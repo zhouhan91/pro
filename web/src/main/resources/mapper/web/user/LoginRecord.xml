@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.user.mapper.LoginRecordMapper">
+
+	<resultMap id="loginRecord" type="com.wemeCity.web.user.model.LoginRecord">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="unionid" property="unionid" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="brand" property="brand" jdbcType="VARCHAR" />
+		<result column="model" property="model" jdbcType="VARCHAR" />
+		<result column="pixel_ratio" property="pixelRatio" jdbcType="VARCHAR" />
+		<result column="screen_width" property="screenWidth" jdbcType="VARCHAR" />
+		<result column="screen_height" property="screenHeight" jdbcType="VARCHAR" />
+		<result column="window_width" property="windowWidth" jdbcType="VARCHAR" />
+		<result column="window_height" property="windowHeight" jdbcType="VARCHAR" />
+		<result column="language" property="language" jdbcType="VARCHAR" />
+		<result column="version" property="version" jdbcType="VARCHAR" />
+		<result column="system" property="system" jdbcType="VARCHAR" />
+		<result column="platform" property="platform" jdbcType="VARCHAR" />
+		<result column="font_size_setting" property="fontSizeSetting" jdbcType="VARCHAR" />
+		<result column="sdk_version" property="sdkVersion" jdbcType="VARCHAR" />
+		<result column="latitude" property="latitude" jdbcType="FLOAT" />
+		<result column="longitude" property="longitude" jdbcType="FLOAT" />
+		<result column="speed" property="speed" jdbcType="FLOAT" />
+		<result column="accuracy" property="accuracy" jdbcType="VARCHAR" />
+		<result column="altitude" property="altitude" jdbcType="VARCHAR" />
+		<result column="verticalAccuracy" property="verticalaccuracy" jdbcType="VARCHAR" />
+		<result column="horizontalAccuracy" property="horizontalaccuracy" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertLoginRecord" parameterType="com.wemeCity.web.user.model.LoginRecord">
+		<![CDATA[
+			INSERT INTO LOGIN_RECORD (
+				id,
+				user_id,
+				unionid,
+				status,
+				brand,
+				model,
+				pixel_ratio,
+				screen_width,
+				screen_height,
+				window_width,
+				window_height,
+				language,
+				version,
+				system,
+				platform,
+				font_size_setting,
+				sdk_version,
+				latitude,
+				longitude,
+				speed,
+				accuracy,
+				altitude,
+				verticalAccuracy,
+				horizontalAccuracy,
+				create_time
+			) VALUES (
+				null,
+				#{userId},
+				#{unionid},
+				#{status},
+				#{brand},
+				#{model},
+				#{pixelRatio},
+				#{screenWidth},
+				#{screenHeight},
+				#{windowWidth},
+				#{windowHeight},
+				#{language},
+				#{version},
+				#{system},
+				#{platform},
+				#{fontSizeSetting},
+				#{sdkVersion},
+				#{latitude},
+				#{longitude},
+				#{speed},
+				#{accuracy},
+				#{altitude},
+				#{verticalaccuracy},
+				#{horizontalaccuracy},
+				#{createTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM LOGIN_RECORD LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteLoginRecord" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE login_record SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateLoginRecord" parameterType="map">
+		UPDATE login_record set modify_time=now()
+		<if test="userId !=null">
+			, user_id=#{userId}
+		</if>
+		<if test="unionid !=null">
+			, unionid=#{unionid}
+		</if>
+		<if test="status !=null">
+			, status=#{status}
+		</if>
+		<if test="brand !=null">
+			, brand=#{brand}
+		</if>
+		<if test="model !=null">
+			, model=#{model}
+		</if>
+		<if test="pixelRatio !=null">
+			, pixel_ratio=#{pixelRatio}
+		</if>
+		<if test="screenWidth !=null">
+			, screen_width=#{screenWidth}
+		</if>
+		<if test="screenHeight !=null">
+			, screen_height=#{screenHeight}
+		</if>
+		<if test="windowWidth !=null">
+			, window_width=#{windowWidth}
+		</if>
+		<if test="windowHeight !=null">
+			, window_height=#{windowHeight}
+		</if>
+		<if test="language !=null">
+			, language=#{language}
+		</if>
+		<if test="version !=null">
+			, version=#{version}
+		</if>
+		<if test="system !=null">
+			, system=#{system}
+		</if>
+		<if test="platform !=null">
+			, platform=#{platform}
+		</if>
+		<if test="fontSizeSetting !=null">
+			, font_size_setting=#{fontSizeSetting}
+		</if>
+		<if test="sdkVersion !=null">
+			, sdk_version=#{sdkVersion}
+		</if>
+		<if test="latitude !=null">
+			, latitude=#{latitude}
+		</if>
+		<if test="longitude !=null">
+			, longitude=#{longitude}
+		</if>
+		<if test="speed !=null">
+			, speed=#{speed}
+		</if>
+		<if test="accuracy !=null">
+			, accuracy=#{accuracy}
+		</if>
+		<if test="altitude !=null">
+			, altitude=#{altitude}
+		</if>
+		<if test="verticalaccuracy !=null">
+			, verticalAccuracy=#{verticalaccuracy}
+		</if>
+		<if test="horizontalaccuracy !=null">
+			, horizontalAccuracy=#{horizontalaccuracy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readLoginRecord" parameterType="java.lang.Long" resultMap="loginRecord">
+		SELECT * FROM login_record WHERE id=#{id}
+	</select>
+
+	<select id="queryLoginRecordList" parameterType="map" resultMap="loginRecord">
+		SELECT * FROM login_record WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="unionid !=null">
+			AND unionid=#{unionid}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="brand !=null">
+			AND brand=#{brand}
+		</if>
+		<if test="model !=null">
+			AND model=#{model}
+		</if>
+		<if test="pixelRatio !=null">
+			AND pixel_ratio=#{pixelRatio}
+		</if>
+		<if test="screenWidth !=null">
+			AND screen_width=#{screenWidth}
+		</if>
+		<if test="screenHeight !=null">
+			AND screen_height=#{screenHeight}
+		</if>
+		<if test="windowWidth !=null">
+			AND window_width=#{windowWidth}
+		</if>
+		<if test="windowHeight !=null">
+			AND window_height=#{windowHeight}
+		</if>
+		<if test="language !=null">
+			AND language=#{language}
+		</if>
+		<if test="version !=null">
+			AND version=#{version}
+		</if>
+		<if test="system !=null">
+			AND system=#{system}
+		</if>
+		<if test="platform !=null">
+			AND platform=#{platform}
+		</if>
+		<if test="fontSizeSetting !=null">
+			AND font_size_setting=#{fontSizeSetting}
+		</if>
+		<if test="sdkVersion !=null">
+			AND sdk_version=#{sdkVersion}
+		</if>
+		<if test="latitude !=null">
+			AND latitude=#{latitude}
+		</if>
+		<if test="longitude !=null">
+			AND longitude=#{longitude}
+		</if>
+		<if test="speed !=null">
+			AND speed=#{speed}
+		</if>
+		<if test="accuracy !=null">
+			AND accuracy=#{accuracy}
+		</if>
+		<if test="altitude !=null">
+			AND altitude=#{altitude}
+		</if>
+		<if test="verticalaccuracy !=null">
+			AND verticalAccuracy=#{verticalaccuracy}
+		</if>
+		<if test="horizontalaccuracy !=null">
+			AND horizontalAccuracy=#{horizontalaccuracy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryLoginRecordCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM LOGIN_RECORD WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="unionid !=null">
+			AND unionid=#{unionid}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="brand !=null">
+			AND brand=#{brand}
+		</if>
+		<if test="model !=null">
+			AND model=#{model}
+		</if>
+		<if test="pixelRatio !=null">
+			AND pixel_ratio=#{pixelRatio}
+		</if>
+		<if test="screenWidth !=null">
+			AND screen_width=#{screenWidth}
+		</if>
+		<if test="screenHeight !=null">
+			AND screen_height=#{screenHeight}
+		</if>
+		<if test="windowWidth !=null">
+			AND window_width=#{windowWidth}
+		</if>
+		<if test="windowHeight !=null">
+			AND window_height=#{windowHeight}
+		</if>
+		<if test="language !=null">
+			AND language=#{language}
+		</if>
+		<if test="version !=null">
+			AND version=#{version}
+		</if>
+		<if test="system !=null">
+			AND system=#{system}
+		</if>
+		<if test="platform !=null">
+			AND platform=#{platform}
+		</if>
+		<if test="fontSizeSetting !=null">
+			AND font_size_setting=#{fontSizeSetting}
+		</if>
+		<if test="sdkVersion !=null">
+			AND sdk_version=#{sdkVersion}
+		</if>
+		<if test="latitude !=null">
+			AND latitude=#{latitude}
+		</if>
+		<if test="longitude !=null">
+			AND longitude=#{longitude}
+		</if>
+		<if test="speed !=null">
+			AND speed=#{speed}
+		</if>
+		<if test="accuracy !=null">
+			AND accuracy=#{accuracy}
+		</if>
+		<if test="altitude !=null">
+			AND altitude=#{altitude}
+		</if>
+		<if test="verticalaccuracy !=null">
+			AND verticalAccuracy=#{verticalaccuracy}
+		</if>
+		<if test="horizontalaccuracy !=null">
+			AND horizontalAccuracy=#{horizontalaccuracy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,214 @@
+.shoptopbox{ background:#ffac40;height:70rpx;}
+.pxdiimgs{width:100rpx;height:100rpx;margin:0 auto;margin-top:18rpx;}
+.pxdiimgs image{width:100%;height:100%;}
+.shoptitle{ text-align:center;margin-top:70rpx;}
+.shoptitle .title{font-size:32rpx;color:#333;}
+.shoptitle .adds image{width:24rpx;height:28rpx;margin-right:10rpx;}
+.shoptitle .adds text{font-size:20rpx;color:#333; display:inline-block; text-align:left;}
+
+.tybox .type{font-size:20rpx;color:#999;padding:0 10rpx;}
+.tybox .money{font-size:26rpx;color:#666;}
+.biao{color:#ffac40;}
+.newbox{width:80%;margin:0 auto;border:2rpx solid #f0f0f0;line-height:30rpx;margin-top:20rpx;padding:10rpx 30rpx; margin-bottom:20rpx; position:relative;}
+.newbox .newtext{color:#333;font-size:20rpx; display:block;padding-left:75rpx;line-height:40rpx;}
+.newbox .strong{ background:#ffac40;color:#fff;padding:5rpx 8rpx;border-radius:5rpx; display:inline-block;margin:0 10rpx;margin-right:15rpx; font-size:26rpx; position:absolute;left:10rpx;top:10rpx;}
+.swiper-tab{  
+    width: 100%;  
+    text-align: center;  
+    line-height: 80rpx;
+    border-bottom:2rpx solid #e7e7e7;
+    background:#fff;
+    overflow:hidden;zoom:1;
+}  
+.swiper-tab-list{  font-size:26rpx;  
+    display: inline-block;   
+    width: 33.33%;   
+    color: #333;  
+    background:#fff;
+}  
+.on{ color: #ffac40;  
+    border-bottom: 5rpx solid #ffac40;
+}  
+swiper-item{padding-top:20rpx;  }
+.swiper-box{ display: block; height: 100%; width: 100%; overflow: hidden; background:#fff; }  
+.shopleftbox{background:#eee;width:30%;}
+.active{background:#fff;}
+.shoprightbox{ background:#fff;width:64%;padding:0 3%;}
+
+.food-item {
+  display: flex;
+  position: relative;
+  margin-bottom:30rpx;
+}
+
+.food-item:last-child {
+  border: none;
+  margin-bottom: 0px;
+}
+
+.food-item .icon {
+  flex: 0 0 57px;
+  margin-right: 10px;
+}
+
+.food-item .content {
+  flex: 1;
+}
+
+.food-item .content .name {
+  margin:0rpx 0 26rpx 0;
+  font-size: 28rpx;
+  line-height:36rpx;
+  min-height: 14px;
+  color: rgb(7, 17, 27);
+}
+
+.food-item .content .desc, .extra {
+  font-size: 10px;
+  line-height: 10px;
+  color: rgb(147, 153, 159);
+}
+
+.food-item .content .desc {
+  margin-bottom: 8px;
+  line-height: 12px;
+}
+
+.food-item .content .extra .count {
+  margin-right: 12px;
+}
+
+.food-item .content .price {
+  font-weight: 700px;
+  line-height: 24px;
+}
+.food-item .content .price .now {
+  margin-right: 8px;
+  color:#999;
+  font-size:24rpx;
+}
+.food-item .content .price .now text{
+font-size: 32rpx;
+  color:#ffac40;
+  margin-right:10rpx;
+  margin-left:10rpx;
+}
+
+.food-item .content .price .old {
+  font-size: 10px; 
+  color: rgb(147, 153, 159);
+  text-decoration: line-through;
+}
+
+.food-item .content .cartControl-wrapper {
+  position: absolute;
+  right: 0;
+  bottom: 12px;
+}
+
+/* cartControl 样式 */
+
+.goods .foods-wrapper .food-list .food-item .content .cartControl-wrapper .cartControl {
+  font-size: 0;
+}
+
+.goods .foods-wrapper .food-list .food-item .content .cartControl-wrapper .cartControl .cart-decrease,
+.cart-add {
+  display: inline-block;
+  padding: 4px 6px 6px 6px;
+}
+
+.goods .foods-wrapper .food-list .food-item .content .cartControl-wrapper .cartControl .cart-decrease,
+.cart-add :fade-enter-active, :fade-leave-active {
+  transition: all 0.4s linear;
+}
+
+.goods .foods-wrapper .food-list .food-item .content .cartControl-wrapper .cartControl .cart-decrease,
+.cart-add :fade-enter, :fade-leave-active {
+  opacity: 0 transform translate3d(24px, 0, 0);
+}
+
+.goods .foods-wrapper .food-list .food-item .content .cartControl-wrapper .cartControl .cart-decrease,
+.cart-add .inner {
+  display: inline-block;
+  line-height: 24px;
+  font-size: 24px;
+  vertical-align: top;
+  color: rgb(0, 160, 220, 0.2);
+}
+
+.goods .foods-wrapper .food-list .food-item .content .cartControl-wrapper .cartControl .cart-decrease,
+.cart-add :inner-enter-active, :inner-leave-active {
+  transition: all 0.4s linear;
+  transform: rotate(0);
+}
+
+.goods .foods-wrapper .food-list .food-item .content .cartControl-wrapper .cartControl .cart-decrease,
+.cart-add :inner-enter, :inner-leave-active {
+  opacity: 0 transform rotate(180deg);
+}
+
+.goods .foods-wrapper .food-list .food-item .content .cartControl-wrapper .cartControl .cart-count {
+  display: inline-block;
+  font-size: 10px;
+  line-height: 24px;
+  width: 12px;
+  vertical-align: top;
+  padding-top: 6px;
+  text-align: center;
+  color: rgb(147, 153, 159);
+}
+
+.food-item .content .cartControl-wrapper .cartControl .cart-add {
+  display: inline-block;
+  padding: 6px;
+  line-height: 24px;
+  font-size: 24px;
+  vertical-align: top;
+  color: rgb(0, 160, 220, 0.2);
+}
+
+.adddele{overflow:hidden;zoom:1; position:absolute;right:3rpx;bottom:10rpx;}
+.adddele image{float:left;margin-top:4rpx;}
+.adddele text{float:left; font-size:26rpx; color:#333; display:block;margin:0 16rpx;}
+.bottombox{position:fixed;bottom:0;height:110rpx;line-height:110rpx; background:#454545;color:#fff;width:100%; display:flex; z-index:30;}
+.bottombox .left{width:70%; overflow: }
+.bottombox .left .gougif{ background:#353535;height:90rpx;width:90rpx;border-radius:90rpx; border:8rpx solid #454545;margin-top:-20rpx;margin-left:30rpx; text-align:center; position:relative;}
+.bottombox .left .gougif text{display:block; position:absolute;top:0; background:#fe3a3c;width:30rpx;height:30rpx;color:#fff; text-align:center;font-size:20rpx;border-radius:30rpx;right:0; line-height:26rpx;}
+.bottombox .right{width:30%; background:#585858;height:100%;}
+.moenybox{ position:absolute;bottom:0;left:140rpx;line-height:110rpx;height:100%;}
+.moenybox text{ font-size:24rpx;color:#fff;margin:0 10rpx;}
+.qs_box{ display:block;width:100%;text-align:center;line-height:110rpx;height:100%;}
+.jsbox{display:block;width:100%;text-align:center;line-height:110rpx; background:#ffac40;height:100%;}
+.bg{ background:rgba(0,0,0,0.7);width:100%;height:100%; position:fixed;top:0;left:0;}
+.karbox{ position:fixed;z-index:20;bottom:110rpx; background:#eee;width:100%; max-height:500rpx;}
+.kartopbox{padding:15rpx 30rpx;overflow:hidden;zoom:1;}
+.kartopbox .title{float:left; font-size:32rpx;color:#333;}
+.kartopbox .clear{float:right;font-size:24rpx;color:#333;}
+.footlist{ background:#fff;height:80rpx;line-height:80rpx;padding:0 30rpx; position:relative;margin-bottom:15rpx;}
+.adddeleer{right:30rpx;}
+.adddeleer image{margin-top:20rpx;} 
+.footmoney{color:#ffac40 !important;font-size:32rpx;}
+
+ .pxbox{position:absolute;right:0;top:0rpx; overflow:hidden;zoom:1;width:160rpx;}
+ .pxdibox{position:absolute;right:0;top:0rpx; overflow:hidden;zoom:1;width:160rpx;}
+ .pxdiimg{float:left;width:28rpx;height:24rpx;margin-right:4rpx;}
+.pjbox{position:absolute;right:0;top:0;}
+
+.pllist{overflow:hidden;zoom:1;padding-left:28rpx;margin-bottom:20rpx;}
+.pllist .left{float:left;overflow:hidden; border-radius:80rpx;width:80rpx;height:80rpx;}
+.pllist .right{float:left;width:82%;margin-right:28rpx;margin-left:20rpx;border-bottom:2rpx solid #e7e7e7;padding-bottom:20rpx;}
+
+.titlebox{position:relative;height:50rpx; overflow:hidden;zoom:1;}
+.titlebox .name{font-size:28rpx;color:#333;float:left; display:block; line-height:20rpx;}
+.plcenter{ font-size:24rpx;color:#333; margin-top:15rpx;}
+.timebox{font-size:20rpx;color:#999;margin-top:15rpx;}
+.shangjiatitle{ height:80rpx;padding:0 28rpx;font-size:24rpx;color:#333;line-height:80rpx; }
+.kbbox{background:#fff; overflow:hidden;zoom:1;padding-right:28rpx;border-bottom:2rpx solid #e7e7e7;height:100rpx;line-height:100rpx;}
+
+.kbbox:last-child{border:none;}
+.kbbox .left{float:left;color:#999;font-size:30rpx;}
+.kbbox .right{float:right;color:#333;font-size:30rpx;}
+.kbwai{padding-left:28rpx; background:#fff; }
+.caipintj{background:#fff;padding:28rpx 0 28rpx 30rpx;}
+.caipintj image{width:160rpx;height:160rpx; display:inline-block;margin-right:20rpx;}

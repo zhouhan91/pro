@@ -1,0 +1,52 @@
+<view class='xuantitle'>
+  <checkbox-group bindchange="oneCheckboxChange" class='xuanbox'>
+    <label class="checkbox">
+      <!-- 默认满减选中 -->
+      <checkbox value="1" checked='{{(oneActObj.type == "manjian" && oneActObj.status == "Y") || (twoActObj.type == "quanchangzhekou" && twoActObj.status == "Y") || activityOneChecked}}' class='xuanyang'/>全场满减或全场折扣
+    </label>
+  </checkbox-group>
+</view>
+<view>
+  <radio-group bindchange="twoRadioChange">
+    <label class="weui-cell weui-check__label">
+      <view class="weui-cell__hd" style='margin-bottom:20rpx;font-size:24rpx;'>
+        <radio value="1" checked="{{(oneActObj.type == 'manjian' && oneActObj.status == 'Y') || defaultSelected || (activityOneType == 'manjian')}}" style=' transform:scale(0.7);'/>满减活动
+      </view>
+    </label>
+    <label class="weui-cell weui-check__label">
+      <view class="weui-cell__hd" style='margin-bottom:20rpx;font-size:24rpx;'>
+        <radio value="2" checked="{{(twoActObj.type == 'quanchangzhekou' && twoActObj.status == 'Y') || (activityOneType == 'quanchangzhekou')}}"  style=' transform:scale(0.7);'/>全场折扣
+      </view>
+    </label>
+  </radio-group>
+</view>
+<view class='listbox'>
+  <view class='szlist' wx:if="{{defaultSelected || (activityOneType == 'manjian')}}">
+    <text>全场消费满</text>
+    <input type='text' value="{{oneActObj.target}}" placeholder='请输入'  placeholder-style="color:#ccc" style='width:50rpx;margin-left:15rpx;' bindblur='onTargetBlur'></input>
+    <text style='width:40rpx;'>减</text>
+    <input type='text' value="{{oneActObj.discount}}" placeholder='请输入'  placeholder-style="color:#ccc" style='width:150rpx;margin-left:15rpx;' bindblur='onDiscountBlue'></input>
+  </view>
+  <view class='szlist daijian' wx:if="{{(activityOneType == 'quanchangzhekou')}}">
+    <text style='width:180rpx;'>全场折扣</text>
+    <input type='text' value="{{twoActObj.discount}}" placeholder='输入折扣，如：5折为0.5'  placeholder-style="color:#ccc" bindblur='onDiscountBlue' style='width:51%;'>折</input><text style='width:180rpx;'>折</text>
+  </view>
+</view>
+<view class='xuantitle'>
+  <checkbox-group bindchange="twoCheckboxChange" class='xuanbox'>
+    <label class="checkbox">
+      <checkbox value="3" checked='{{threeActObj.type == "xinren" && threeActObj.status == "Y"}}' class='xuanyang'/>新用户首单减免
+    </label>
+  </checkbox-group>
+</view>
+<view class='listbox'>
+  <view class='szlist'>
+    <text style='width:260rpx;'>新用户首单消费减免</text>
+    <input style='width:50%;' type='text' value="{{threeActObj.discount}}" placeholder='输入金额'  placeholder-style="color:#ccc" bindblur='onXinRenBlue'></input>
+  </view>
+</view>
+<view style='font-size:24rpx;color:#ff0000;padding-left:40rpx;margin-top:20rpx;'>注：此处为商户设置全场活动，当活动到期请及时取消！</view>
+
+<view class='botbox'>
+  <text class='seven' bindtap='onSaveActivityClick'>保存</text>
+</view>

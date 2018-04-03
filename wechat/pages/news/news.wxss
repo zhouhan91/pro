@@ -1,0 +1,44 @@
+page{background:#fff;padding-top:80rpx;}
+.newsnavi{ display:flex; position:fixed;top:0;width:100%;z-index:200; background:#f6f6f6; height:86rpx; line-height:86rpx;}
+.newsnavi view{ flex:1; width:25%; text-align:center; font-size:26rpx;color:#999;}
+.newstitle{ font-size:34rpx; color:#333; text-align:center; font-weight:bold; height:100rpx; line-height:100rpx;}
+.newshost{ width:98%; margin-left:2%;  white-space: nowrap;  }
+.newshostbox{width:253rpx;height:253rpx; display:inline-block;margin-right:8rpx; position:relative;}
+.newshostbox image{width:100%; height:100%;}
+.newshostbox text{position:absolute;top:0;color:#fff; z-index:100; left:0;width:100%;height:100%; text-align:center;line-height:253rpx;}
+.newsnew{margin-bottom:40rpx;}
+.active{color:#000 !important;position:relative;}
+.active::after{position:absolute;content:'';background:#000;width:30rpx;height:6rpx;bottom:0;left:40%;}
+.newscentbox{width:96%;margin-left:2%;}
+.newsnew image{width:100%;}
+.newsnew text{ font-size:28rpx;color:#333;}
+.newsshuang{ display:flex; flex-wrap:wrap;justify-content:space-between;width:98%;margin-left:2%; }
+.newsshuang .fontimg{width:48%; max-width:48%; min-width:48%; flex:1; margin-bottom:30rpx; }
+.newsshuang .fontimg image{width:100%; height:194rpx;}
+.newsshuang .fontimg text{display: block; text-align:left; font-size:26rpx;color:#333;}
+.babilist{width:94%;margin-left:3%;}
+.babilist imag{height:480rpx;width:100%;}
+.babibasic{ background:#f6f6f6;margin-top:30rpx;} 
+.lanmufrist{position:relative;height:420rpx; overflow:hidden;}
+.lanmufrist image{width:100%;height:420rpx;}
+.lanmufrists{height:320rpx !important;}
+.lanmufrists image{height:320rpx !important;}
+.lanmubox{position:absolute;width:100%;height:100%; background:rgba(0, 0, 0, 0.3);top:0;left:0;padding-top:100rpx;}
+.bbcent{font-size:26rpx;color:#666;margin-bottom:15rpx;}
+.bbttext{background:#f6f6f6;padding:15rpx 25rpx;}
+.bbttime{font-size:40rpx;margin-bottom:10rpx; display:block; font-weight:blod;color:#333;}
+.lanmubox text{color:#fff; display:block;text-align: center;}
+text.chinse{font-size:40rpx;}
+text.englise{font-size:20rpx;}
+.lanmulistct{ display:flex;flex-wrap:wrap;justify-content:space-between;width:96%;margin-left:2%;padding-bottom:15rpx;}
+.lanmulistct .lanmufrist{width:49%; margin-top:15rpx;}
+.lanmulistct .lanmufrist .lanmubox{padding-top:115rpx;}
+.zlbox{width:94%;margin:0 auto; overflow:hidden;zoom:1;margin-top:25rpx;}
+.zlleft{float:left;width:220rpx;height:160rpx;margin-right:20rpx;}
+.zlleft image{width:100%;}
+.zltitle{font-size:32rpx;margin-top:-10rpx; display:block;color:#333;}
+.zlright{float:left; position: relative;width:65%;height:160rpx;}
+.zlbtcontent{ position:absolute;width:100%;overflow:hidden;zoom:1;left:0;bottom:0rpx;}
+.zlchu{float:right; padding-left:15rpx;height:30rpx;color:#666;font-size:20rpx;}
+.zlreadnb{float:right;color:#666;font-size:20rpx;margin-left:30rpx;}
+.zlreadnb image{width:22rpx;height:13rpx; margin-right:5rpx;}

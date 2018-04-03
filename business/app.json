@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/distribution/distribution",
+    "pages/managePersonnel/managePersonnel",
+    "pages/emplace/emplace",
+    "pages/manageFond/manageFond",
+    "pages/manageMenu/manageMenu",
+    "pages/manageOrder/manageOrder",
+    "pages/news/news",
+    "pages/manageActivity/manageActivity",
+    "pages/register/register",
+    "pages/orderDetail/orderDetail",
+    "pages/manageData/manageData",
+    "pages/xieyi/xieyi",
+    "pages/addFond/addFond",
+    "pages/demo/demo"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  }
+}

@@ -1,0 +1,39 @@
+.ordertopbox{background:#fff; overflow:hidden;zoom:1;padding-left:30rpx;padding-top:30rpx;border-bottom:1px solid #d1d1d1;padding-bottom:10rpx;}
+.ordtopleft{width:270rpx;height:180rpx;float:left; margin-top:10rpx;}
+.ordtopleft image{width:100%;height:100%;}
+.ordtopright{float:left;width:410rpx; margin-left:32rpx;}
+.odtoptitle{font-size:28rpx;color:#333;  }
+.odtopds{ margin-bottom:5rpx;}
+.odtopds image{width:23rpx;height:28rpx;margin-top:1rpx;}
+.odtopds text{ font-size:24rpx;color:#333;padding-left:12rpx; }
+.odtopty{display:flex;flex-wrap:wrap;}
+.odtopty text{font-size:24rpx;color:#999; border:2rpx solid #e0e0e0;padding:10rpx 10rpx; border-radius:6rpx;margin-right:20rpx; display:inline-block;margin-bottom:20rpx;}
+
+.ordertitle{text-align:center;   font-size:26rpx;color:333; margin-top:35rpx;margin-bottom:15rpx;}
+.ordertimebox{display:flex; background:#fff;padding:40rpx 0;border-bottom:1px solid #d1d1d1; position:relative;}
+.ordertimtim{ position:absolute; left:42%; background:#fff; z-index:100; font-size:24rpx;color:#999; border:2rpx solid #d1d1d1; border-radius:15rpx;width:80rpx;padding:6rpx 15rpx; display:block; text-align:center;  } 
+.odtmcent{width:50%; text-align:center;}
+.odtimeleft{position:relative;}
+.odtimeleft::after{position:absolute;content:"";display:block;width:2rpx;height:110%;right:0;top:-10rpx;background:#d1d1d1}
+.odtmcent image{width:42rpx;height:36rpx;margin-bottom:10rpx;}
+.odtmcent text{display:block; font-size:28rpx; color:#333;}
+
+.ruzhubox{background:#fff; padding:0 32rpx;border-bottom:1px solid #e7e7e7;}
+.rzlistbox{display:flex;border-bottom:1px solid #e7e7e7; height:90rpx; line-height:90rpx;}
+.rzlistbox text{font-size:28rpx;color:#333;margin-right:50rpx; width:123rpx; text-align:left;}
+.rzlistbox input{font-size:28rpx;height:90rpx; line-height:90rpx;width:400rpx;}
+.orderplaceholder{color:#ccc;}
+.ordjt{margin-top:35rpx; margin-left:120rpx;}
+.ordercent{ }
+.orderbot{position: fixed;bottom:0;height:96rpx; line-height:90rpx; background:#fff; z-index:3000; width:100%; display:flex;}
+.orderbot text{display:block;}
+.odbtsj{width:16%;font-size:28rpx;color:#333;padding-left:4%;border-top:1px solid #e7e7e7;}
+.odbtmy{width:40%; font-size:28rpx;color:#ffac40;border-top:1px solid #e7e7e7;}
+.odbtbtn{width:40%; text-align:center; background:#ffac40;color:#fff; font-size:32rpx;}
+
+.user_coupon .mask{position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: 999999}
+.user_coupon .mask{background: rgba(0,0,0,0.7);}
+.user_coupon_body{position: fixed; bottom:0;width:100%;height: 480rpx;background: #fff;z-index: 99999999999999;overflow: hidden}
+.coupon_body_title{width: 100%; font-size: 40rpx; text-align: center; margin-top: 20rpx;}
+.user_coupon_body radio-group{margin-top: 10rpx;}
+.user_coupon_close{position: fixed; width: 100%; font-size: 40rpx; text-align: center; color: orange; bottom: 10rpx;}

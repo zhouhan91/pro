@@ -1,0 +1,5 @@
+.registerbox{width:90%;margin-left:5%; }
+.regilist{overflow:hidden;zoom:1; border:2rpx solid #d1d1d1;margin-bottom:30rpx;height:80rpx;line-height:80rpx;padding:0 20rpx;}
+.regilist label{float:left; font-size:32rpx;color:#999;width:165rpx;}
+.regilist input{float:left; font-size:32rpx; color:#333;margin-top:15rpx;}
+.loginbt{height:80rpx;font-size:28rpx;line-height:80rpx;border-radius:0rpx; background:#ffac40 !important; margin-top:15rpx; }

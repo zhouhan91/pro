@@ -1,0 +1,32 @@
+<!--logs.wxml-->
+<view class='logsbox'>
+    <view class='logo'>
+      <image src='../images/logo.gif'></image>
+    </view>
+    <view>
+      <form bindsubmit="loginFormSubmit" bindreset="formReset">
+          <view class='inputbox'>
+              <image src='../images/tu1.png' style='width:26rpx;height:28rpx;'></image>
+              <input type='text' name="userName" value="{{userName}}" placeholder='请输入昵称'  placeholder-style="color:#ccc"></input>
+          </view>
+          <view class='inputbox'>
+              <image src='../images/tu2.png' style='width:22rpx;height:28rpx;'></image>
+              <input type='password' name="password" value="{{password}}" placeholder='请输入密码'  placeholder-style="color:#ccc"></input>
+          </view>
+          <view>
+             <switch type="checkbox" checked='{{saveFlag}}' bindchange="switch2Change" class='xuanyang'/><text class="title checkbox">记住账户密码</text><text class="title checkbox" style='color:#ffac40;' bindtap='onChangePasswordClick'>　忘记帐号或密码?</text>
+          </view>
+          <view>
+              <button type='warn' class='loginbt' formType="submit">立即登录</button>
+          </view>
+          <view class='hrefbox' bindtap='onRegisterClick'>
+              还没有账号<text>，立即注册</text>
+          </view>
+          <!--
+          <view class='xieyibox'>
+             点击登陆，即表示已阅读并同意<text bindtap='onXieyiClick'>《XX协议》</text>
+          </view>
+          -->
+      </form>
+    </view>
+</view>

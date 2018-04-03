@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.catering.mapper.CateringRecommendMapper">
+
+	<resultMap id="cateringRecommend" type="com.wemeCity.web.catering.model.CateringRecommend">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="district_code" property="districtCode" jdbcType="VARCHAR" />
+		<result column="district_name" property="districtName" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+		<result column="img" property="img" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="discount_price" property="discountPrice" jdbcType="DECIMAL" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="sort_num" property="sortNum" jdbcType="INTEGER" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertCateringRecommend" parameterType="com.wemeCity.web.catering.model.CateringRecommend">
+		<![CDATA[
+			INSERT INTO CATERING_RECOMMEND (
+				id,
+				city_code,
+				city_name,
+				district_code,
+				district_name,
+				title,
+				goods_name,
+				img,
+				price,
+				discount_price,
+				url,
+				status,
+				sort_num,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{cityCode},
+				#{cityName},
+				#{districtCode},
+				#{districtName},
+				#{title},
+				#{goodsName},
+				#{img},
+				#{price},
+				#{discountPrice},
+				#{url},
+				#{status},
+				#{sortNum},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM CATERING_RECOMMEND LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteCateringRecommend" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE catering_recommend SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateCateringRecommend" parameterType="map">
+		UPDATE catering_recommend set modify_time=now()
+		<if test="cityCode !=null">
+			, city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			, city_name=#{cityName}
+		</if>
+		<if test="districtCode !=null">
+			, district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			, district_name=#{districtName}
+		</if>
+		<if test="title !=null">
+			, title=#{title}
+		</if>
+		<if test="goodsName !=null">
+			, goods_name=#{goodsName}
+		</if>
+		<if test="img !=null">
+			, img=#{img}
+		</if>
+		<if test="price !=null">
+			, price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			, discount_price=#{discountPrice}
+		</if>
+		<if test="url !=null">
+			, url=#{url}
+		</if>
+		<if test="status !=null">
+			, status=#{status}
+		</if>
+		<if test="sortNum !=null">
+			, sort_num=#{sortNum}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readCateringRecommend" parameterType="java.lang.Long" resultMap="cateringRecommend">
+		SELECT * FROM catering_recommend WHERE id=#{id}
+	</select>
+
+	<select id="queryCateringRecommendList" parameterType="map" resultMap="cateringRecommend">
+		SELECT * FROM catering_recommend WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="cityCode !=null">
+			AND city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="cityNameLike !=null">
+			AND city_name like CONCAT('%',#{cityNameLike},'%')
+		</if>
+		<if test="districtCode !=null">
+			AND district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			AND district_name=#{districtName}
+		</if>
+		<if test="districtNameLike !=null">
+			AND district_name like CONCAT('%',#{districtNameLike},'%')
+		</if>
+		<if test="title !=null">
+			AND title=#{title}
+		</if>
+		<if test="goodsName !=null">
+			AND goods_name=#{goodsName}
+		</if>
+		<if test="img !=null">
+			AND img=#{img}
+		</if>
+		<if test="price !=null">
+			AND price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			AND discount_price=#{discountPrice}
+		</if>
+		<if test="url !=null">
+			AND url=#{url}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="sortNum !=null">
+			AND sort_num=#{sortNum}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryCateringRecommendCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM CATERING_RECOMMEND WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="cityCode !=null">
+			AND city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="districtCode !=null">
+			AND district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			AND district_name=#{districtName}
+		</if>
+		<if test="title !=null">
+			AND title=#{title}
+		</if>
+		<if test="goodsName !=null">
+			AND goods_name=#{goodsName}
+		</if>
+		<if test="img !=null">
+			AND img=#{img}
+		</if>
+		<if test="price !=null">
+			AND price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			AND discount_price=#{discountPrice}
+		</if>
+		<if test="url !=null">
+			AND url=#{url}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="sortNum !=null">
+			AND sort_num=#{sortNum}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,69 @@
+{
+  "pages": [
+    "pages/Ordering_index/Ordering_index",
+    "pages/foodcoment/foodcoment",
+    "pages/foot_paysucc/foot_paysucc",
+    "pages/foot_order/foot_order",
+    "pages/shop_list/shop_list",
+    "pages/index/index",
+    "pages/shop_details/shop_details",
+    "pages/foodaddress/foodaddress",
+    "pages/foodhomeorder/foodhomeorder",
+    "pages/collection/collection",
+    "pages/news/news",
+    "pages/comment_details/comment_details",
+    "pages/newdetail/newdetail",
+    "pages/house_detail/house_detail",
+    "pages/order/order",
+    "pages/ordersucc/ordersucc",
+    "pages/home/home",
+    "pages/setting_userinfo/setting_userinfo",
+    "pages/rentalorder/rentalorder",
+    "pages/search/search",
+    "pages/newlist/newlist",
+    "pages/comment_list/comment_list",
+    "pages/overseas/overseas"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "微米城市",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "backgroundColor": "#fff",
+    "selectedColor": "#ffac40",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "pages/resource/kind/nav_01.png",
+        "selectedIconPath": "pages/resource/kind/navdian_01.png",
+        "text": "租房"
+      },
+      {
+        "pagePath": "pages/overseas/overseas",
+        "iconPath": "pages/resource/kind/nav_02.png",
+        "selectedIconPath": "pages/resource/kind/navdian_02.png",
+        "text": "留学"
+      },
+      {
+      "pagePath": "pages/Ordering_index/Ordering_index",
+      "iconPath": "pages/resource/kind/nav_03.png",
+      "selectedIconPath": "pages/resource/kind/navdian_03.png",
+      "text": "好吃"
+      },
+      {
+        "pagePath": "pages/news/news",
+        "iconPath": "pages/resource/kind/nav_04.png",
+        "selectedIconPath": "pages/resource/kind/navdian_04.png",
+        "text": "头条"
+      },
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "pages/resource/kind/nav_05.png",
+        "selectedIconPath": "pages/resource/kind/navdian_05.png",
+        "text": "我"
+      }
+    ]
+  }
+}

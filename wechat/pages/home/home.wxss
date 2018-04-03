@@ -1,0 +1,44 @@
+/* pages/home/home.wxss */
+
+/*header*/
+page{background:#fff;}
+.header{
+    position: relative;
+    height: 320rpx;
+    width: 100%;
+    background-color: #f0ece8;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  margin-top: 90rpx;
+  border-radius: 50%;
+  border:1px solid #fff;
+}
+
+.userinfo-nickname {
+  margin-top: 20rpx;
+  color: #fff;
+}
+
+.setting-btn{
+  position: absolute;
+  right: 0px;
+  margin-right: 20px;
+  margin-top:20px;
+  width: 64rpx;
+  height: 64rpx;
+
+}
+.setting-btn-image{
+  width: 40rpx;
+  height: 40rpx;
+}
+

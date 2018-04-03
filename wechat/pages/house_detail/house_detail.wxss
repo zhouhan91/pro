@@ -1,0 +1,246 @@
+/* pages/house_detail/house_detail.wxss */
+
+/*轮播begin*/
+page{background:#fff;}
+.lunbo,.lunbo image{
+  width: 100%;
+  height:480rpx;
+}
+.lunbo .wx-swiper-dots.wx-swiper-dots-horizontal{
+      margin-bottom: 10rpx;
+}
+.lunbo .wx-swiper-dot{
+    width: 14rpx;
+    display: inline-flex;
+    height: 14rpx;
+    vertical-align: sub; 
+    margin-left: 10rpx;
+    margin-right: 10rpx;
+    background:rgba(255,255,255,.5);
+    border-radius: 100%;
+}
+.lunbo .wx-swiper-dot::before{
+     content: '';
+     flex-grow: 1;
+} 
+.lunbo .wx-swiper-dot-active::before{
+     content: '';
+     flex-grow: 1;
+     background:rgba(255,255,255,1);
+     border-radius: 100%;
+}
+
+.lunbo-index {
+    box-sizing: border-box;
+    position:fixed;
+    bottom:30rpx;
+    right: 30rpx;
+    height: 40rpx;
+    width: 66rpx;
+    font-size: 12px;
+    text-align: center;
+    line-height: 40rpx;
+    background-color: rgba(0, 0, 0, .65);
+    color: #fff;
+    border-radius:20rpx;
+    z-index:100;
+}
+/*轮播end*/
+.house_property{
+  display: flex;
+  margin:0 30rpx;
+  border-bottom:2rpx solid #e7e7e7;padding-bottom:10rpx;
+}
+.house_property_item{
+  display: flex;
+  font-size: 28rpx;
+  margin-bottom:10rpx;
+}
+.house_property_left{
+  width:50%;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.house_property_right{
+  width:50%;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+.house_room{
+  margin:0 30rpx;
+}
+.house_room_item{
+  width: 100%;
+  display: flex;
+  margin-top: 40rpx;
+  border-bottom:2rpx solid #e7e7e7;
+  padding-bottom:40rpx;
+}
+.house_room_item:last-child{border:none;}
+.house_room_left {
+  position:relative;
+  left: 0;
+  width:65%;
+  height: 320rpx;
+  text-align: center;
+}
+.house_room_right {
+  width:32%;
+  margin-left: 20rpx;
+}
+.house_room_image{
+  width: 100%;
+  height: 100%;
+}
+.house_room_index {
+    box-sizing: border-box;
+    position: absolute;
+    height: 40rpx;
+    width: 70rpx;
+    font-size: 9px;
+    text-align: center;
+    line-height: 40rpx;
+    background-color: rgba(0, 0, 0, .65);
+    color: #fff;
+    right: 0;
+    bottom: 0px;
+}
+.house_room_left_item{
+  display: flex;
+  margin-bottom:20rpx;
+}
+
+.room_facility_item{
+  text-align: center;
+  margin-top: 10rpx;
+}
+.room_facility_icon{
+  width: 64rpx;
+  height: 64rpx;
+}
+
+.room_facility_label{
+  text-align: center;
+  font-size: 20rpx;
+  color:#333;
+}
+
+.public_facility_item{
+  display: flex;
+  height: 72rpx;
+}
+.public_facility_icon{
+  width: 64rpx;
+  height: 64rpx;
+}
+.public_facility_label{
+  margin-left: 20rpx;
+  text-align: center;
+  font-size: 20rpx;
+  color:#333;
+  line-height:55rpx;
+}
+
+.rent_info_item{
+  display: flex;
+  height: 72rpx;
+}
+.rent_info_icon{
+  width: 64rpx;
+  height: 64rpx;
+}
+.rent_info_label{
+  margin-left: 20rpx;
+  text-align: center;
+  font-size: 20rpx;
+  color:#333;
+  line-height:55rpx;
+}
+
+.house_property_50, .house_room_50{
+  width:50%;
+}
+
+ .searmiao{ position:absolute;bottom:-68rpx;padding:0 1.5%;overflow:hidden;zoom:1;width:97%;height:68rpx; background:rgba(0,0,0,0.8);line-height:68rpx;}
+ .dizhiimg{width:23rpx;height:28rpx;margin-right:13rpx; }
+ .miaofont{font-size:20rpx;color:#fff;  text-overflow:ellipsis;
+white-space: nowrap;width:90%;}
+
+.bottom_menu{
+  display: flex;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height:96rpx;
+  background:#fff;
+  z-index:5000;
+}
+.bottom_menu_left{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  background-color:#fff;
+  border-top:2rpx solid #e7e7e7;
+}
+.bottom_menu_left_item{
+  width: 33.333%;
+  text-align: center;
+  position:relative;
+}
+.bottom_menu_left_image{
+  width:42rpx;
+  height: 42rpx;
+  margin-top:15rpx;
+}
+.bottom_menu_left_label{
+  font-size:20rpx;
+  color:#333;
+  margin-top:-5rpx;
+}
+.bottom_menu_right{
+  display: block;
+  text-align: center;
+  width: 40%;
+  height: 100%;
+  background: orange;
+}
+
+.room_detail .mask{position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: 999999}
+.room_detail .mask{background: rgba(0,0,0,0.7);}
+.room_detail_pic{position: fixed; top:30%;width:100%;height: 480rpx;background: #fff;z-index: 99999999999999;overflow: hidden}
+.banner{height: 480rpx;}
+.banner image{width: 100%;height: 100%;border-radius:10px 10px 0 0;}
+.house_name{margin:0 30rpx; border-bottom:2rpx solid #e7e7e7;padding-bottom:35rpx;}
+.page__title{font-size:36rpx;margin-top:30rpx; }
+.page__desc{ font-size:24rpx; margin:0;}
+.house_property_label{color:#999; font-size:24rpx;width:40% !important;}
+.house_property_value{ font-size:24rpx; color:#333;}
+.weui-media-box__title{margin-bottom:10rpx; }
+.house_room_left_item{ justify-content:space-between;}
+.yuding-btn{ background:#ffac40 !important;color:#fff; width:170rpx;height:66rpx; border-radius: 0; line-height:66rpx; border:none; font-size:28rpx;}
+.hengjia{ font-size:20rpx;text-decoration:line-through; line-height:40rpx;}
+.house_location_map{position:relative;}
+.kydbox{position:absolute;top:14rpx; background:#eea342;font-size:20rpx;color:#fff;padding:10rpx 30rpx;right:-10rpx;max-width:420rpx;padding-left:10rpx !important; text-align:right;}
+.kydbox::after{
+   position:absolute;
+   content:"";
+   right:-6rpx;
+   top:20rpx;
+    width: 0;
+    height: 0;
+    border-top:8rpx solid transparent;
+    border-left:8rpx solid #f5aa49;
+    border-bottom:8rpx solid transparent;
+}
+.house_introduce{margin:0 30rpx;border-bottom:2rpx solid #e7e7e7;padding-bottom:35rpx;}
+.weui-article__p{font-size: 28rpx;color:#333; margin:0;}
+.room_facility{margin:0 30rpx;border-bottom:2rpx solid #e7e7e7;padding-bottom:35rpx;}
+.detubox{width:30rpx;height:30rpx; display:block;margin:0 auto;}
+.detubox image{width:100% !important; height:auto !important; display:initial;}
+.public_facility{margin:0 30rpx;border-bottom:2rpx solid #e7e7e7; }
+.rent_info{margin:0 30rpx;border-bottom:2rpx solid #e7e7e7; }
+.detuboxgg{margin:0;width:52rpx;height:52rpx;}
+.house_trafic{margin:0 30rpx;border-bottom:2rpx solid #e7e7e7;padding-bottom:35rpx;}
+.house_tip{margin:0 30rpx;padding-bottom:35rpx;}
+.bottom_menu_right_label{color:#fff; line-height:96rpx; font-size:32rpx;}

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.catering.mapper.CateringContactsMapper">
+
+	<resultMap id="cateringContacts" type="com.wemeCity.web.catering.model.CateringContacts">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="district_code" property="districtCode" jdbcType="VARCHAR" />
+		<result column="district_name" property="districtName" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="default_flag" property="defaultFlag" jdbcType="VARCHAR" />
+		<result column="label" property="label" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertCateringContacts" parameterType="com.wemeCity.web.catering.model.CateringContacts">
+		<![CDATA[
+			INSERT INTO CATERING_CONTACTS (
+				id,
+				user_id,
+				name,
+				phone,
+				city_code,
+				city_name,
+				district_code,
+				district_name,
+				address,
+				default_flag,
+				label,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{userId},
+				#{name},
+				#{phone},
+				#{cityCode},
+				#{cityName},
+				#{districtCode},
+				#{districtName},
+				#{address},
+				#{defaultFlag},
+				#{label},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM CATERING_CONTACTS LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteCateringContacts" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE catering_contacts SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateCateringContacts" parameterType="map">
+		UPDATE catering_contacts set modify_time=now()
+		<if test="userId !=null">
+			, user_id=#{userId}
+		</if>
+		<if test="name !=null">
+			, name=#{name}
+		</if>
+		<if test="phone !=null">
+			, phone=#{phone}
+		</if>
+		<if test="cityCode !=null">
+			, city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			, city_name=#{cityName}
+		</if>
+		<if test="districtCode !=null">
+			, district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			, district_name=#{districtName}
+		</if>
+		<if test="address !=null">
+			, address=#{address}
+		</if>
+		<if test="defaultFlag !=null">
+			, default_flag=#{defaultFlag}
+		</if>
+		<if test="label !=null">
+			, label=#{label}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readCateringContacts" parameterType="java.lang.Long" resultMap="cateringContacts">
+		SELECT * FROM catering_contacts WHERE id=#{id}
+	</select>
+
+	<select id="queryCateringContactsList" parameterType="map" resultMap="cateringContacts">
+		SELECT * FROM catering_contacts WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="phone !=null">
+			AND phone=#{phone}
+		</if>
+		<if test="cityCode !=null">
+			AND city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="districtCode !=null">
+			AND district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			AND district_name=#{districtName}
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="defaultFlag !=null">
+			AND default_flag=#{defaultFlag}
+		</if>
+		<if test="label !=null">
+			AND label=#{label}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryCateringContactsCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM CATERING_CONTACTS WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="phone !=null">
+			AND phone=#{phone}
+		</if>
+		<if test="cityCode !=null">
+			AND city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="districtCode !=null">
+			AND district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			AND district_name=#{districtName}
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="defaultFlag !=null">
+			AND default_flag=#{defaultFlag}
+		</if>
+		<if test="label !=null">
+			AND label=#{label}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+	
+	
+	<update id="changeDefaultContacts" parameterType="map">
+		update CATERING_CONTACTS set default_flag=#{defaultFlag} where user_id=#{userId}
+	</update>
+
+</mapper>

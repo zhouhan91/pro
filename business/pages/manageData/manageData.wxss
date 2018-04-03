@@ -1,0 +1,49 @@
+page{background:#eee;}
+.datatitle{overflow:hidden;zoom:1;padding:0 30rpx;padding-top:40rpx;margin-bottom:30rpx;}
+.datatitle image{width:40rpx;height:40rpx; float:left;margin-right:20rpx;}
+.datatitle text{font-size:24rpx;color:#333;float:left;margin-top:4rpx;}
+.shujubox{ display:flex;height:94rpx;padding-top:34rpx; background:#fff; clear:both;border-bottom:1.5rpx solid #d6d6d6;}
+.pfbox{text-align:center; font-size:20rpx;color:#999; width:33.33%;border-right:2rpx solid #ccc;height:66rpx;}
+.pfbox text{display:block;}
+.pfbox:last-child{border:none;}
+.nubmer{color:#333;font-size:32rpx;}
+
+.table {
+  border: 0px solid darkgray;
+  padding:0 30rpx;
+  padding-bottom:30rpx;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height:80rpx; 
+  align-items: center;
+  border-bottom:1.5rpx solid #d6d6d6;
+}
+.td {
+    width:40%;
+    justify-content: center;
+    text-align: center;
+    background:#fff;
+    height:80rpx;
+    font-size:24rpx;
+    color:#333;
+    line-height:80rpx;
+}
+.bg-w{
+  background:#fff;
+}
+.bg-g{
+   
+}
+.th {
+  width: 40%;
+  justify-content: center;
+  background: #f3f3f3;
+  color: #333;
+  display: flex;
+  height: 80rpx;
+  font-size:24rpx;
+  align-items: center;
+}

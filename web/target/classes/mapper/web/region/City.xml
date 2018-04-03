@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.region.mapper.CityMapper">
+
+	<resultMap id="city" type="com.wemeCity.web.region.model.City">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="chinese_name" property="chineseName" jdbcType="VARCHAR" />
+		<result column="english_name" property="englishName" jdbcType="VARCHAR" />
+		<result column="province_id" property="provinceId" jdbcType="BIGINT" />
+		<result column="country_id" property="countryId" jdbcType="BIGINT" />
+		<result column="image" property="image" jdbcType="VARCHAR" />
+		<result column="area_code" property="areaCode" jdbcType="VARCHAR" />
+		<result column="post_code" property="postCode" jdbcType="VARCHAR" />
+		<result column="key_words" property="keyWords" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertCity" parameterType="com.wemeCity.web.region.model.City">
+		<![CDATA[
+			INSERT INTO CITY (
+				id,
+				code,
+				name,
+				chinese_name,
+				english_name,
+				province_id,
+				country_id,
+				image,
+				area_code,
+				post_code,
+				key_words,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{code},
+				#{name},
+				#{chineseName},
+				#{englishName},
+				#{provinceId},
+				#{countryId},
+				#{image},
+				#{areaCode},
+				#{postCode},
+				#{keyWords},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM CITY LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteCity" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE city SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateCity" parameterType="map">
+		UPDATE city set modify_time=now()
+		<if test="code !=null">
+			, code=#{code}
+		</if>
+		<if test="name !=null">
+			, name=#{name}
+		</if>
+		<if test="chineseName !=null">
+			, chinese_name=#{chineseName}
+		</if>
+		<if test="englishName !=null">
+			, english_name=#{englishName}
+		</if>
+		<if test="provinceId !=null">
+			, province_id=#{provinceId}
+		</if>
+		<if test="countryId !=null">
+			, country_id=#{countryId}
+		</if>
+		<if test="image !=null">
+			, image=#{image}
+		</if>
+		<if test="areaCode !=null">
+			, area_code=#{areaCode}
+		</if>
+		<if test="postCode !=null">
+			, post_code=#{postCode}
+		</if>
+		<if test="keyWords !=null">
+			, key_words=#{keyWords}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readCity" parameterType="java.lang.Long" resultMap="city">
+		SELECT * FROM city WHERE id=#{id}
+	</select>
+
+	<select id="queryCityList" parameterType="map" resultMap="city">
+		SELECT * FROM city WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="code !=null">
+			AND code=#{code}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="chineseName !=null">
+			AND chinese_name=#{chineseName}
+		</if>
+		<if test="englishName !=null">
+			AND english_name=#{englishName}
+		</if>
+		<if test="provinceId !=null">
+			AND province_id=#{provinceId}
+		</if>
+		<if test="countryId !=null">
+			AND country_id=#{countryId}
+		</if>
+		<if test="image !=null">
+			AND image=#{image}
+		</if>
+		<if test="areaCode !=null">
+			AND area_code=#{areaCode}
+		</if>
+		<if test="postCode !=null">
+			AND post_code=#{postCode}
+		</if>
+		<if test="keyWords !=null">
+			AND key_words=#{keyWords}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryCityCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM CITY WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="code !=null">
+			AND code=#{code}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="chineseName !=null">
+			AND chinese_name=#{chineseName}
+		</if>
+		<if test="englishName !=null">
+			AND english_name=#{englishName}
+		</if>
+		<if test="provinceId !=null">
+			AND province_id=#{provinceId}
+		</if>
+		<if test="countryId !=null">
+			AND country_id=#{countryId}
+		</if>
+		<if test="image !=null">
+			AND image=#{image}
+		</if>
+		<if test="areaCode !=null">
+			AND area_code=#{areaCode}
+		</if>
+		<if test="postCode !=null">
+			AND post_code=#{postCode}
+		</if>
+		<if test="keyWords !=null">
+			AND key_words=#{keyWords}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

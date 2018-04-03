@@ -1,0 +1,27 @@
+<view class='listbox listbox'>
+  <view class='szlist'>
+    <text style='width:10%'>序号</text>
+    <text style='margin-left:15rpx;width:30%'>名称</text>
+    <text style='margin-left:15rpx;width:30%'>排序</text>
+    <text style='margin-left:15rpx;width:18%'>操作</text>
+  </view>
+  <view wx:for="{{goodsCateList}}" wx:key="idx" class='szlist'>
+    <text>{{index+1}}</text>
+    <input disabled='{{index == enableEditorIndex ? false : true}}' type='text' name="name" value='{{item.name}}' placeholder='请输入'  placeholder-style="color:#ccc" focus='{{index == enableEditorIndex ? true : false}}' bindblur='onNameBlur'></input>
+    <input disabled='{{index == enableEditorIndex ? false : true}}' type='number' name="sortNum" value='{{item.sortNum}}' placeholder='请输入排序号'  placeholder-style="color:#ccc" bindblur='onsortNumBlur'></input>
+    <button type='primary' size='mini' style='float:left;font-size:19rpx;color:#FFF;' data-index='{{index}}' bindtap='onEditorClick'>修改</button>
+    <button type='warn' size='mini' style='float:left;font-size:19rpx;color:#FFF;' data-index='{{index}}' bindtap='onDeleteClick'>删除</button>
+    
+  </view>
+  <view class='szlist' wx:if="{{isAddLine}}">
+    <text>{{goodsCateList.length + 1}}</text>
+    <input  type='text' value="{{name}}" placeholder='请输入'  placeholder-style="color:#ccc" focus='true' bindblur='onNameBlur'></input>
+    <input type='number' value="{{sortNum}}" placeholder='请输入排序号'  placeholder-style="color:#ccc" bindblur='onsortNumBlur'></input>
+    <button type='primary' size='mini' style='float:left;font-size:19rpx;color:#FFF;' data-index='{{index}}' bindtap='onCancelClick'>取消</button>
+  </view>
+</view>
+
+<view class='botbox'>
+  <text class='quxiao' bindtap='onAddLineClick'>增加一行</text>
+  <text class='seven' bindtap='onSaveClick'>保存</text>
+</view>

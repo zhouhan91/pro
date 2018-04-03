@@ -1,0 +1,12 @@
+<view >
+      <view class='bgtu'>
+          <image src='../resource/kind/ordsucc.png'></image>
+      </view>
+      <view class='zfcg'>支付成功</view>
+      <view class='text'>
+          <text>您的订单已成功下单</text>
+          <text>店家将尽快把您的外卖送达，请耐心等待！</text>
+          <text>您可以在小程序首页'我'，'外卖订单'中查看订单状态!</text>
+      </view> 
+      <text class='btn' bindtap='onOkClick'>确定</text>
+</view>

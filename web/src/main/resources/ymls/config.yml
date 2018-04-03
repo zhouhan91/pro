@@ -1,0 +1,41 @@
+components: 
+    fileUpload: 
+        path: 
+            portrait: /portrait
+    sms: 
+        url: http://120.55.242.177/OpenPlatform/OpenApi?action=sendOnce
+        ac: 1001@800139840001
+        authkey: A2D8E3C779B891A5043A38D5D096A01D
+        cgid: 407
+
+system: 
+        user: 
+            sessionTimeMinutes: 21600
+            defaultPortrait: /images/touxiang.jpg
+        wechat: 
+            sessionKeyUrl: https://api.weixin.qq.com/sns/jscode2session
+            unifiedorderUrl: https://api.mch.weixin.qq.com/pay/unifiedorder
+            programAppId: wxfdeff9a45b0a0b7b
+            programSecret: 53dbd0d528c3b28317f8cc62ee14201d
+            sdkAppId: wx986f3a5e38092557
+            sdkSecret: 90b3592fd997cb3eb6991affc916147c
+            mchId: 1490521032
+            payNotifyUrl: https://i.wemecity.net/payCallback/wechat
+            paySecret: wemecity20171101aaaaaaaaaaaaaaaa
+        news: 
+            navigation: 
+                  - code: lanmu
+                    name: 栏目
+                  - code: babieta
+                    name: 巴别塔
+                  - code: zhinan
+                    name: 指南
+                  - code: zhuanlan
+                    name: 专栏
+                  - code: studyAbroad
+                    name: 留学
+        juhe: 
+            appKey: c086ade240642630cdc7bea43acea052
+            
+            
+            

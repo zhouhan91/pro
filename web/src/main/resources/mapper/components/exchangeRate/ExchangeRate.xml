@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.components.exchangeRate.mapper.ExchangeRateMapper">
+
+	<resultMap id="exchangeRate" type="com.wemeCity.components.exchangeRate.model.ExchangeRate">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="euros" property="euros" jdbcType="DECIMAL" />
+		<result column="dollar" property="dollar" jdbcType="DECIMAL" />
+		<result column="yen" property="yen" jdbcType="DECIMAL" />
+		<result column="hk" property="hk" jdbcType="DECIMAL" />
+		<result column="pound" property="pound" jdbcType="DECIMAL" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertExchangeRate" parameterType="com.wemeCity.components.exchangeRate.model.ExchangeRate">
+		<![CDATA[
+			INSERT INTO EXCHANGE_RATE (
+				id,
+				euros,
+				dollar,
+				yen,
+				hk,
+				pound,
+				update_time,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{euros},
+				#{dollar},
+				#{yen},
+				#{hk},
+				#{pound},
+				#{updateTime},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM EXCHANGE_RATE LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteExchangeRate" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE exchange_rate SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateExchangeRate" parameterType="map">
+		UPDATE exchange_rate set modify_time=now()
+		<if test="euros !=null">
+			, euros=#{euros}
+		</if>
+		<if test="dollar !=null">
+			, dollar=#{dollar}
+		</if>
+		<if test="yen !=null">
+			, yen=#{yen}
+		</if>
+		<if test="hk !=null">
+			, hk=#{hk}
+		</if>
+		<if test="pound !=null">
+			, pound=#{pound}
+		</if>
+		<if test="updateTime !=null">
+			, update_time=#{updateTime}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readExchangeRate" parameterType="java.lang.Long" resultMap="exchangeRate">
+		SELECT * FROM exchange_rate WHERE id=#{id}
+	</select>
+
+	<select id="queryExchangeRateList" parameterType="map" resultMap="exchangeRate">
+		SELECT * FROM exchange_rate WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="euros !=null">
+			AND euros=#{euros}
+		</if>
+		<if test="dollar !=null">
+			AND dollar=#{dollar}
+		</if>
+		<if test="yen !=null">
+			AND yen=#{yen}
+		</if>
+		<if test="hk !=null">
+			AND hk=#{hk}
+		</if>
+		<if test="pound !=null">
+			AND pound=#{pound}
+		</if>
+		<if test="updateTime !=null">
+			AND update_time=#{updateTime}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryExchangeRateCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM EXCHANGE_RATE WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="euros !=null">
+			AND euros=#{euros}
+		</if>
+		<if test="dollar !=null">
+			AND dollar=#{dollar}
+		</if>
+		<if test="yen !=null">
+			AND yen=#{yen}
+		</if>
+		<if test="hk !=null">
+			AND hk=#{hk}
+		</if>
+		<if test="pound !=null">
+			AND pound=#{pound}
+		</if>
+		<if test="updateTime !=null">
+			AND update_time=#{updateTime}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

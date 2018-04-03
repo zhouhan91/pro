@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.components.location.mapper.LocationRequestMapper">
+
+	<resultMap id="locationRequest" type="com.wemeCity.components.location.model.LocationRequest">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="channel" property="channel" jdbcType="VARCHAR" />
+		<result column="latitude" property="latitude" jdbcType="FLOAT" />
+		<result column="longitude" property="longitude" jdbcType="FLOAT" />
+		<result column="speed" property="speed" jdbcType="FLOAT" />
+		<result column="accuracy" property="accuracy" jdbcType="FLOAT" />
+		<result column="altitude" property="altitude" jdbcType="FLOAT" />
+		<result column="vertical_accuracy" property="verticalAccuracy" jdbcType="FLOAT" />
+		<result column="horizontal_accuracy" property="horizontalAccuracy" jdbcType="FLOAT" />
+		<result column="country" property="country" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertLocationRequest" parameterType="com.wemeCity.components.location.model.LocationRequest">
+		<![CDATA[
+			INSERT INTO LOCATION_REQUEST (
+				id,
+				channel,
+				latitude,
+				longitude,
+				speed,
+				accuracy,
+				altitude,
+				vertical_accuracy,
+				horizontal_accuracy,
+				country,
+				city,
+				address,
+				status,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{channel},
+				#{latitude},
+				#{longitude},
+				#{speed},
+				#{accuracy},
+				#{altitude},
+				#{verticalAccuracy},
+				#{horizontalAccuracy},
+				#{country},
+				#{city},
+				#{address},
+				#{status},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM LOCATION_REQUEST LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteLocationRequest" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE location_request SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateLocationRequest" parameterType="map">
+		UPDATE location_request set modify_time=now()
+		<if test="channel !=null">
+			, channel=#{channel}
+		</if>
+		<if test="latitude !=null">
+			, latitude=#{latitude}
+		</if>
+		<if test="longitude !=null">
+			, longitude=#{longitude}
+		</if>
+		<if test="speed !=null">
+			, speed=#{speed}
+		</if>
+		<if test="accuracy !=null">
+			, accuracy=#{accuracy}
+		</if>
+		<if test="altitude !=null">
+			, altitude=#{altitude}
+		</if>
+		<if test="verticalAccuracy !=null">
+			, vertical_accuracy=#{verticalAccuracy}
+		</if>
+		<if test="horizontalAccuracy !=null">
+			, horizontal_accuracy=#{horizontalAccuracy}
+		</if>
+		<if test="country !=null">
+			, country=#{country}
+		</if>
+		<if test="city !=null">
+			, city=#{city}
+		</if>
+		<if test="address !=null">
+			, address=#{address}
+		</if>
+		<if test="status !=null">
+			, status=#{status}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readLocationRequest" parameterType="java.lang.Long" resultMap="locationRequest">
+		SELECT * FROM location_request WHERE id=#{id}
+	</select>
+
+	<select id="queryLocationRequestList" parameterType="map" resultMap="locationRequest">
+		SELECT * FROM location_request WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="channel !=null">
+			AND channel=#{channel}
+		</if>
+		<if test="latitude !=null">
+			AND latitude=#{latitude}
+		</if>
+		<if test="longitude !=null">
+			AND longitude=#{longitude}
+		</if>
+		<if test="speed !=null">
+			AND speed=#{speed}
+		</if>
+		<if test="accuracy !=null">
+			AND accuracy=#{accuracy}
+		</if>
+		<if test="altitude !=null">
+			AND altitude=#{altitude}
+		</if>
+		<if test="verticalAccuracy !=null">
+			AND vertical_accuracy=#{verticalAccuracy}
+		</if>
+		<if test="horizontalAccuracy !=null">
+			AND horizontal_accuracy=#{horizontalAccuracy}
+		</if>
+		<if test="country !=null">
+			AND country=#{country}
+		</if>
+		<if test="city !=null">
+			AND city=#{city}
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryLocationRequestCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM LOCATION_REQUEST WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="channel !=null">
+			AND channel=#{channel}
+		</if>
+		<if test="latitude !=null">
+			AND latitude=#{latitude}
+		</if>
+		<if test="longitude !=null">
+			AND longitude=#{longitude}
+		</if>
+		<if test="speed !=null">
+			AND speed=#{speed}
+		</if>
+		<if test="accuracy !=null">
+			AND accuracy=#{accuracy}
+		</if>
+		<if test="altitude !=null">
+			AND altitude=#{altitude}
+		</if>
+		<if test="verticalAccuracy !=null">
+			AND vertical_accuracy=#{verticalAccuracy}
+		</if>
+		<if test="horizontalAccuracy !=null">
+			AND horizontal_accuracy=#{horizontalAccuracy}
+		</if>
+		<if test="country !=null">
+			AND country=#{country}
+		</if>
+		<if test="city !=null">
+			AND city=#{city}
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

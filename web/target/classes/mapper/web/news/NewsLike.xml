@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.news.mapper.NewsLikeMapper">
+
+	<resultMap id="newsLike" type="com.wemeCity.web.news.model.NewsLike">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="news_id" property="newsId" jdbcType="BIGINT" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="cover_picture" property="coverPicture" jdbcType="VARCHAR" />
+		<result column="author" property="author" jdbcType="VARCHAR" />
+		<result column="navigation_code" property="navigationCode" jdbcType="VARCHAR" />
+		<result column="navigation_name" property="navigationName" jdbcType="VARCHAR" />
+		<result column="sub_navigation_code" property="subNavigationCode" jdbcType="VARCHAR" />
+		<result column="sub_navigation_name" property="subNavigationName" jdbcType="VARCHAR" />
+		<result column="key_words" property="keyWords" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertNewsLike" parameterType="com.wemeCity.web.news.model.NewsLike">
+		<![CDATA[
+			INSERT INTO NEWS_LIKE (
+				id,
+				user_id,
+				news_id,
+				title,
+				cover_picture,
+				author,
+				navigation_code,
+				navigation_name,
+				sub_navigation_code,
+				sub_navigation_name,
+				key_words,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{userId},
+				#{newsId},
+				#{title},
+				#{coverPicture},
+				#{author},
+				#{navigationCode},
+				#{navigationName},
+				#{subNavigationCode},
+				#{subNavigationName},
+				#{keyWords},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM NEWS_LIKE LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteNewsLike" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE news_like SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateNewsLike" parameterType="map">
+		UPDATE news_like set modify_time=now()
+		<if test="userId !=null">
+			, user_id=#{userId}
+		</if>
+		<if test="newsId !=null">
+			, news_id=#{newsId}
+		</if>
+		<if test="title !=null">
+			, title=#{title}
+		</if>
+		<if test="coverPicture !=null">
+			, cover_picture=#{coverPicture}
+		</if>
+		<if test="author !=null">
+			, author=#{author}
+		</if>
+		<if test="navigationCode !=null">
+			, navigation_code=#{navigationCode}
+		</if>
+		<if test="navigationName !=null">
+			, navigation_name=#{navigationName}
+		</if>
+		<if test="subNavigationCode !=null">
+			, sub_navigation_code=#{subNavigationCode}
+		</if>
+		<if test="subNavigationName !=null">
+			, sub_navigation_name=#{subNavigationName}
+		</if>
+		<if test="keyWords !=null">
+			, key_words=#{keyWords}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readNewsLike" parameterType="java.lang.Long" resultMap="newsLike">
+		SELECT * FROM news_like WHERE id=#{id}
+	</select>
+
+	<select id="queryNewsLikeList" parameterType="map" resultMap="newsLike">
+		SELECT * FROM news_like WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="newsId !=null">
+			AND news_id=#{newsId}
+		</if>
+		<if test="title !=null">
+			AND title=#{title}
+		</if>
+		<if test="coverPicture !=null">
+			AND cover_picture=#{coverPicture}
+		</if>
+		<if test="author !=null">
+			AND author=#{author}
+		</if>
+		<if test="navigationCode !=null">
+			AND navigation_code=#{navigationCode}
+		</if>
+		<if test="navigationName !=null">
+			AND navigation_name=#{navigationName}
+		</if>
+		<if test="subNavigationCode !=null">
+			AND sub_navigation_code=#{subNavigationCode}
+		</if>
+		<if test="subNavigationName !=null">
+			AND sub_navigation_name=#{subNavigationName}
+		</if>
+		<if test="keyWords !=null">
+			AND key_words=#{keyWords}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryNewsLikeCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM NEWS_LIKE WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="newsId !=null">
+			AND news_id=#{newsId}
+		</if>
+		<if test="title !=null">
+			AND title=#{title}
+		</if>
+		<if test="coverPicture !=null">
+			AND cover_picture=#{coverPicture}
+		</if>
+		<if test="author !=null">
+			AND author=#{author}
+		</if>
+		<if test="navigationCode !=null">
+			AND navigation_code=#{navigationCode}
+		</if>
+		<if test="navigationName !=null">
+			AND navigation_name=#{navigationName}
+		</if>
+		<if test="subNavigationCode !=null">
+			AND sub_navigation_code=#{subNavigationCode}
+		</if>
+		<if test="subNavigationName !=null">
+			AND sub_navigation_name=#{subNavigationName}
+		</if>
+		<if test="keyWords !=null">
+			AND key_words=#{keyWords}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

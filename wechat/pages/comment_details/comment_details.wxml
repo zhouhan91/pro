@@ -1,0 +1,105 @@
+<wxs module="newsDetailUtils">
+  var dateFormat = function(dateStr){
+    var d = getDate(dateStr);
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    var hour = d.getHours();
+    var min = d.getMinutes();
+    return month + "-" + day + " " + hour + ":" + min;
+  };
+
+  var diffDate = function (dateStr){
+    var cDate = getDate();
+    var eDate = getDate(dateStr);
+    var diffTimes = (cDate.getTime() - eDate.getTime()) / 1000;
+    var diffDays = diffTimes / 3600 / 24;
+    var ctime = dateStr;
+    if (diffTimes < 3600) {
+      ctime = Math.abs(parseInt(diffTimes / 60)) + '分钟前';
+    } else if (diffDays < 1) {
+      ctime = parseInt(diffTimes / 3600) + '小时前';
+    } else {
+      ctime = parseInt(diffDays) + '天前';
+    }
+    return ctime;
+  };
+
+  var subContent = function(content, len){
+    return content.substring(0, len);
+  };
+
+  module.exports.subContent = subContent;
+  module.exports.diffDate = diffDate;
+  module.exports.dateFormat = dateFormat;
+</wxs>
+
+<view class="newsplbox newsplboxtop">
+  <view class="plbox">
+    <view class="plcenttop">
+      <view class="touxiang"><image src='{{commentItem.portrait ? commentItem.portrait : "../resource/kind/or01.jpg"}}'></image></view>
+      <text>{{commentItem.nickname ? commentItem.nickname : "匿名"}}</text>           
+    </view>
+    <view class="comdtilct">
+      <text class="plcontent">
+        {{commentItem.content}}
+      </text>
+      <view class="plbot">
+        <text>{{commentItem.replyCount}}回复</text>
+        <text>{{newsDetailUtils.diffDate(commentItem.createTime)}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="newsplbox">
+  <block wx:for="{{commentStatus == 1 && commentList}}" wx:key="{{index}}" >
+    <view class="plbox">
+      <view class="plcenttop">
+        <view class="touxiang"><image src='{{item.portrait ? item.portrait : "../resource/kind/or01.jpg"}}'></image></view>
+        <text>{{item.nickname ? item.nickname : "匿名"}}</text>
+        <view class="titledz" data-comment-id='{{item.id}}' bindtap='onLikedClick'>
+          <text>{{item.likeCount}}</text>
+          <image src='../resource/kind/dz.png'></image>
+        </view>            
+      </view>
+      <view class="comdtilct">
+        <text class="plcontent">
+          {{item.content}}
+        </text>
+        <view class="plbot">
+          <text>{{item.replyCount}}回复</text>
+          <text>{{newsDetailUtils.diffDate(item.createTime)}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+<!--
+    <view class="plbox">
+        <view class="plcenttop">
+            <view class="touxiang"><image src='../resource/kind/or01.jpg'></image></view>
+            <text>花意思</text>
+            <view class="titledz">
+              <text>181</text>
+                <image src='../resource/kind/dz.png'></image>
+            </view>
+        </view>
+        <view class="comdtilct">
+          <text class="plcontent">
+            据悉，该片取景于意大利托斯卡纳地区，镜头中的两人也展现出了情侣的日常：遛狗、骑车、野餐、看报，演绎惬意随心的意式浪漫。杂志采访中，倪妮与井柏然也首次坦露了爱情观以及相处细节，两人表示，爱情是懂得与尊重彼此，想对方所想。
+          </text>
+          <view class="plbot">
+            <text>81回复</text>
+            <text>81分钟前</text>
+          </view>
+          </view>
+    </view>
+-->
+</view>
+
+<view class="newsbottom">
+    <form bindsubmit="onPublishComment" class="newsbottom fabiaobox">
+      <image src='../resource/kind/bianxie.png' class='xie'></image>
+      <input focus="{{fabiao_focus}}" name="content" type='text' placeholder='发表评论' class="fabiao" bindblur="hidfabu" style='width:70%'></input>
+      <button class="fabu" formType="submit">发布</button>
+    </form>
+</view>

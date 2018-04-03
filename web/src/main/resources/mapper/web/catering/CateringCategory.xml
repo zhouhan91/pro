@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.catering.mapper.CateringCategoryMapper">
+
+	<resultMap id="cateringCategory" type="com.wemeCity.web.catering.model.CateringCategory">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="image" property="image" jdbcType="VARCHAR" />
+		<result column="parent_id" property="parentId" jdbcType="BIGINT" />
+		<result column="parent_code" property="parentCode" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertCateringCategory" parameterType="com.wemeCity.web.catering.model.CateringCategory">
+		<![CDATA[
+			INSERT INTO CATERING_CATEGORY (
+				id,
+				name,
+				code,
+				image,
+				parent_id,
+				parent_code,
+				status,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{name},
+				#{code},
+				#{image},
+				#{parentId},
+				#{parentCode},
+				#{status},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM CATERING_CATEGORY LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteCateringCategory" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE catering_category SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateCateringCategory" parameterType="map">
+		UPDATE catering_category set modify_time=now()
+		<if test="name !=null">
+			, name=#{name}
+		</if>
+		<if test="code !=null">
+			, code=#{code}
+		</if>
+		<if test="image !=null">
+			, image=#{image}
+		</if>
+		<if test="parentId !=null">
+			, parent_id=#{parentId}
+		</if>
+		<if test="parentCode !=null">
+			, parent_code=#{parentCode}
+		</if>
+		<if test="status !=null">
+			, status=#{status}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readCateringCategory" parameterType="java.lang.Long" resultMap="cateringCategory">
+		SELECT * FROM catering_category WHERE id=#{id}
+	</select>
+
+	<select id="queryCateringCategoryList" parameterType="map" resultMap="cateringCategory">
+		SELECT * FROM catering_category WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="code !=null">
+			AND code=#{code}
+		</if>
+		<if test="image !=null">
+			AND image=#{image}
+		</if>
+		<if test="parentId !=null">
+			AND parent_id=#{parentId}
+		</if>
+		<if test="parentCode !=null">
+			AND parent_code=#{parentCode}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryCateringCategoryCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM CATERING_CATEGORY WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="code !=null">
+			AND code=#{code}
+		</if>
+		<if test="image !=null">
+			AND image=#{image}
+		</if>
+		<if test="parentId !=null">
+			AND parent_id=#{parentId}
+		</if>
+		<if test="parentCode !=null">
+			AND parent_code=#{parentCode}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true" monitoring="autodetect" dynamicConfig="true">
+
+<diskStore path="java.io.tmpdir"/>
+
+<!-- 
+        配置自定义缓存
+        maxElementsInMemory：缓存中允许创建的最大对象数
+        eternal：缓存中对象是否为永久的，如果是，超时设置将被忽略，对象从不过期。
+        timeToIdleSeconds：缓存数据的钝化时间，也就是在一个元素消亡之前，两次访问时间的最大时间间隔值，这只能在元素不是永久驻留时有效，如果该值是 0 就意味着元素可以停顿无穷长的时间。
+        timeToLiveSeconds：缓存数据的生存时间，也就是一个元素从构建到消亡的最大时间间隔值，这只能在元素不是永久驻留时有效，如果该值是0就意味着元素可以停顿无穷长的时间。
+        overflowToDisk：内存不足时，是否启用磁盘缓存。
+        memoryStoreEvictionPolicy：缓存满了之后的淘汰算法。
+    -->
+
+<!-- 默认配置 -->
+<defaultCache 
+	maxElementsInMemory="100000" 
+	eternal="false" 
+	timeToIdleSeconds="7200" 
+	timeToLiveSeconds="7200" 
+	overflowToDisk="false">
+</defaultCache>
+
+<!-- 房源详细信息(1小时) -->
+<cache name="communityInfo" 
+	maxElementsInMemory="100000" 
+	eternal="false"
+	overflowToDisk="true" 
+	timeToIdleSeconds="0" 
+	timeToLiveSeconds="30"
+	memoryStoreEvictionPolicy="FIFO" />
+
+<!-- 房源信息(1小时) -->
+<cache name="community" 
+	maxElementsInMemory="100000" 
+	eternal="false"
+	overflowToDisk="true" 
+	timeToIdleSeconds="0" 
+	timeToLiveSeconds="30"
+	memoryStoreEvictionPolicy="FIFO" />
+
+<!-- 子栏目信息(24小时) -->
+<cache name="subNavigation" 
+    maxElementsInMemory="100000" 
+    eternal="false"
+    overflowToDisk="true" 
+    timeToIdleSeconds="0" 
+    timeToLiveSeconds="30"
+    memoryStoreEvictionPolicy="FIFO" />
+
+<!-- 栏目首页最新信息(3分钟) -->
+<cache name="navigationNews" 
+    maxElementsInMemory="100000" 
+    eternal="false"
+    overflowToDisk="true" 
+    timeToIdleSeconds="0" 
+    timeToLiveSeconds="30"
+    memoryStoreEvictionPolicy="FIFO" />
+    
+<!-- 新闻内容(1小时) -->
+<cache name="newsContents" 
+    maxElementsInMemory="100000" 
+    eternal="false"
+    overflowToDisk="true" 
+    timeToIdleSeconds="0" 
+    timeToLiveSeconds="30"
+    memoryStoreEvictionPolicy="FIFO" />
+    
+<!-- 新闻内容(1分钟) -->
+<cache name="newsInfo" 
+    maxElementsInMemory="100000" 
+    eternal="false"
+    overflowToDisk="true" 
+    timeToIdleSeconds="0" 
+    timeToLiveSeconds="30"
+    memoryStoreEvictionPolicy="FIFO" />  
+        
+        
+<!-- 餐饮订单明细(5分钟) -->
+<cache name="cateringOrderDetail" 
+    maxElementsInMemory="100000" 
+    eternal="false"
+    overflowToDisk="true" 
+    timeToIdleSeconds="0" 
+    timeToLiveSeconds="300"
+    memoryStoreEvictionPolicy="FIFO" />
+<!-- 餐饮店铺评论图片 -->
+<cache name="cateringCommentImg" 
+    maxElementsInMemory="100000" 
+    eternal="false"
+    overflowToDisk="true" 
+    timeToIdleSeconds="0" 
+    timeToLiveSeconds="60000"
+    memoryStoreEvictionPolicy="FIFO" />
+<!-- 店铺信息 -->
+<cache name="cateringRestaurantInfo" 
+    maxElementsInMemory="100000" 
+    eternal="false"
+    overflowToDisk="true" 
+    timeToIdleSeconds="0" 
+    timeToLiveSeconds="600"
+    memoryStoreEvictionPolicy="FIFO" />
+    
+</ehcache>

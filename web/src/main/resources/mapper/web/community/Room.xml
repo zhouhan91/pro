@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.community.mapper.RoomMapper">
+
+	<resultMap id="room" type="com.wemeCity.web.community.model.Room">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="community_id" property="communityId" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="type_code" property="typeCode" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="discount_price" property="discountPrice" jdbcType="DECIMAL" />
+		<result column="tip_price" property="tipPrice" jdbcType="DECIMAL" />
+		<result column="deposit_price" property="depositPrice" jdbcType="DECIMAL" />
+		<result column="first_rent_month" property="firstRentMonth" jdbcType="INTEGER" />
+		<result column="first_deposit_month" property="firstDepositMonth" jdbcType="INTEGER" />
+		<result column="first_amount" property="firstAmount" jdbcType="DECIMAL" />
+		<result column="area" property="area" jdbcType="FLOAT" />
+		<result column="lease_model_key" property="leaseModelKey" jdbcType="VARCHAR" />
+		<result column="lease_model" property="leaseModel" jdbcType="VARCHAR" />
+		<result column="lease_limit" property="leaseLimit" jdbcType="INTEGER" />
+		<result column="lease_unit" property="leaseUnit" jdbcType="VARCHAR" />
+		<result column="bed_type" property="bedType" jdbcType="VARCHAR" />
+		<result column="bed_type_code" property="bedTypeCode" jdbcType="VARCHAR" />
+		<result column="date_allowed_start" property="dateAllowedStart" jdbcType="TIMESTAMP" />
+		<result column="date_allowed_end" property="dateAllowedEnd" jdbcType="TIMESTAMP" />
+		<result column="pay_flag" property="payFlag" jdbcType="VARCHAR" />
+		<result column="tip_flag" property="tipFlag" jdbcType="VARCHAR" />
+		<result column="sort_num" property="sortNum" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertRoom" parameterType="com.wemeCity.web.community.model.Room">
+		<![CDATA[
+			INSERT INTO ROOM (
+				id,
+				community_id,
+				name,
+				type,
+				type_code,
+				price,
+				discount_price,
+				tip_price,
+				deposit_price,
+				first_rent_month,
+				first_deposit_month,
+				first_amount,
+				area,
+				lease_model_key,
+				lease_model,
+				lease_limit,
+				lease_unit,
+				bed_type,
+				bed_type_code,
+				date_allowed_start,
+				date_allowed_end,
+				pay_flag,
+				tip_flag,
+				sort_num,
+				status,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{communityId},
+				#{name},
+				#{type},
+				#{typeCode},
+				#{price},
+				#{discountPrice},
+				#{tipPrice},
+				#{depositPrice},
+				#{firstRentMonth},
+				#{firstDepositMonth},
+				#{firstAmount},
+				#{area},
+				#{leaseModelKey},
+				#{leaseModel},
+				#{leaseLimit},
+				#{leaseUnit},
+				#{bedType},
+				#{bedTypeCode},
+				#{dateAllowedStart},
+				#{dateAllowedEnd},
+				#{payFlag},
+				#{tipFlag},
+				#{sortNum},
+				#{status},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM ROOM LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteRoom" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE room SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateRoom" parameterType="map">
+		UPDATE room set modify_time=now()
+		<if test="communityId !=null">
+			, community_id=#{communityId}
+		</if>
+		<if test="name !=null">
+			, name=#{name}
+		</if>
+		<if test="type !=null">
+			, type=#{type}
+		</if>
+		<if test="typeCode !=null">
+			, type_code=#{typeCode}
+		</if>
+		<if test="price !=null">
+			, price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			, discount_price=#{discountPrice}
+		</if>
+		<if test="tipPrice !=null">
+			, tip_price=#{tipPrice}
+		</if>
+		<if test="depositPrice !=null">
+			, deposit_price=#{depositPrice}
+		</if>
+		<if test="firstRentMonth !=null">
+			, first_rent_month=#{firstRentMonth}
+		</if>
+		<if test="firstDepositMonth !=null">
+			, first_deposit_month=#{firstDepositMonth}
+		</if>
+		<if test="firstAmount !=null">
+			, first_amount=#{firstAmount}
+		</if>
+		<if test="area !=null">
+			, area=#{area}
+		</if>
+		<if test="leaseModelKey !=null">
+			, lease_model_key=#{leaseModelKey}
+		</if>
+		<if test="leaseModel !=null">
+			, lease_model=#{leaseModel}
+		</if>
+		<if test="leaseLimit !=null">
+			, lease_limit=#{leaseLimit}
+		</if>
+		<if test="leaseUnit !=null">
+			, lease_unit=#{leaseUnit}
+		</if>
+		<if test="bedType !=null">
+			, bed_type=#{bedType}
+		</if>
+		<if test="bedTypeCode !=null">
+			, bed_type_code=#{bedTypeCode}
+		</if>
+		<if test="dateAllowedStart !=null">
+			, date_allowed_start=#{dateAllowedStart}
+		</if>
+		<if test="dateAllowedEnd !=null">
+			, date_allowed_end=#{dateAllowedEnd}
+		</if>
+		<if test="payFlag !=null">
+			, pay_flag=#{payFlag}
+		</if>
+		<if test="tipFlag !=null">
+			, tip_flag=#{tipFlag}
+		</if>
+		<if test="sortNum !=null">
+			, sort_num=#{sortNum}
+		</if>
+		<if test="status !=null">
+			, status=#{status}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readRoom" parameterType="java.lang.Long" resultMap="room">
+		SELECT * FROM room WHERE id=#{id}
+	</select>
+
+	<select id="queryRoomList" parameterType="map" resultMap="room">
+		SELECT * FROM room WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="communityId !=null">
+			AND community_id=#{communityId}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="type !=null">
+			AND type=#{type}
+		</if>
+		<if test="typeCode !=null">
+			AND type_code=#{typeCode}
+		</if>
+		<if test="price !=null">
+			AND price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			AND discount_price=#{discountPrice}
+		</if>
+		<if test="tipPrice !=null">
+			AND tip_price=#{tipPrice}
+		</if>
+		<if test="depositPrice !=null">
+			AND deposit_price=#{depositPrice}
+		</if>
+		<if test="firstRentMonth !=null">
+			AND first_rent_month=#{firstRentMonth}
+		</if>
+		<if test="firstDepositMonth !=null">
+			AND first_deposit_month=#{firstDepositMonth}
+		</if>
+		<if test="firstAmount !=null">
+			AND first_amount=#{firstAmount}
+		</if>
+		<if test="area !=null">
+			AND area=#{area}
+		</if>
+		<if test="leaseModelKey !=null">
+			AND lease_model_key=#{leaseModelKey}
+		</if>
+		<if test="leaseModel !=null">
+			AND lease_model=#{leaseModel}
+		</if>
+		<if test="leaseLimit !=null">
+			AND lease_limit=#{leaseLimit}
+		</if>
+		<if test="leaseUnit !=null">
+			AND lease_unit=#{leaseUnit}
+		</if>
+		<if test="bedType !=null">
+			AND bed_type=#{bedType}
+		</if>
+		<if test="bedTypeCode !=null">
+			AND bed_type_code=#{bedTypeCode}
+		</if>
+		<if test="dateAllowedStart !=null">
+			AND date_allowed_start=#{dateAllowedStart}
+		</if>
+		<if test="dateAllowedEnd !=null">
+			AND date_allowed_end=#{dateAllowedEnd}
+		</if>
+		<if test="payFlag !=null">
+			AND pay_flag=#{payFlag}
+		</if>
+		<if test="tipFlag !=null">
+			AND tip_flag=#{tipFlag}
+		</if>
+		<if test="sortNum !=null">
+			AND sort_num=#{sortNum}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryRoomCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM ROOM WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="communityId !=null">
+			AND community_id=#{communityId}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="type !=null">
+			AND type=#{type}
+		</if>
+		<if test="typeCode !=null">
+			AND type_code=#{typeCode}
+		</if>
+		<if test="price !=null">
+			AND price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			AND discount_price=#{discountPrice}
+		</if>
+		<if test="tipPrice !=null">
+			AND tip_price=#{tipPrice}
+		</if>
+		<if test="depositPrice !=null">
+			AND deposit_price=#{depositPrice}
+		</if>
+		<if test="firstRentMonth !=null">
+			AND first_rent_month=#{firstRentMonth}
+		</if>
+		<if test="firstDepositMonth !=null">
+			AND first_deposit_month=#{firstDepositMonth}
+		</if>
+		<if test="firstAmount !=null">
+			AND first_amount=#{firstAmount}
+		</if>
+		<if test="area !=null">
+			AND area=#{area}
+		</if>
+		<if test="leaseModelKey !=null">
+			AND lease_model_key=#{leaseModelKey}
+		</if>
+		<if test="leaseModel !=null">
+			AND lease_model=#{leaseModel}
+		</if>
+		<if test="leaseLimit !=null">
+			AND lease_limit=#{leaseLimit}
+		</if>
+		<if test="leaseUnit !=null">
+			AND lease_unit=#{leaseUnit}
+		</if>
+		<if test="bedType !=null">
+			AND bed_type=#{bedType}
+		</if>
+		<if test="bedTypeCode !=null">
+			AND bed_type_code=#{bedTypeCode}
+		</if>
+		<if test="dateAllowedStart !=null">
+			AND date_allowed_start=#{dateAllowedStart}
+		</if>
+		<if test="dateAllowedEnd !=null">
+			AND date_allowed_end=#{dateAllowedEnd}
+		</if>
+		<if test="payFlag !=null">
+			AND pay_flag=#{payFlag}
+		</if>
+		<if test="tipFlag !=null">
+			AND tip_flag=#{tipFlag}
+		</if>
+		<if test="sortNum !=null">
+			AND sort_num=#{sortNum}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

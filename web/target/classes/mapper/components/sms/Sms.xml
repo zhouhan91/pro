@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.components.sms.mapper.SmsMapper">
+
+	<resultMap id="sms" type="com.wemeCity.components.sms.model.Sms">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="busi_code" property="busiCode" jdbcType="VARCHAR" />
+		<result column="reciver" property="reciver" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="result" property="result" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insertSms" parameterType="com.wemeCity.components.sms.model.Sms">
+		<![CDATA[
+			INSERT INTO SMS (
+				id,
+				busi_code,
+				reciver,
+				content,
+				create_time,
+				result,
+				is_deleted
+			) VALUES (
+				null,
+				#{busiCode},
+				#{reciver},
+				#{content},
+				now(),
+				#{result},
+				#{isDeleted}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM SMS LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteSms" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE sms SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateSms" parameterType="map">
+		UPDATE sms set modify_time=now()
+		<if test="busiCode !=null">
+			, busi_code=#{busiCode}
+		</if>
+		<if test="reciver !=null">
+			, reciver=#{reciver}
+		</if>
+		<if test="content !=null">
+			, content=#{content}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="result !=null">
+			, result=#{result}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readSms" parameterType="java.lang.Long" resultMap="sms">
+		SELECT * FROM sms WHERE id=#{id}
+	</select>
+
+	<select id="querySmsList" parameterType="map" resultMap="sms">
+		SELECT * FROM sms WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="busiCode !=null">
+			AND busi_code=#{busiCode}
+		</if>
+		<if test="reciver !=null">
+			AND reciver=#{reciver}
+		</if>
+		<if test="receiverLike !=null">
+			AND reciver like CONCAT('%',#{receiverLike},'%')
+		</if>
+		<if test="content !=null">
+			AND content=#{content}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="result !=null">
+			AND result=#{result}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		 
+	</select>
+
+	<select id="querySmsCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM SMS WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="busiCode !=null">
+			AND busi_code=#{busiCode}
+		</if>
+		<if test="reciver !=null">
+			AND reciver=#{reciver}
+		</if>
+		<if test="content !=null">
+			AND content=#{content}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="result !=null">
+			AND result=#{result}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+	</select>
+
+</mapper>

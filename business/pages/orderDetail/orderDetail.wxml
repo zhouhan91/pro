@@ -1,0 +1,23 @@
+<view class='box'>
+  <view class='ordertitle'>日订单日期</view>
+  <view>
+    <view class='szlist daijian'>
+          <input type='text' placeholder='请选择日期'  placeholder-style="color:#ccc"></input>
+      </view>
+      <view>
+          <button type='warn' class='loginbt'>导出</button>
+      </view>
+  </view>
+  <view class='ordertitle'>月订单日期</view>
+  <view>
+    <view class='szlist daijian'>
+          <input type='text' placeholder='请选择月份'  placeholder-style="color:#ccc"></input>
+      </view>
+      <view>
+          <button type='warn' class='loginbt'>导出</button>
+      </view>
+  </view>
+  <view class='zhushi'>
+    <text>注：日交易明细以每天0点到24点截止下订统计订单明细月交易以每月第一天0点开始到最后一天24点截止下订统计订单明细</text>
+  </view>
+</view>

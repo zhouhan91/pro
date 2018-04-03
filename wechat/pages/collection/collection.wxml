@@ -1,0 +1,54 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="idx">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="onTabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      
+      <view class="weui-tab__panel">
+        <block  wx:if="{{!isLoading}}">
+          <!-- 列表数据 -->
+          <view wx:if="{{activeIndex == 0}}" class="news">
+            <view data-news-id="{{item.newsId}}" bindtap='onListItemClick' class="ordertopbox" wx:for="{{tabData[activeIndex]}}" wx:key="index">
+              <view class="ordtopleft">
+                <text class="odtoptitle">{{item.title}}</text>
+                <view class="odtopds">
+                  <text>{{item.author}}</text>
+                  <text>{{item.author}}</text>
+                </view>
+              </view>
+              <view class="ordtopright">
+                <image src="{{item.coverPicture}}" />
+              </view>
+            </view>
+          </view>
+          <view wx:if="{{activeIndex == 1}}" class="community">
+            <view data-community-item="{{item}}" bindtap='onListItemClick' class="ordertopbox" wx:for="{{tabData[activeIndex]}}" wx:key="index">
+              <view class="ordtopleft"><image src="{{item.community.coverPicture}}" /></view>
+              <view class="ordtopright">
+                <text class="odtoptitle">{{item.community.name}}</text>
+                <view class="odtopds"><image src="../resource/kind/dress.png" class="souimg"/><text>{{item.community.cityName}}</text></view>
+                <view class="odtopty"><text>{{item.community.type}}</text><text>{{item.community.supplierName}}</text></view>
+              </view>
+            </view>
+          </view>
+          <!-- 底部加载 -->
+          <view wx:if="{{isLoading}}" class="weui-loadmore">
+            <view class="weui-loading"></view>
+            <view class="weui-loadmore__tips">正在加载</view>
+          </view>
+        </block>
+
+        <!-- 无更多数据 -->
+        <view wx:if="{{!isLoading && searchStatus == 2}}" class="weui-loadmore weui-loadmore_line">
+          <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无更多数据</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

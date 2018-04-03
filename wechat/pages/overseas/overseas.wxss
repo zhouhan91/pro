@@ -1,0 +1,9 @@
+.zlbox{width:94%;margin:0 auto; overflow:hidden;zoom:1;margin-top:25rpx;}
+.zlleft{float:left;width:220rpx;height:160rpx;margin-right:20rpx;}
+.zlleft image{width:100%;}
+.zltitle{font-size:32rpx;margin-top:-10rpx; display:block;color:#333;}
+.zlright{float:left; position: relative;width:65%;height:160rpx;}
+.zlbtcontent{ position:absolute;width:100%;overflow:hidden;zoom:1;left:0;bottom:0rpx;}
+.zlchu{float:right; padding-left:15rpx;height:30rpx;color:#666;font-size:20rpx;}
+.zlreadnb{float:right;color:#666;font-size:20rpx;margin-left:30rpx;}
+.zlreadnb image{width:22rpx;height:13rpx; margin-right:5rpx;}

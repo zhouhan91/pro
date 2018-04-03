@@ -1,0 +1,13 @@
+<template name="foot">
+  <view class="weui-footer weui-footer_fixed-bottom">
+      <view class="weui-footer__links">
+          <navigator url="../index/index" class="weui-footer__link">
+            <view class='group'>
+              <text class='text-foot'>蔬小宝</text>
+              <image class="footer-icon" src="../resource/kind/foot_icon_72X72.jpg"></image>
+            </view>
+          </navigator>
+      </view>
+      <view class="weui-footer__text"> © 2015-2018 zaoxn.com 版权所有</view>
+  </view>
+</template>

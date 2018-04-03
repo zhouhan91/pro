@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.catering.mapper.CateringOrderMapper">
+
+	<resultMap id="cateringOrder" type="com.wemeCity.web.catering.model.CateringOrder">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="restaurant_id" property="restaurantId" jdbcType="BIGINT" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="discount_price" property="discountPrice" jdbcType="DECIMAL" />
+		<result column="coupon_amount" property="couponAmount" jdbcType="DECIMAL" />
+		<result column="cash_amount" property="cashAmount" jdbcType="DECIMAL" />
+		<result column="exchange_rate" property="exchangeRate" jdbcType="DECIMAL" />
+		<result column="cash_amount_rmb" property="cashAmountRmb" jdbcType="DECIMAL" />
+		<result column="coupon_name" property="couponName" jdbcType="VARCHAR" />
+		<result column="pay_type" property="payType" jdbcType="VARCHAR" />
+		<result column="distribution_location" property="distributionLocation" jdbcType="VARCHAR" />
+		<result column="distribution_amount" property="distributionAmount" jdbcType="DECIMAL" />
+		<result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="district_code" property="districtCode" jdbcType="VARCHAR" />
+		<result column="district_name" property="districtName" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="order_source" property="orderSource" jdbcType="VARCHAR" />
+		<result column="courier_id" property="courierId" jdbcType="BIGINT" />
+		<result column="courier_name" property="courierName" jdbcType="VARCHAR" />
+		<result column="courier_phone" property="courierPhone" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="pay_status" property="payStatus" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="confirm_time" property="confirmTime" jdbcType="TIMESTAMP" />
+		<result column="distribution_time" property="distributionTime" jdbcType="TIMESTAMP" />
+		<result column="settlement_time" property="settlementTime" jdbcType="TIMESTAMP" />
+		<result column="settlement_amount" property="settlementAmount" jdbcType="DECIMAL" />
+		<result column="settlement_remark" property="settlementRemark" jdbcType="VARCHAR" />
+		<result column="cancel_reason" property="cancelReason" jdbcType="VARCHAR" />
+		<result column="cancel_remark" property="cancelRemark" jdbcType="VARCHAR" />
+		<result column="comment_flag" property="commentFlag" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+		<result column="distribution_notes" property="distributionNotes" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insertCateringOrder" parameterType="com.wemeCity.web.catering.model.CateringOrder">
+		<![CDATA[
+			INSERT INTO CATERING_ORDER (
+				id,
+				code,
+				user_id,
+				restaurant_id,
+				price,
+				discount_price,
+				coupon_amount,
+				cash_amount,
+				exchange_rate,
+				cash_amount_rmb,
+				coupon_name,
+				pay_type,
+				distribution_location,
+				distribution_amount,
+				city_code,
+				city_name,
+				district_code,
+				district_name,
+				address,
+				name,
+				phone,
+				order_source,
+				courier_id,
+				courier_name,
+				courier_phone,
+				remark,
+				pay_status,
+				status,
+				confirm_time,
+				distribution_time,
+				settlement_time,
+				settlement_amount,
+				settlement_remark,
+				cancel_reason,
+				cancel_remark,
+				comment_flag,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time,
+				distribution_notes
+			) VALUES (
+				null,
+				#{code},
+				#{userId},
+				#{restaurantId},
+				#{price},
+				#{discountPrice},
+				#{couponAmount},
+				#{cashAmount},
+				#{exchangeRate},
+				#{cashAmountRmb},
+				#{couponName},
+				#{payType},
+				#{distributionLocation},
+				#{distributionAmount},
+				#{cityCode},
+				#{cityName},
+				#{districtCode},
+				#{districtName},
+				#{address},
+				#{name},
+				#{phone},
+				#{orderSource},
+				#{courierId},
+				#{courierName},
+				#{courierPhone},
+				#{remark},
+				#{payStatus},
+				#{status},
+				#{confirmTime},
+				#{distributionTime},
+				#{settlementTime},
+				#{settlementAmount},
+				#{settlementRemark},
+				#{cancelReason},
+				#{cancelRemark},
+				#{commentFlag},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime},
+				#{distributionNotes}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM CATERING_ORDER LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteCateringOrder" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE catering_order SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateCateringOrder" parameterType="map">
+		UPDATE catering_order set modify_time=now()
+		<if test="code !=null">
+			, code=#{code}
+		</if>
+		<if test="userId !=null">
+			, user_id=#{userId}
+		</if>
+		<if test="restaurantId !=null">
+			, restaurant_id=#{restaurantId}
+		</if>
+		<if test="price !=null">
+			, price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			, discount_price=#{discountPrice}
+		</if>
+		<if test="couponAmount !=null">
+			, coupon_amount=#{couponAmount}
+		</if>
+		<if test="cashAmount !=null">
+			, cash_amount=#{cashAmount}
+		</if>
+		<if test="exchangeRate !=null">
+			, exchange_rate=#{exchangeRate}
+		</if>
+		<if test="cashAmountRmb !=null">
+			, cash_amount_rmb=#{cashAmountRmb}
+		</if>
+		<if test="couponName !=null">
+			, coupon_name=#{couponName}
+		</if>
+		<if test="payType !=null">
+			, pay_type=#{payType}
+		</if>
+		<if test="distributionLocation !=null">
+			, distribution_location=#{distributionLocation}
+		</if>
+		<if test="distributionAmount !=null">
+			, distribution_amount=#{distributionAmount}
+		</if>
+		<if test="cityCode !=null">
+			, city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			, city_name=#{cityName}
+		</if>
+		<if test="districtCode !=null">
+			, district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			, district_name=#{districtName}
+		</if>
+		<if test="address !=null">
+			, address=#{address}
+		</if>
+		<if test="name !=null">
+			, name=#{name}
+		</if>
+		<if test="phone !=null">
+			, phone=#{phone}
+		</if>
+		<if test="orderSource !=null">
+			, order_source=#{orderSource}
+		</if>
+		<if test="courierId !=null">
+			, courier_id=#{courierId}
+		</if>
+		<if test="courierName !=null">
+			, courier_name=#{courierName}
+		</if>
+		<if test="courierPhone !=null">
+			, courier_phone=#{courierPhone}
+		</if>
+		<if test="remark !=null">
+			, remark=#{remark}
+		</if>
+		<if test="payStatus !=null">
+			, pay_status=#{payStatus}
+		</if>
+		<if test="status !=null">
+			, status=#{status}
+		</if>
+		<if test="confirmTime !=null">
+			, confirm_time=#{confirmTime}
+		</if>
+		<if test="distributionTime !=null">
+			, distribution_time=#{distributionTime}
+		</if>
+		<if test="settlementTime !=null">
+			, settlement_time=#{settlementTime}
+		</if>
+		<if test="settlementAmount !=null">
+			, settlement_amount=#{settlementAmount}
+		</if>
+		<if test="settlementRemark !=null">
+			, settlement_remark=#{settlementRemark}
+		</if>
+		<if test="cancelReason !=null">
+			, cancel_reason=#{cancelReason}
+		</if>
+		<if test="cancelRemark !=null">
+			, cancel_remark=#{cancelRemark}
+		</if>
+		<if test="commentFlag !=null">
+			, comment_flag=#{commentFlag}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		<if test="distributionNotes !=null">
+			, distribution_notes=#{distributionNotes}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readCateringOrder" parameterType="java.lang.Long" resultMap="cateringOrder">
+		SELECT * FROM catering_order WHERE id=#{id}
+	</select>
+
+	<select id="queryCateringOrderList" parameterType="map" resultMap="cateringOrder">
+		SELECT * FROM catering_order WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="code !=null">
+			AND code=#{code}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="restaurantId !=null">
+			AND restaurant_id=#{restaurantId}
+		</if>
+		<if test="price !=null">
+			AND price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			AND discount_price=#{discountPrice}
+		</if>
+		<if test="couponAmount !=null">
+			AND coupon_amount=#{couponAmount}
+		</if>
+		<if test="cashAmount !=null">
+			AND cash_amount=#{cashAmount}
+		</if>
+		<if test="exchangeRate !=null">
+			AND exchange_rate=#{exchangeRate}
+		</if>
+		<if test="cashAmountRmb !=null">
+			AND cash_amount_rmb=#{cashAmountRmb}
+		</if>
+		<if test="couponName !=null">
+			AND coupon_name=#{couponName}
+		</if>
+		<if test="payType !=null">
+			AND pay_type=#{payType}
+		</if>
+		<if test="distributionLocation !=null">
+			AND distribution_location=#{distributionLocation}
+		</if>
+		<if test="distributionAmount !=null">
+			AND distribution_amount=#{distributionAmount}
+		</if>
+		<if test="cityCode !=null">
+			AND city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="districtCode !=null">
+			AND district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			AND district_name=#{districtName}
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="phone !=null">
+			AND phone=#{phone}
+		</if>
+		<if test="orderSource !=null">
+			AND order_source=#{orderSource}
+		</if>
+		<if test="courierId !=null">
+			AND courier_id=#{courierId}
+		</if>
+		<if test="courierName !=null">
+			AND courier_name=#{courierName}
+		</if>
+		<if test="courierPhone !=null">
+			AND courier_phone=#{courierPhone}
+		</if>
+		<if test="remark !=null">
+			AND remark=#{remark}
+		</if>
+		<if test="payStatus !=null">
+			AND pay_status=#{payStatus}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="confirmTime !=null">
+			AND confirm_time=#{confirmTime}
+		</if>
+		<if test="distributionTime !=null">
+			AND distribution_time=#{distributionTime}
+		</if>
+		<if test="settlementTime !=null">
+			AND settlement_time=#{settlementTime}
+		</if>
+		<if test="settlementAmount !=null">
+			AND settlement_amount=#{settlementAmount}
+		</if>
+		<if test="settlementRemark !=null">
+			AND settlement_remark=#{settlementRemark}
+		</if>
+		<if test="cancelReason !=null">
+			AND cancel_reason=#{cancelReason}
+		</if>
+		<if test="cancelRemark !=null">
+			AND cancel_remark=#{cancelRemark}
+		</if>
+		<if test="commentFlag !=null">
+			AND comment_flag=#{commentFlag}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="distributionNotes !=null">
+			AND distribution_notes=#{distributionNotes}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryCateringOrderCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM CATERING_ORDER WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="code !=null">
+			AND code=#{code}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="restaurantId !=null">
+			AND restaurant_id=#{restaurantId}
+		</if>
+		<if test="price !=null">
+			AND price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			AND discount_price=#{discountPrice}
+		</if>
+		<if test="couponAmount !=null">
+			AND coupon_amount=#{couponAmount}
+		</if>
+		<if test="cashAmount !=null">
+			AND cash_amount=#{cashAmount}
+		</if>
+		<if test="exchangeRate !=null">
+			AND exchange_rate=#{exchangeRate}
+		</if>
+		<if test="cashAmountRmb !=null">
+			AND cash_amount_rmb=#{cashAmountRmb}
+		</if>
+		<if test="couponName !=null">
+			AND coupon_name=#{couponName}
+		</if>
+		<if test="payType !=null">
+			AND pay_type=#{payType}
+		</if>
+		<if test="distributionLocation !=null">
+			AND distribution_location=#{distributionLocation}
+		</if>
+		<if test="distributionAmount !=null">
+			AND distribution_amount=#{distributionAmount}
+		</if>
+		<if test="cityCode !=null">
+			AND city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="districtCode !=null">
+			AND district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			AND district_name=#{districtName}
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="phone !=null">
+			AND phone=#{phone}
+		</if>
+		<if test="orderSource !=null">
+			AND order_source=#{orderSource}
+		</if>
+		<if test="courierId !=null">
+			AND courier_id=#{courierId}
+		</if>
+		<if test="courierName !=null">
+			AND courier_name=#{courierName}
+		</if>
+		<if test="courierPhone !=null">
+			AND courier_phone=#{courierPhone}
+		</if>
+		<if test="remark !=null">
+			AND remark=#{remark}
+		</if>
+		<if test="payStatus !=null">
+			AND pay_status=#{payStatus}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="confirmTime !=null">
+			AND confirm_time=#{confirmTime}
+		</if>
+		<if test="distributionTime !=null">
+			AND distribution_time=#{distributionTime}
+		</if>
+		<if test="settlementTime !=null">
+			AND settlement_time=#{settlementTime}
+		</if>
+		<if test="settlementAmount !=null">
+			AND settlement_amount=#{settlementAmount}
+		</if>
+		<if test="settlementRemark !=null">
+			AND settlement_remark=#{settlementRemark}
+		</if>
+		<if test="cancelReason !=null">
+			AND cancel_reason=#{cancelReason}
+		</if>
+		<if test="cancelRemark !=null">
+			AND cancel_remark=#{cancelRemark}
+		</if>
+		<if test="commentFlag !=null">
+			AND comment_flag=#{commentFlag}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="distributionNotes !=null">
+			AND distribution_notes=#{distributionNotes}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+	
+	
+	<resultMap id="todayStatisticsInfo" type="com.wemeCity.web.catering.dto.TodayStatisticsInfo">
+		<result column="order_count" property="orderCount" jdbcType="INTEGER" />
+		<result column="order_complete_count" property="orderCompleteCount" jdbcType="INTEGER" />
+		<result column="order_paid_count" property="orderPaidCount" jdbcType="INTEGER" />
+		<result column="order_confirmed_count" property="orderConfirmedCount" jdbcType="INTEGER" />
+		<result column="amount" property="amount" jdbcType="DECIMAL" />
+		<result column="income" property="income" jdbcType="DECIMAL" />
+	</resultMap>
+	
+	<select id="queryTodayStatisticsInfo" parameterType="map" resultMap="todayStatisticsInfo">
+		select 
+			count(*) as 'order_count',
+			count(CASE when status='70' then id END) as 'order_complete_count',
+			count(CASE when status='30' then id END) as 'order_paid_count',
+			count(CASE when status='50' then id END) as 'order_confirmed_count',
+			sum(discount_price) as 'amount',
+			sum(cash_amount) as 'income'
+		from catering_order
+		where
+			(WHEN ISNULL(distribution_notes) THEN create_time>=#{today} ELSE create_time>=#{yesterday} END)
+		and pay_status=#{payStatus}
+		and is_deleted='N'
+		and restaurant_id=#{restaurantId}
+	</select>
+	
+	<resultMap id="cateringAllData" type="com.wemeCity.web.catering.dto.CateringAllData">
+		<result column="order_count" property="orderCount" jdbcType="INTEGER" />
+		<result column="order_complete_count" property="orderCompleteCount" jdbcType="INTEGER" />
+		<result column="income" property="income" jdbcType="DECIMAL" />
+	</resultMap>
+	<select id="queryAllData" parameterType="map" resultMap="cateringAllData">
+		SELECT
+			count(*) 'order_count',
+			count(CASE when status='70' then id END) as 'order_complete_count',
+			sum(CASE WHEN STATUS = '70' THEN cash_amount END ) 'income'
+		FROM
+			catering_order
+		WHERE restaurant_id = #{restaurantId}
+		AND is_deleted = 'N'
+		AND pay_status = 3
+	</select>
+	
+	
+	<resultMap id="cateringMonthData" type="com.wemeCity.web.catering.dto.CateringMonthData">
+		<result column="order_count" property="orderCount" jdbcType="INTEGER" />
+		<result column="order_complete_count" property="orderCompleteCount" jdbcType="INTEGER" />
+		<result column="order_cancel_count" property="orderCancelCount" jdbcType="INTEGER" />
+		<result column="income" property="income" jdbcType="DECIMAL" />
+		<result column="income_offLine" property="incomeOffLine" jdbcType="DECIMAL" />
+		<result column="income_onLine" property="incomeOnLine" jdbcType="DECIMAL" />
+	</resultMap>
+	<select id="queryMonthData" parameterType="map" resultMap="cateringMonthData">
+		SELECT
+			count(*) 'order_count',
+			count(CASE when status='70' then id END) as 'order_complete_count',
+		  count(case when status='80' then id end) as 'order_cancel_count',
+			sum(CASE WHEN STATUS = '70' THEN cash_amount END ) 'income',
+		  sum(CASE WHEN STATUS = '70' and pay_type='offLine' THEN cash_amount END ) 'income_offLine',
+		  sum(CASE WHEN STATUS = '70' and pay_type='wxpay' THEN cash_amount END ) 'income_onLine'
+		FROM
+			catering_order
+		WHERE restaurant_id = #{restaurantId}
+		AND is_deleted = 'N'
+		AND pay_status = 3
+	</select>
+
+</mapper>

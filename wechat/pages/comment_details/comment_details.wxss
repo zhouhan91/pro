@@ -1,0 +1,23 @@
+.newsplbox{padding:0 30rpx;margin-bottom:40rpx;padding-top:30rpx;}
+.plbox{ padding-bottom:0rpx;margin-bottom:28rpx;}
+.plcenttop{overflow:hidden;zoom:1;}
+.plcenttop .touxiang{float:left;width:50rpx;height:50rpx;overflow:hidden;margin-right:20rpx;border-radius:25rpx;}
+.plcenttop .touxiang image{width:100%;height:100%;} 
+.plcenttop text{float:left; font-size:28rpx;color:#333;}
+.plcontent{font-size: 32rpx;color:#333;margin-top:-30rpx; display:block;}
+.more{display:block; font-size:28rpx;color:#ffac40;}
+.plbot{overflow:hidden;zoom:1;}
+.plbot text{float:left;color:#999;font-size:20rpx;margin-right:30rpx;}
+.comdtilct{margin-left:75rpx;margin-top:-40rpx;border-bottom:2rpx solid #e7e7e7;padding-bottom:30rpx;}
+.titledz{float:right !important; overflow:hidden;zoom:1;} 
+.titledz text{font-size:20rpx !important;color:#999 !important;float:left;margin-top:0.45rem;margin-right:0.5rem;}
+.titledz image{width:44rpx;height:44rpx; float:left;}
+.newsplboxtop{background:#fff;padding-bottom:0;margin-bottom:0;}
+.newsplboxtop .plbox{border:none;margin-bottom:0; padding-bottom:28rpx;}
+.newsplboxtop .plbox .comdtilct{border:none;padding-bottom:0;}
+.newsbottom{position:fixed;bottom:0;width:100%; background:#fff;height:100rpx;line-height:100rpx; border-top:2rpx solid #e7e7e7; overflow:hidden;zoom:1; z-index:100;}
+.newsbottom text,.newsbottom image{float:left;}
+.newsbottom input{font-size:32rpx;color:#999; display:block;margin-left:24rpx; width:80%;margin-top:20rpx; }
+.xie{width:37rpx;height:34rpx;margin-left:30rpx;margin-top:34rpx;margin-right:30rpx;}
+.fabu{position:fixed;bottom:18rpx;right:10rpx;font-size:28rpx;color:#333; } 
+.fabu::after{display:none;}

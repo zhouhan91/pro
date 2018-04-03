@@ -1,0 +1,244 @@
+<!--pages/house_detail/house_detail.wxml-->
+<view class='page'>
+  <view class="page__bd">
+    <view wx:if="{{hasDetail && !isLoading}}" class='house_detail'>
+    <view id="header_info">
+      <!--顶部轮播图 begin-->
+      <import src="../common/topScroll.wxml"/>
+      <template is="topScroll" data="{{currentIndex,topScroll:house_detail.images,indicatorDots,autoplay,interval,duration}}"/>
+      <!--顶部轮播图 end-->
+
+      <!-- 公寓名称 begin -->
+      <view class="house_name">
+        <view class="page__title">{{house_detail.name}}</view>
+        <view class="page__desc">{{house_detail.localName}}</view>
+      </view>
+      <!-- 公寓名称 end -->
+
+      <!-- 公寓属性 start-->
+      <view class="house_property">
+        <view class="house_property_left">
+          <view class="house_property_item">
+            <view class="house_property_label house_property_50">房屋类型</view>
+            <view class="house_property_value house_property_50">{{house_detail.type}}</view>
+          </view>
+          <view class="house_property_item">
+            <view class="house_property_label house_property_50">租赁方式</view>
+            <view class="house_property_value house_property_50">{{house_detail.leaseType}}</view>
+          </view>
+           <view class="house_property_item">
+            <view class="house_property_label house_property_50">房屋租期</view>
+            <view class="house_property_value house_property_50">{{house_detail.leaseModel}}</view>
+          </view>
+        </view>
+        <view class="house_property_right">
+                   <view class="house_property_item">
+            <view class="house_property_label house_property_50">房屋来源</view>
+            <view class="house_property_value house_property_50">{{house_detail.supplierName}}</view>
+          </view>    
+          <view class="house_property_item">
+            <view class="house_property_label house_property_50">押金方式</view>
+            <view class="house_property_value house_property_50">{{house_detail.depositType}}</view>
+          </view>
+          <view wx:if="{{house_detail.owner}}" class="house_property_item">
+            <view class="house_property_label house_property_50">房东</view>
+            <view class="house_property_value house_property_50">{{house_detail.owner}}</view>
+          </view>
+         
+        </view>
+     
+      <!-- 公寓属性 end-->
+    </view>
+
+     
+
+      <!-- 公寓介绍 start-->
+      <view style='padding:0 30rpx;'>
+        <view class="page__title">{{house_detail.type}}介绍</view>
+            <block wx:if="{{videoUrl}}">
+            <view style='margin:15rpx 0;'>
+               <video id="myVideo" src="{{videoUrl}}" enable-danmu controls style='width:100%;'></video>
+            </view>
+            </block>
+        <view class="weui-article__p">{{house_detail.description}}</view>
+      </view>
+      <!-- 公寓介绍 end -->
+
+      <!-- 房间设施 start -->
+      <view class="room_facility" wx:if="{{house_detail.privateFacilities.length>0}}">
+        <view class="page__title" style='margin-bottom:15rpx;'>房间设施</view>
+        <block wx:for="{{house_detail.privateFacilities}}" wx:key="idx" wx:for-index="idx">
+          <block wx:if="{{idx % privateFacilityNum == 0}}">
+            <view class="weui-flex" style='width: 100%;'>
+              <block wx:for="{{house_detail.privateFacilities}}" wx:key="i" wx:for-index="i" wx:for-item="itemName">
+                <block wx:if="{{i >= idx && i < privateFacilityNum + idx}}">
+                  <view class="room_facility_item" style="width:{{100/privateFacilityNum}}%;">
+                    <view class="detubox"><image class="room_facility_icon" src="{{itemName.filePath}}" /></view>
+                    <view class="room_facility_label">{{itemName.name}}</view>
+                  </view>
+                </block>
+              </block>
+            </view>
+          </block>
+        </block>
+      </view>
+      
+      <!-- 房间设施 end -->
+
+      <!-- 公用设备 start -->
+      <view class="public_facility" wx:if="{{house_detail.commonFacilities.length>0}}">
+        <view class="page__title" style='margin-bottom:15rpx;'>公用设备</view>
+        <block wx:for="{{house_detail.commonFacilities}}" wx:key="idx" wx:for-index="idx">
+          <block wx:if="{{idx % publicFacilityNum == 0}}">
+            <view class="weui-flex" style='width: 100%;'>
+              <block wx:for="{{house_detail.commonFacilities}}" wx:key="i" wx:for-index="i" wx:for-item="itemName">
+                <block wx:if="{{i >= idx && i < publicFacilityNum + idx}}">
+                  <view class="public_facility_item" style="width:{{100/publicFacilityNum}}%;">
+                    <view class="detubox detuboxgg"><image class="public_facility_icon" src="{{itemName.filePath}}" /></view>
+                    <view class="public_facility_label">{{itemName.name}}</view>
+                  </view>
+                </block>
+              </block>
+            </view>
+          </block>
+        </block>
+      </view>
+      <!-- 公用设备 end -->
+
+      <!-- 房租包含 start -->
+      <view class="rent_info"  wx:if="{{house_detail.rentFacilities.length>0}}">
+        <view class="page__title" style='margin-bottom:15rpx;'>房租包含</view>
+        <block wx:for="{{house_detail.rentFacilities}}" wx:key="idx" wx:for-index="idx">
+          <block wx:if="{{idx % rentFacilityNum == 0}}">
+            <view class="weui-flex" style='width: 100%;'>
+              <block wx:for="{{house_detail.rentFacilities}}" wx:key="i" wx:for-index="i" wx:for-item="itemName">
+                <block wx:if="{{i >= idx && i < rentFacilityNum + idx}}">
+                  <view class="rent_info_item" style="width:{{100/rentFacilityNum}}%;">
+                    <view class="detubox detuboxgg"><image class="rent_info_icon" src="{{itemName.filePath}}" /></view>
+                    <view class="rent_info_label">{{itemName.name}}</view>
+                  </view>
+                </block>
+              </block>
+            </view>
+          </block>
+        </block>
+      </view>
+      <!-- 房租包含 end -->
+        </view>
+       <!-- 房型信息 start -->
+      <view class="house_room house_introduce" id="house_room"  >
+        <view class="page__title">选择房型</view>
+        <block wx:for="{{house_detail.rooms}}" wx:key="index">
+          <view class="house_room_item" hover-class="weui-cell_active" data-room-id="{{index}}" bindtap='onShowRoomDetail'>
+            <view class="house_room_left">
+            <!-- 可预订时间，暂不显示 -->
+             <!--
+              <view class="kydbox">{{item.dateAllowedStart?"可预订"+item.dateAllowedStart:""}}{{item.dateAllowedEnd?"-"+item.dateAllowedEnd+"/":""}}{{item.leaseLimit}}{{item.leaseUnit=="天"?item.leaseUnit+"起租":"个"+item.leaseUnit+"起租"}}
+</view>-->
+              <image class="house_room_image" src="{{item.images[0].path}}" />
+              <view class="house_room_index">
+                {{item.images.length > 0 ? "1/" + item.images.length : "0/0"}}
+              </view>
+            </view>
+            <view class="house_room_right">
+              <view class="weui-media-box__title">{{item.type}}</view>
+              <view class="weui-media-box__desc">
+                <view class="house_room_left_item weui-cells_after-title">
+                  <view class="house_room_label weui-cell__bd">面积</view>
+                  <view class="house_room_value weui-cell__ft">{{item.area}}㎡</view>
+                </view>
+                <view class="house_room_left_item" style='margin-bottom:50rpx;'>
+                  <view class="house_room_label weui-cell__bd">床型</view>
+                  <view class="house_room_value weui-cell__ft">{{item.bedType}}</view>
+                </view>
+                <view class="house_room_left_item" style='margin-bottom:15rpx;'>
+                  <view class="house_room_label weui-cell__bd hengjia">{{item.price}}</view>
+                  <view class="house_room_value weui-cell__ft"><text style='font-size:28rpx;color:#f73e20;'>{{item.discountPrice==0?item.price:item.discountPrice}}</text><text style='font-size:20rpx;'>€起/{{item.leaseUnit}}</text></view>
+                </view>
+                <button class="yuding-btn" type="primary" data-room-id="{{index}}" catchtap='onReservationClick'>预定</button>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <!-- 房型信息 end -->
+      
+      <!-- 交通说明 start -->
+      <view class="house_trafic">
+        <view class="page__title" style='margin-bottom:15rpx;'>交通说明</view>
+        <view class="weui-article__p">{{house_detail.routeDescription}}</view>
+      </view>
+      <!-- 交通说明 end -->
+
+      <!-- 位置地图 start -->
+      <view class="house_location">
+        <view class="page__title" style='padding:0 30rpx;margin-bottom:15rpx;'>位置</view>
+        <view class="house_location_map">
+         <map
+            style="width: 100%; height: 300px;"
+            latitude="{{house_detail.latitude}}"
+            longitude="{{house_detail.longitude}}"
+            markers="{{markers}}">
+          </map>
+          <view class="searmiao house_location_addr">
+           <image class="dizhiimg" src='../resource/kind/didian.png'/>
+            <text class="miaofont">{{house_detail.address}}</text>           
+          </view>
+        </view>
+      </view>
+      <!-- 位置地图 end -->
+
+      <!-- 租房须知 start -->
+      <view class="house_tip">
+        <view class="page__title" style='margin-bottom:15rpx;margin-top:100rpx;'>租房须知</view>
+        <view class="weui-article__p"><text>{{house_detail.tip}}</text></view>
+      </view>
+      <!-- 租房须知 end -->
+    </view>
+
+    <!-- 浏览房源图片 start -->
+    <view class="room_detail" hidden="{{!isShowRoomDetail}}">
+      <view class="mask" bindtap="hideHomeDetail"></view>
+      <view class="room_detail_pic">
+        <swiper class="banner" indicator-dots="true" autoplay="false" interval="3000" duration="500">
+          <block wx:for="{{roomDetailImages}}" wx:key="i" wx:for-index="i">
+            <swiper-item>
+              <image src="{{item.path}}"></image>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+    </view>
+
+    <view wx:if="{{hasDetail}}">
+      <view class="bottom_menu">
+        <view class="bottom_menu_left">
+          <view class='bottom_menu_left_item'>
+              <button open-type="contact" style='position:absolute;width:100%;height:100%;opacity:0;'></button>
+              <image class="bottom_menu_left_image" src="../resource/kind/fydetil12.png"></image>
+               <view class="bottom_menu_left_label" style='color:#000;'>{{"客服"}}</view> 
+          </view>
+          <view class='bottom_menu_left_item'>
+            <button open-type="share" style='position:absolute;height:100%;width:100%;opacity:0;'></button>
+            <image class="bottom_menu_left_image" src="../resource/kind/fydetil13.png"></image>
+            <view class="bottom_menu_left_label">{{"分享"}}</view>
+          </view>
+          <view class='bottom_menu_left_item' bindtap="onMarkClick">
+            <image class="bottom_menu_left_image" src="{{isMarked?'../resource/kind/fydetil15.png':'../resource/kind/fydetil14.png'}}"></image>
+            <view class="bottom_menu_left_label">{{isMarked?"已收藏":"收藏"}}</view>
+          </view> 
+          
+        </view>
+        <view class="bottom_menu_right" bindtap="onSublimitClick">
+          <view class="bottom_menu_right_label">立即选房</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 获取详情失败提示 start -->
+    <view wx:if="{{!hasDetail && !isLoading}}" class="error_info">
+      暂无 {{house_summ.name}} 相关信息
+    </view>
+    <!-- 获取详情失败提示 end -->
+  </view>
+</view>

@@ -1,0 +1,151 @@
+<wxs module="orderUtils">
+  var diffDate = function (startDate, endDate, mobileSystem){
+    if (mobileSystem.match("ios")) {
+      startDate.replace("-","/");
+      endDate.replace("-","/");
+    }
+    var sDate = getDate(startDate);
+    var eDate = getDate(endDate);
+    var diffTimes = (eDate.getTime() - sDate.getTime()) / 1000;
+    var diffDays = diffTimes / 60 / 60 / 24;
+    var diffMonths = parseInt(diffDays / 30);
+    if (diffDays == 0) {
+      diffDays = 1;
+    }
+    diffDays = diffDays % 30;
+    return diffMonths + "个月" + diffDays + "天";
+  };
+
+  var parsePayStatus = function(status) {
+    var result = "";
+    switch (status) {
+      case "10":  result = "待支付"; break;
+      case "20":  result = "支付中"; break;
+      case "30":  result = "已支付 | 待房东确认"; break;
+      case "40":  result = "支付失败"; break;
+      case "50":  result = "已取消"; break;
+      case "60":  result = "已退款"; break;
+    }
+    return result;
+  }
+  module.exports.diffDate = diffDate;
+  module.exports.parsePayStatus = parsePayStatus;
+</wxs>
+
+<view class="pgorderbox" wx:for="{{orderList}}" wx:key="index">
+  <view class="ddtitletop">
+    <text class="typetop">{{orderUtils.parsePayStatus(item.status)}}</text>
+    <text class="ddnub">订单号：{{item.code}}</text>
+    <button wx:if="{{item.status == '10'}}" class="lijizhi" data-pay-order='{{item}}' bindtap='onPayClick'>立即支付</button>
+  </view>
+  <view style='padding:0 20rpx;'>
+    <text class="odtitle">{{item.communityName}}</text>
+    <view class="odtopty">
+      <text>{{item.communityType}}</text>
+      <text>{{item.roomType}}</text>
+    </view>
+    <text class="ruzhutime">入住时间</text>
+    <view class="ordertimebox">
+      <view class="ordertimtim">{{orderUtils.diffDate(item.inDate, item.outDate, mobileSystem)}}</view>
+      <view class="odtmcent odtimeleft">
+        <text>{{item.inDate}}</text>
+      </view>
+      <view class="odtmcent odtimeright">
+        <text>{{item.outDate}}</text>
+      </view>
+    </view>
+    <text class="ruzhutime" style='margin-bottom:15rpx;'>入住人信息</text>
+    <view class="oddjbox">
+      <text class="left">真实姓名</text>
+      <text class="right">{{item.realName}}</text>
+    </view>
+    <view class="oddjbox">
+      <text class="left">联系电话</text>
+      <text class="right">{{item.phone}}</text>
+    </view>
+    <view class="oddjbox">
+      <text class="left">EMAIL</text>
+      <text class="right">{{item.email}}</text>
+    </view>
+    <text class="ruzhutime" style='margin-bottom:15rpx;margin-top:30rpx;'>咨费信息</text>
+    <view class="oddjbox" wx:if="{{item.tipFlag == 'Y'}}">
+      <text class="left">定金</text>
+      <text class="right">€{{item.tipPrice}}</text>
+    </view>
+    <view class="oddjbox" wx:if="{{item.tipFlag == 'N'}}">
+      <text class="left">房费</text>
+      <text class="right">€{{item.discountPrice}}</text>
+    </view>
+    <view class="oddjbox">
+      <text class="left">优惠券</text>
+      <text class="right">€{{item.coupon}}</text>
+    </view>
+    <view class="oddjbox">
+      <text class="left">实际支付</text>
+      <text class="right">€{{item.realPay}}</text>
+    </view>
+  </view>
+  
+</view>
+<view wx:if="{{isLoading}}" class="weui-loadmore">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+  <view wx:if="{{!isLoading && loadingStatus == 2 && orderList.length > 0}}" class="weui-loadmore weui-loadmore_line">
+    <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无更多数据</view>
+  </view>
+<view wx:if="{{!isLoading && loadingStatus == 2 && orderList.length == 0}}" class="weui-loadmore weui-loadmore_line">
+  <view class="weui-loadmore__tips ">找不到"租房订单"</view>
+</view>
+
+<!-- <view class="pgorderbox">
+  <view class="ddtitletop">
+    <text class="typetop">已支付 | 待房东确认</text>
+    <text class="ddnub">订单号：58455455</text>
+  </view>
+  <view style='padding:0 20rpx;'>
+    <text class="odtitle">曼彻斯特理工大学附近两居欧式舒适公寓</text>
+    <view class="odtopty">
+      <text>学生公寓</text>
+      <text>两房一厅</text>
+    </view>
+    <text class="ruzhutime">入住时间</text>
+    <view class="ordertimebox">
+      <view class="ordertimtim">19个月5天</view>
+      <view class="odtmcent odtimeleft">
+        <text>2017年5月28日</text>
+      </view>
+      <view class="odtmcent odtimeright">
+        <text>2017年5月28日</text>
+      </view>
+    </view>
+    <text class="ruzhutime" style='margin-bottom:15rpx;'>入住人信息</text>
+    <view class="oddjbox">
+      <text class="left">真实姓名</text>
+      <text class="right">李雷</text>
+    </view>
+    <view class="oddjbox">
+      <text class="left">联系电话</text>
+      <text class="right">18585658542</text>
+    </view>
+    <view class="oddjbox">
+      <text class="left">EMAIL</text>
+      <text class="right">4937411@qq.com</text>
+    </view>
+    <text class="ruzhutime" style='margin-bottom:15rpx;margin-top:30rpx;'>咨费信息</text>
+    <view class="oddjbox">
+      <text class="left">服务费</text>
+      <text class="right">€100</text>
+    </view>
+    <view class="oddjbox">
+      <text class="left">房费</text>
+      <text class="right">€500</text>
+    </view>
+    <view class="oddjbox">
+      <text class="left">实际支付</text>
+      <text class="right">€1500</text>
+    </view>
+  </view>
+</view> -->
+
+    

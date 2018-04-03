@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.community.mapper.CityCommunityMapper">
+
+	<resultMap id="cityCommunity" type="com.wemeCity.web.community.model.CityCommunity">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="city_id" property="cityId" jdbcType="BIGINT" />
+		<result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="country_id" property="countryId" jdbcType="BIGINT" />
+		<result column="country_code" property="countryCode" jdbcType="VARCHAR" />
+		<result column="country_name" property="countryName" jdbcType="VARCHAR" />
+		<result column="image" property="image" jdbcType="VARCHAR" />
+		<result column="community_count" property="communityCount" jdbcType="INTEGER" />
+		<result column="room_count" property="roomCount" jdbcType="INTEGER" />
+		<result column="experience_count" property="experienceCount" jdbcType="INTEGER" />
+		<result column="comment_count" property="commentCount" jdbcType="INTEGER" />
+		<result column="sort_num" property="sortNum" jdbcType="INTEGER" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertCityCommunity" parameterType="com.wemeCity.web.community.model.CityCommunity">
+		<![CDATA[
+			INSERT INTO CITY_COMMUNITY (
+				id,
+				city_id,
+				city_code,
+				city_name,
+				country_id,
+				country_code,
+				country_name,
+				image,
+				community_count,
+				room_count,
+				experience_count,
+				comment_count,
+				sort_num,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{cityId},
+				#{cityCode},
+				#{cityName},
+				#{countryId},
+				#{countryCode},
+				#{countryName},
+				#{image},
+				#{communityCount},
+				#{roomCount},
+				#{experienceCount},
+				#{commentCount},
+				#{sortNum},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM CITY_COMMUNITY LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteCityCommunity" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE city_community SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateCityCommunity" parameterType="map">
+		UPDATE city_community set modify_time=now()
+		<if test="cityId !=null">
+			, city_id=#{cityId}
+		</if>
+		<if test="cityCode !=null">
+			, city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			, city_name=#{cityName}
+		</if>
+		<if test="countryId !=null">
+			, country_id=#{countryId}
+		</if>
+		<if test="countryCode !=null">
+			, country_code=#{countryCode}
+		</if>
+		<if test="countryName !=null">
+			, country_name=#{countryName}
+		</if>
+		<if test="image !=null">
+			, image=#{image}
+		</if>
+		<if test="communityCount !=null">
+			, community_count=#{communityCount}
+		</if>
+		<if test="roomCount !=null">
+			, room_count=#{roomCount}
+		</if>
+		<if test="experienceCount !=null">
+			, experience_count=#{experienceCount}
+		</if>
+		<if test="commentCount !=null">
+			, comment_count=#{commentCount}
+		</if>
+		<if test="sortNum !=null">
+			, sort_num=#{sortNum}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readCityCommunity" parameterType="java.lang.Long" resultMap="cityCommunity">
+		SELECT * FROM city_community WHERE id=#{id}
+	</select>
+
+	<select id="queryCityCommunityList" parameterType="map" resultMap="cityCommunity">
+		SELECT * FROM city_community WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="cityId !=null">
+			AND city_id=#{cityId}
+		</if>
+		<if test="cityCode !=null">
+			AND city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="countryId !=null">
+			AND country_id=#{countryId}
+		</if>
+		<if test="countryCode !=null">
+			AND country_code=#{countryCode}
+		</if>
+		<if test="countryName !=null">
+			AND country_name=#{countryName}
+		</if>
+		<if test="image !=null">
+			AND image=#{image}
+		</if>
+		<if test="communityCount !=null">
+			AND community_count=#{communityCount}
+		</if>
+		<if test="roomCount !=null">
+			AND room_count=#{roomCount}
+		</if>
+		<if test="experienceCount !=null">
+			AND experience_count=#{experienceCount}
+		</if>
+		<if test="commentCount !=null">
+			AND comment_count=#{commentCount}
+		</if>
+		<if test="sortNum !=null">
+			AND sort_num=#{sortNum}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryCityCommunityCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM CITY_COMMUNITY WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="cityId !=null">
+			AND city_id=#{cityId}
+		</if>
+		<if test="cityCode !=null">
+			AND city_name=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="countryId !=null">
+			AND country_id=#{countryId}
+		</if>
+		<if test="countryCode !=null">
+			AND country_code=#{countryCode}
+		</if>
+		<if test="countryName !=null">
+			AND country_name=#{countryName}
+		</if>
+		<if test="image !=null">
+			AND image=#{image}
+		</if>
+		<if test="communityCount !=null">
+			AND community_count=#{communityCount}
+		</if>
+		<if test="roomCount !=null">
+			AND room_count=#{roomCount}
+		</if>
+		<if test="experienceCount !=null">
+			AND experience_count=#{experienceCount}
+		</if>
+		<if test="commentCount !=null">
+			AND comment_count=#{commentCount}
+		</if>
+		<if test="sortNum !=null">
+			AND sort_num=#{sortNum}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

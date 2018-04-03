@@ -1,0 +1,22 @@
+page{background:#f8f8f8;padding-bottom:20rpx;}
+.ordertimebox{display:flex; background:#fff;padding:40rpx 0;  position:relative;}
+.ordertimtim{ position:absolute; left:42%; background:#fff; z-index:100; font-size:24rpx;color:#999; border:2rpx solid #d1d1d1; border-radius:15rpx;width:80rpx;padding:6rpx 15rpx; display:block; text-align:center;  } 
+.odtmcent{width:50%; text-align:center; margin-top:20rpx;}
+.odtimeleft{position:relative; text-align:center;}
+.odtimeleft::after{position:absolute;content:"";display:block;width:2rpx;height:250%;right:0;top:-30rpx;background:#d1d1d1;}
+.odtmcent image{width:42rpx;height:36rpx;margin-bottom:10rpx;}
+.odtmcent text{display:block; font-size:28rpx; color:#999;}
+.pgorderbox{width:96%;margin-left:2%; background:#fff;border-radius:8rpx; overflow:hidden;margin-top:20rpx; border:2rpx solid #d1d1d1;padding-bottom:20rpx;}
+.ddtitletop{ background:#fd9f39; height:101rpx;padding-left:20rpx; padding-top:15rpx;  position:relative;}
+.lijizhi{position:absolute;width:140rpx;height:60rpx; line-height:60rpx;color:#333; border-radius:8rpx;right:20rpx;top:28rpx; background:#fff;font-size:26rpx;color:#ffac40;border:none; padding:0;}
+.ddtitletop text{display:block;color:#fff;}
+.typetop{ font-size:32rpx;}
+.ddnub{font-size:20rpx;}
+.odtitle{ font-size:28rpx; color:#333; margin-top:30rpx; display:block;}
+.odtopty text{font-size:24rpx;color:#999; border:2rpx solid #e0e0e0;padding:10rpx 10rpx; border-radius:6rpx;margin-right:20rpx;}
+.odtopty{margin-top:10rpx; margin-bottom: 40rpx;}
+.ruzhutime{ display:block;border-bottom:2rpx solid #e7e7e7;padding-bottom:28rpx;}
+.oddjbox{overflow:hidden;zoom:1;}
+.oddjbox text{float:left; font-size:28rpx; color:#333;height:64rpx;line-height:64rpx;}
+.oddjbox text.left{width:186rpx;}
+.oddjbox text.right{color:#999;}

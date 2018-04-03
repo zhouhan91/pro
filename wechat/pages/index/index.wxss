@@ -1,0 +1,10 @@
+/**index.wxss**/
+.listbox{ position:relative;}
+ .indeximg{width:100%;height:300rpx;}
+ .cityblok{position:absolute;top:46rpx;right:30rpx; background-color:rgba(26,26,26,0.6);color:#fff;font-size:20rpx;width:200rpx;height:208rpx;}
+ .cityname{color:#ffac40; font-size:36rpx;  position:relative; display:block;background-color:rgba(26,26,26,0.8); text-align:center;height:88rpx; line-height:78rpx; }  
+ .cityname::before{ content:"";position:absolute; background:#ffac40;left:40%; height:2rpx;bottom:12rpx;width:22%;}
+.icoindex{width:26rpx;height:25rpx;margin-right:16rpx;}
+.citynew{margin-left:26rpx;margin-top:15rpx;}
+.page_body{width:96%;margin:0 auto;padding:15rpx 0 0 0;}
+.guoname{position:absolute;left:40rpx;bottom:80rpx;color:#fff;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}

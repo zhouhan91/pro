@@ -1,0 +1,22 @@
+<form bindsubmit='onDistFormSubmit'>
+  <view class='listbox'>
+    <view class='szlist'>
+          <text>配送费</text>
+          <input type='text' name="distributionAmount" value="{{restInfo.distributionAmount}}" placeholder='请输入'  placeholder-style="color:#ccc"></input>欧元
+      </view>
+      <view class='szlist'>
+          <text>起送金额</text>
+          <input type='text' name="amountLimit" value="{{restInfo.amountLimit}}" placeholder='请输入'  placeholder-style="color:#ccc"></input>欧元
+      </view>
+      <view class='titletext'>集中配送地址</view>
+      <view class='peidzhi' wx:for="{{locationList}}" wx:key="item.id">
+          <textarea  class='adzsbox' rows="3" value="{{item.address}}" placeholder='请输入集中配送地址'  auto-height placeholder-style="color:#ccc;font-size:26rpx;"  bindblur='onItemBlur' data-id='{{item.id}}'></textarea>
+      </view>
+      <view class='peidzhi' wx:if="{{locationList && locationList.length <= 7}}">
+          <textarea  class='adzsbox' rows="3" value="{{addr}}" placeholder='请输入集中配送地址'  auto-height placeholder-style="color:#ccc;font-size:26rpx;" bindblur='onItemBlur' data-id='0'></textarea>
+      </view>
+  </view>
+  <view class='botbox'>
+    <button class='seven' form-type='submit'>保存</button>
+  </view>
+</form>

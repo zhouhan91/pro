@@ -1,0 +1,20 @@
+<view>
+    <view class="succimgbox">
+      <image src='../resource/kind/ordsucc.png' ></image>
+    </view>
+    <text class="succfont">预订成功</text>
+    <text class="succfontque">尊敬的{{nickName}}</text>
+    <view>{{}}</view>
+    <block wx:if='{{owner.length!=0||ownerWechat.length!=0||ownerPhone.length!=0||ownerEmail.length!=0}}'>
+    <text class="succfontque">以下为房东信息，敬请关注！</text>
+    </block>
+    <block wx:elif="{{owner.length==0 && ownerWechat.length==0 && ownerPhone.length==0 && ownerEmail.length==0}}">
+    <text class="succfontque">我们的工作人员将尽快与您取得联系！</text>
+    </block>
+    
+    <view class='fdbox' style='margin-top:20rpx;' wx:if='{{owner}}'><text class='left'>房东姓名</text><text class='right'>{{owner}}</text></view>
+    <view class='fdbox' wx:if='{{ownerWechat}}'><text class='left'>房东微信</text><text class='right'>{{ownerWechat}}</text></view>
+    <view class='fdbox' wx:if='{{ownerPhone}}'><text class='left'>房东电话</text><text class='right'>{{ownerPhone}}</text></view>
+    <view class='fdbox' wx:if='{{ownerEmail}}'><text class='left'>房东邮箱</text><text class='right'>{{ownerEmail}}</text></view>
+    <button class="ordersuccbt" bindtap='onOkClick'>确定</button>
+</view>

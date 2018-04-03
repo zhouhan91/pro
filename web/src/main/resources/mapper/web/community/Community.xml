@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.community.mapper.CommunityMapper">
+
+	<resultMap id="community" type="com.wemeCity.web.community.model.Community">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="local_name" property="localName" jdbcType="VARCHAR" />
+		<result column="country_id" property="countryId" jdbcType="BIGINT" />
+		<result column="country_code" property="countryCode" jdbcType="VARCHAR" />
+		<result column="country_name" property="countryName" jdbcType="VARCHAR" />
+		<result column="city_id" property="cityId" jdbcType="BIGINT" />
+		<result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="district_id" property="districtId" jdbcType="BIGINT" />
+		<result column="district_code" property="districtCode" jdbcType="VARCHAR" />
+		<result column="district_name" property="districtName" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="discount_price" property="discountPrice" jdbcType="DECIMAL" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="local_title" property="localTitle" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="file_id" property="fileId" jdbcType="BIGINT" />
+		<result column="cover_picture" property="coverPicture" jdbcType="VARCHAR" />
+		<result column="room_count" property="roomCount" jdbcType="INTEGER" />
+		<result column="grade" property="grade" jdbcType="FLOAT" />
+		<result column="type_key" property="typeKey" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="lease_type_key" property="leaseTypeKey" jdbcType="VARCHAR" />
+		<result column="lease_type" property="leaseType" jdbcType="VARCHAR" />
+		<result column="deposit_type_key" property="depositTypeKey" jdbcType="VARCHAR" />
+		<result column="deposit_type" property="depositType" jdbcType="VARCHAR" />
+		<result column="source_type_key" property="sourceTypeKey" jdbcType="VARCHAR" />
+		<result column="source_type" property="sourceType" jdbcType="VARCHAR" />
+		<result column="lease_model_key" property="leaseModelKey" jdbcType="VARCHAR" />
+		<result column="lease_model" property="leaseModel" jdbcType="VARCHAR" />
+		<result column="bathroom_type_key" property="bathroomTypeKey" jdbcType="VARCHAR" />
+		<result column="bathroom_type" property="bathroomType" jdbcType="VARCHAR" />
+		<result column="owner" property="owner" jdbcType="VARCHAR" />
+		<result column="owner_phone" property="ownerPhone" jdbcType="VARCHAR" />
+		<result column="owner_wechat" property="ownerWechat" jdbcType="VARCHAR" />
+		<result column="owner_email" property="ownerEmail" jdbcType="VARCHAR" />
+		<result column="supplier_id" property="supplierId" jdbcType="BIGINT" />
+		<result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+		<result column="pay_mode" property="payMode" jdbcType="VARCHAR" />
+		<result column="room_type_key" property="roomTypeKey" jdbcType="VARCHAR" />
+		<result column="room_type" property="roomType" jdbcType="VARCHAR" />
+		<result column="private_facilities" property="privateFacilitiesStr" jdbcType="VARCHAR" />
+		<result column="common_facilities" property="commonFacilitiesStr" jdbcType="VARCHAR" />
+		<result column="rent_facilities" property="rentFacilitiesStr" jdbcType="VARCHAR" />
+		<result column="route_description" property="routeDescription" jdbcType="VARCHAR" />
+		<result column="advantage" property="advantage" jdbcType="VARCHAR" />
+		<result column="tip" property="tip" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="mark_count" property="markCount" jdbcType="INTEGER" />
+		<result column="experience_count" property="experienceCount" jdbcType="INTEGER" />
+		<result column="comment_count" property="commentCount" jdbcType="INTEGER" />
+		<result column="longitude" property="longitude" jdbcType="DOUBLE" />
+		<result column="latitude" property="latitude" jdbcType="DOUBLE" />
+		<result column="key_words" property="keyWords" jdbcType="VARCHAR" />
+		<result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+		<result column="sort_num" property="sortNum" jdbcType="INTEGER" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertCommunity" parameterType="com.wemeCity.web.community.model.Community">
+		<![CDATA[
+			INSERT INTO COMMUNITY (
+				id,
+				name,
+				local_name,
+				country_id,
+				country_code,
+				country_name,
+				city_id,
+				city_code,
+				city_name,
+				district_id,
+				district_code,
+				district_name,
+				price,
+				discount_price,
+				title,
+				local_title,
+				description,
+				address,
+				file_id,
+				cover_picture,
+				room_count,
+				grade,
+				type_key,
+				type,
+				lease_type_key,
+				lease_type,
+				deposit_type_key,
+				deposit_type,
+				source_type_key,
+				source_type,
+				lease_model_key,
+				lease_model,
+				bathroom_type_key,
+				bathroom_type,
+				owner,
+				owner_phone,
+				owner_wechat,
+				owner_email,
+				supplier_id,
+				supplier_name,
+				pay_mode,
+				room_type_key,
+				room_type,
+				route_description,
+				advantage,
+				tip,
+				status,
+				mark_count,
+				experience_count,
+				comment_count,
+				longitude,
+				latitude,
+				video_url,
+				sort_num,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{name},
+				#{localName},
+				#{countryId},
+				#{countryCode},
+				#{countryName},
+				#{cityId},
+				#{cityCode},
+				#{cityName},
+				#{districtId},
+				#{districtCode},
+				#{districtName},
+				#{price},
+				#{discountPrice},
+				#{title},
+				#{localTitle},
+				#{description},
+				#{address},
+				#{fileId},
+				#{coverPicture},
+				#{roomCount},
+				#{grade},
+				#{typeKey},
+				#{type},
+				#{leaseTypeKey},
+				#{leaseType},
+				#{depositTypeKey},
+				#{depositType},
+				#{sourceTypeKey},
+				#{sourceType},
+				#{leaseModelKey},
+				#{leaseModel},
+				#{bathroomTypeKey},
+				#{bathroomType},
+				#{owner},
+				#{ownerPhone},
+				#{ownerWechat},
+				#{ownerEmail},
+				#{supplierId},
+				#{supplierName},
+				#{payMode},
+				#{roomTypeKey},
+				#{roomType},
+				#{routeDescription},
+				#{advantage},
+				#{tip},
+				#{status},
+				#{markCount},
+				#{experienceCount},
+				#{commentCount},
+				#{longitude},
+				#{latitude},
+				#{videoUrl},
+				#{sortNum},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM COMMUNITY LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteCommunity" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE community SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateCommunity" parameterType="map">
+		UPDATE community set modify_time=now()
+		<if test="name !=null">
+			, name=#{name}
+		</if>
+		<if test="localName !=null">
+			, local_name=#{localName}
+		</if>
+		<if test="countryId !=null">
+			, country_id=#{countryId}
+		</if>
+		<if test="countryCode !=null">
+			, country_code=#{countryCode}
+		</if>
+		<if test="countryName !=null">
+			, country_name=#{countryName}
+		</if>
+		<if test="cityId !=null">
+			, city_id=#{cityId}
+		</if>
+		<if test="cityCode !=null">
+			, city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			, city_name=#{cityName}
+		</if>
+		<if test="districtId !=null">
+			, district_id=#{districtId}
+		</if>
+		<if test="districtCode !=null">
+			, district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			, district_name=#{districtName}
+		</if>
+		<if test="price !=null">
+			, price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			, discount_price=#{discountPrice}
+		</if>
+		<if test="title !=null">
+			, title=#{title}
+		</if>
+		<if test="localTitle !=null">
+			, local_title=#{localTitle}
+		</if>
+		<if test="description !=null">
+			, description=#{description}
+		</if>
+		<if test="address !=null">
+			, address=#{address}
+		</if>
+		<if test="fileId !=null">
+			, file_id=#{fileId}
+		</if>
+		<if test="coverPicture !=null">
+			, cover_picture=#{coverPicture}
+		</if>
+		<if test="roomCount !=null">
+			, room_count=#{roomCount}
+		</if>
+		<if test="grade !=null">
+			, grade=#{grade}
+		</if>
+		<if test="typeKey !=null">
+			, type_key=#{typeKey}
+		</if>
+		<if test="type !=null">
+			, type=#{type}
+		</if>
+		<if test="leaseTypeKey !=null">
+			, lease_type_key=#{leaseTypeKey}
+		</if>
+		<if test="leaseType !=null">
+			, lease_type=#{leaseType}
+		</if>
+		<if test="depositTypeKey !=null">
+			, deposit_type_key=#{depositTypeKey}
+		</if>
+		<if test="depositType !=null">
+			, deposit_type=#{depositType}
+		</if>
+		<if test="sourceTypeKey !=null">
+			, source_type_key=#{sourceTypeKey}
+		</if>
+		<if test="sourceType !=null">
+			, source_type=#{sourceType}
+		</if>
+		<if test="leaseModelKey !=null">
+			, lease_model_key=#{leaseModelKey}
+		</if>
+		<if test="leaseModel !=null">
+			, lease_model=#{leaseModel}
+		</if>
+		<if test="bathroomTypeKey !=null">
+			, bathroom_type_key=#{bathroomTypeKey}
+		</if>
+		<if test="bathroomType !=null">
+			, bathroom_type=#{bathroomType}
+		</if>
+		<if test="owner !=null">
+			, owner=#{owner}
+		</if>
+		<if test="ownerPhone !=null">
+			, owner_phone=#{ownerPhone}
+		</if>
+		<if test="ownerWechat !=null">
+			, owner_wechat=#{ownerWechat}
+		</if>
+		<if test="ownerEmail !=null">
+			, owner_email=#{ownerEmail}
+		</if>
+		<if test="supplierId !=null">
+			, supplier_id=#{supplierId}
+		</if>
+		<if test="supplierName !=null">
+			, supplier_name=#{supplierName}
+		</if>
+		<if test="payMode !=null">
+			, pay_mode=#{payMode}
+		</if>
+		<if test="roomTypeKey !=null">
+			, room_type_key=#{roomTypeKey}
+		</if>
+		<if test="roomType !=null">
+			, room_type=#{roomType}
+		</if>
+		<if test="routeDescription !=null">
+			, route_description=#{routeDescription}
+		</if>
+		<if test="advantage !=null">
+			, advantage=#{advantage}
+		</if>
+		<if test="tip !=null">
+			, tip=#{tip}
+		</if>
+		<if test="status !=null">
+			, status=#{status}
+		</if>
+		<if test="markCount !=null">
+			, mark_count=#{markCount}
+		</if>
+		<if test="experienceCount !=null">
+			, experience_count=#{experienceCount}
+		</if>
+		<if test="commentCount !=null">
+			, comment_count=#{commentCount}
+		</if>
+		<if test="longitude !=null">
+			, longitude=#{longitude}
+		</if>
+		<if test="latitude !=null">
+			, latitude=#{latitude}
+		</if>
+		<if test="videoUrl !=null">
+			, video_url=#{videoUrl}
+		</if>
+		<if test="sortNum !=null">
+			, sort_num=#{sortNum}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readCommunity" parameterType="java.lang.Long" resultMap="community">
+		SELECT * FROM community WHERE id=#{id}
+	</select>
+
+	<select id="queryCommunityList" parameterType="map" resultMap="community">
+		SELECT * FROM community WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="localName !=null">
+			AND local_name=#{localName}
+		</if>
+		<if test="countryId !=null">
+			AND country_id=#{countryId}
+		</if>
+		<if test="countryCode !=null">
+			AND country_code=#{countryCode}
+		</if>
+		<if test="countryName !=null">
+			AND country_name=#{countryName}
+		</if>
+		<if test="cityId !=null">
+			AND city_id=#{cityId}
+		</if>
+		<if test="cityCode !=null">
+			AND city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="districtId !=null">
+			AND district_id=#{districtId}
+		</if>
+		<if test="districtCode !=null">
+			AND district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			AND district_name=#{districtName}
+		</if>
+		<if test="price !=null">
+			AND price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			AND discount_price=#{discountPrice}
+		</if>
+		<if test="title !=null">
+			AND title=#{title}
+		</if>
+		<if test="localTitle !=null">
+			AND local_title=#{localTitle}
+		</if>
+		<if test="description !=null">
+			AND description=#{description}
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="fileId !=null">
+			AND file_id=#{fileId}
+		</if>
+		<if test="coverPicture !=null">
+			AND cover_picture=#{coverPicture}
+		</if>
+		<if test="roomCount !=null">
+			AND room_count=#{roomCount}
+		</if>
+		<if test="grade !=null">
+			AND grade=#{grade}
+		</if>
+		<if test="typeKey !=null">
+			AND type_key=#{typeKey}
+		</if>
+		<if test="type !=null">
+			AND type=#{type}
+		</if>
+		<if test="typeLike !=null">
+			AND type like CONCAT('%',#{typeLike},'%')
+		</if>
+		<if test="leaseTypeKey !=null">
+			AND lease_type_key=#{leaseTypeKey}
+		</if>
+		<if test="leaseType !=null">
+			AND lease_type=#{leaseType}
+		</if>
+		<if test="depositTypeKey !=null">
+			AND deposit_type_key=#{depositTypeKey}
+		</if>
+		<if test="depositType !=null">
+			AND deposit_type=#{depositType}
+		</if>
+		<if test="sourceTypeKey !=null">
+			AND source_type_key=#{sourceTypeKey}
+		</if>
+		<if test="sourceType !=null">
+			AND source_type=#{sourceType}
+		</if>
+		<if test="sourceTypeLike !=null">
+			AND source_type like CONCAT('%',#{sourceTypeLike},'%')
+		</if>
+		<if test="leaseModelKey !=null">
+			AND lease_model_key=#{leaseModelKey}
+		</if>
+		<if test="leaseModel !=null">
+			AND lease_model=#{leaseModel}
+		</if>
+		<if test="leaseModelLike !=null">
+			AND lease_model like CONCAT('%',#{leaseModelLike},'%')
+		</if>
+		<if test="bathroomTypeKey !=null">
+			AND bathroom_type_key=#{bathroomTypeKey}
+		</if>
+		<if test="bathroomType !=null">
+			AND bathroom_type=#{bathroomType}
+		</if>
+		<if test="bathroomTypeLike !=null">
+			AND bathroom_type like CONCAT('%',#{bathroomTypeLike},'%')
+		</if>
+		<if test="owner !=null">
+			AND owner=#{owner}
+		</if>
+		<if test="ownerPhone !=null">
+			AND owner_phone=#{ownerPhone}
+		</if>
+		<if test="ownerWechat !=null">
+			AND owner_wechat=#{ownerWechat}
+		</if>
+		<if test="ownerEmail !=null">
+			AND owner_email=#{ownerEmail}
+		</if>
+		<if test="supplierId !=null">
+			AND supplier_id=#{supplierId}
+		</if>
+		<if test="supplierName !=null">
+			AND supplier_name=#{supplierName}
+		</if>
+		<if test="payMode !=null">
+			AND pay_mode=#{payMode}
+		</if>
+		<if test="roomTypeKey !=null">
+			AND room_type_key=#{roomTypeKey}
+		</if>
+		<if test="roomType !=null">
+			AND room_type=#{roomType}
+		</if>
+		<if test="roomTypeLike !=null">
+			AND room_type like CONCAT('%',#{roomTypeLike},'%')
+		</if>
+		<if test="routeDescription !=null">
+			AND route_description=#{routeDescription}
+		</if>
+		<if test="advantage !=null">
+			AND advantage=#{advantage}
+		</if>
+		<if test="tip !=null">
+			AND tip=#{tip}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="markCount !=null">
+			AND mark_count=#{markCount}
+		</if>
+		<if test="experienceCount !=null">
+			AND experience_count=#{experienceCount}
+		</if>
+		<if test="commentCount !=null">
+			AND comment_count=#{commentCount}
+		</if>
+		<if test="longitude !=null">
+			AND longitude=#{longitude}
+		</if>
+		<if test="latitude !=null">
+			AND latitude=#{latitude}
+		</if>
+		<if test="keyWords !=null">
+			AND key_words like CONCAT('%',#{keyWords},'%')
+		</if>
+		<if test="videoUrl !=null">
+			AND video_url=#{videoUrl}
+		</if>
+		<if test="sortNum !=null">
+			AND sort_num=#{sortNum}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryCommunityCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM COMMUNITY WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="localName !=null">
+			AND local_name=#{localName}
+		</if>
+		<if test="countryId !=null">
+			AND country_id=#{countryId}
+		</if>
+		<if test="countryCode !=null">
+			AND country_code=#{countryCode}
+		</if>
+		<if test="countryName !=null">
+			AND country_name=#{countryName}
+		</if>
+		<if test="cityId !=null">
+			AND city_id=#{cityId}
+		</if>
+		<if test="cityCode !=null">
+			AND city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="districtId !=null">
+			AND district_id=#{districtId}
+		</if>
+		<if test="districtCode !=null">
+			AND district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			AND district_name=#{districtName}
+		</if>
+		<if test="price !=null">
+			AND price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			AND discount_price=#{discountPrice}
+		</if>
+		<if test="title !=null">
+			AND title=#{title}
+		</if>
+		<if test="localTitle !=null">
+			AND local_title=#{localTitle}
+		</if>
+		<if test="description !=null">
+			AND description=#{description}
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="fileId !=null">
+			AND file_id=#{fileId}
+		</if>
+		<if test="coverPicture !=null">
+			AND cover_picture=#{coverPicture}
+		</if>
+		<if test="roomCount !=null">
+			AND room_count=#{roomCount}
+		</if>
+		<if test="grade !=null">
+			AND grade=#{grade}
+		</if>
+		<if test="typeKey !=null">
+			AND type_key=#{typeKey}
+		</if>
+		<if test="type !=null">
+			AND type=#{type}
+		</if>
+		<if test="leaseTypeKey !=null">
+			AND lease_type_key=#{leaseTypeKey}
+		</if>
+		<if test="leaseType !=null">
+			AND lease_type=#{leaseType}
+		</if>
+		<if test="depositTypeKey !=null">
+			AND deposit_type_key=#{depositTypeKey}
+		</if>
+		<if test="depositType !=null">
+			AND deposit_type=#{depositType}
+		</if>
+		<if test="sourceTypeKey !=null">
+			AND source_type_key=#{sourceTypeKey}
+		</if>
+		<if test="sourceType !=null">
+			AND source_type=#{sourceType}
+		</if>
+		<if test="leaseModelKey !=null">
+			AND lease_model_key=#{leaseModelKey}
+		</if>
+		<if test="leaseModel !=null">
+			AND lease_model=#{leaseModel}
+		</if>
+		<if test="bathroomTypeKey !=null">
+			AND bathroom_type_key=#{bathroomTypeKey}
+		</if>
+		<if test="bathroomType !=null">
+			AND bathroom_type=#{bathroomType}
+		</if>
+		<if test="owner !=null">
+			AND owner=#{owner}
+		</if>
+		<if test="ownerPhone !=null">
+			AND owner_phone=#{ownerPhone}
+		</if>
+		<if test="ownerWechat !=null">
+			AND owner_wechat=#{ownerWechat}
+		</if>
+		<if test="ownerEmail !=null">
+			AND owner_email=#{ownerEmail}
+		</if>
+		<if test="supplierId !=null">
+			AND supplier_id=#{supplierId}
+		</if>
+		<if test="supplierName !=null">
+			AND supplier_name=#{supplierName}
+		</if>
+		<if test="payMode !=null">
+			AND pay_mode=#{payMode}
+		</if>
+		<if test="roomTypeKey !=null">
+			AND room_type_key=#{roomTypeKey}
+		</if>
+		<if test="roomType !=null">
+			AND room_type=#{roomType}
+		</if>
+		<if test="routeDescription !=null">
+			AND route_description=#{routeDescription}
+		</if>
+		<if test="advantage !=null">
+			AND advantage=#{advantage}
+		</if>
+		<if test="tip !=null">
+			AND tip=#{tip}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="markCount !=null">
+			AND mark_count=#{markCount}
+		</if>
+		<if test="experienceCount !=null">
+			AND experience_count=#{experienceCount}
+		</if>
+		<if test="commentCount !=null">
+			AND comment_count=#{commentCount}
+		</if>
+		<if test="longitude !=null">
+			AND longitude=#{longitude}
+		</if>
+		<if test="latitude !=null">
+			AND latitude=#{latitude}
+		</if>
+		<if test="keyWords !=null">
+			AND key_words like CONCAT('%',#{keyWords},'%')
+		</if>
+		<if test="videoUrl !=null">
+			AND video_url=#{videoUrl}
+		</if>
+		<if test="sortNum !=null">
+			AND sort_num=#{sortNum}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,26 @@
+<view style='padding-bottom:20rpx;'>
+  <navigator wx:for='{{subNavNewsList}}' wx:if='{{item.status==2}}' wx:key="index"  url='../newdetail/newdetail?newsId={{item.id}}&newsTitle={{item.title}}' class='zlbox'>
+      <view class='zlleft'>
+      <image src='{{item.coverPicture}}' class='zlleft' />
+      </view>
+      <view class='zlright'>
+          <text class='zltitle'>{{item.title}}</text>
+          <view class='zlbtcontent'>
+              <view class='zlreadnb'>
+                <image src='../resource/kind/readnb.png' />
+                <text>{{item.readCount}}</text>
+              </view>
+              <text class='zlchu'>{{item.author}}</text>
+          </view>
+      </view>
+  </navigator>
+</view>
+ 
+
+<view wx:if="{{isLoading}}" class="weui-loadmore">
+  <view class="weui-loading"></view>
+  <view class="weui-loadmore__tips">正在加载</view>
+</view>
+<view wx:if="{{!isLoading && searchStatus == 2 && subNavNewsList[subNavIndex].length > 10}}" class="weui-loadmore weui-loadmore_line">
+  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无更多数据</view>
+</view>

@@ -1,0 +1,72 @@
+<view class='datatitle'>
+    <image src='../images/datatb.png'></image>
+    <text>历史数据</text>
+</view>
+<view class='shujubox'> 
+    <view class='pfbox'>
+        <text class='nubmer'>{{restInfo.allData.orderCount}}个</text>
+        <text>订单总数</text>
+    </view>
+    <view class='pfbox'>
+        <text class='nubmer'>{{restInfo.allData.orderCompleteCount}}个</text>
+        <text>完成订单</text>
+    </view>
+    <view class='pfbox'>
+        <text class='nubmer'>€{{restInfo.allData.income ? restInfo.allData.income : 0}}</text>
+        <text>订单总额</text>
+    </view>
+</view>
+<view class='datatitle'>
+    <image src='../images/datatb.png'></image>
+    <text>本月订单统计</text>
+</view>
+<view class='shujubox'> 
+    <view class='pfbox'>
+        <text class='nubmer'>{{restInfo.monthData.orderCount}}个</text>
+        <text>本月总订单</text>
+    </view>
+    <view class='pfbox'>
+        <text class='nubmer'>{{restInfo.monthData.orderCompleteCount}}个</text>
+        <text>本月完成订单</text>
+    </view>
+    <view class='pfbox'>
+        <text class='nubmer'>{{restInfo.monthData.orderCancelCount}}个</text>
+        <text>本月取消订单</text>
+    </view>
+</view>
+<view class='datatitle'>
+    <image src='../images/datatb.png'></image>
+    <text>本月收入统计</text>
+</view>
+<view class='shujubox'> 
+    <view class='pfbox'>
+        <text class='nubmer'>€{{restInfo.monthData.income ? restInfo.monthData.income : 0}}</text>
+        <text>本月总收入</text>
+    </view>
+    <view class='pfbox'>
+        <text class='nubmer'>€{{restInfo.monthData.incomeOnLine ? restInfo.monthData.incomeOnLine : 0}}</text>
+        <text>线上支付</text>
+    </view>
+    <view class='pfbox'>
+        <text class='nubmer'>€{{restInfo.monthData.incomeOffLine ? restInfo.monthData.incomeOffLine : 0}}</text>
+        <text>现金支付</text>
+    </view>
+</view>
+<view class='datatitle'>
+    <image src='../images/datatb.png'></image>
+    <text>本月菜品统计</text>
+</view>
+<view class="table">
+  <view class="tr bg-w">
+    <view class="th">前五菜品</view>
+    <view class="th">菜品名称</view>
+    <view class="th ">数量</view>
+  </view>
+  <block wx:for="{{restInfo.monthData.lstSalesVolume}}" wx:key="{{code}}">
+    <view class="tr bg-g">
+      <view class="td">{{item.index}}</view>
+      <view class="td">{{item.goodsName}}</view>
+      <view class="td">{{item.salesVolume}}</view>
+    </view>   
+  </block>
+</view>

@@ -1,0 +1,91 @@
+<!--pages/comment_list/comment_list.wxml-->
+<wxs module="newsDetailUtils">
+  var dateFormat = function(dateStr){
+    var d = getDate(dateStr);
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    var hour = d.getHours();
+    var min = d.getMinutes();
+    return month + "-" + day + " " + hour + ":" + min;
+  };
+
+  var diffDate = function (dateStr){
+    var cDate = getDate();
+    var eDate = getDate(dateStr);
+    var diffTimes = (cDate.getTime() - eDate.getTime()) / 1000;
+    var diffDays = diffTimes / 3600 / 24;
+    var ctime = dateStr;
+    if (diffTimes < 3600) {
+      ctime = Math.abs(parseInt(diffTimes / 60)) + '分钟前';
+    } else if (diffDays < 1) {
+      ctime = parseInt(diffTimes / 3600) + '小时前';
+    } else {
+      ctime = parseInt(diffDays) + '天前';
+    }
+    return ctime;
+  };
+
+  var subContent = function(content, len){
+    return content.substring(0, len);
+  };
+
+  module.exports.subContent = subContent;
+  module.exports.diffDate = diffDate;
+  module.exports.dateFormat = dateFormat;
+</wxs>
+
+<view class="newsdetaitop">
+    <text class="newtitle">{{newsInfo.title}}</text>
+    <view class="newfubox">
+        <text class="chu">{{newsInfo.author}}</text>
+        <text class="time">{{newsDetailUtils.dateFormat(newsInfo.createTime)}}</text>
+    </view>
+</view>
+
+<view wx:if="{{commentTotal > 0}}" class="comment_page">
+  <view class="">
+    全部评论({{commentTotal}})
+  </view>
+  <view class="newsplbox">
+    <block wx:for="{{commentStatus == 1 && commentList}}" wx:key="index" >
+      <view class="plbox" data-comment-item="{{item}}" bindtap='onCommentDetailClick'>
+          <view class="plcenttop">
+              <view><image src='{{item.portrait}}'></image></view>
+              <text>{{item.nickname}}</text>
+          </view>
+          <text class="plcontent">
+            {{item.isFullText ? item.content : newsDetailUtils.subContent(item.content, commentShowLen)}}
+          </text>
+          <text wx:if="{{item.content.length > commentShowLen}}" class="more" data-comment-item='{{item}}' data-comment-index='{{index}}' catchtap='onFulltextClick'>{{item.isFullText ? '收起' : '全文'}}</text>
+          <view class="plbot">
+            <text>{{item.replyCount}}回复</text>
+            <text>{{item.likeCount}}赞</text>
+            <text>{{newsDetailUtils.diffDate(item.createTime)}}</text>
+          </view>
+      </view>
+    </block>
+    <view wx:if="{{commentStatus == 2}}" class="weui-loadmore">
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无评论</view>
+    </view>
+  </view>
+</view>
+
+<block wx:if="{{newbottom}}">
+<view class="newsbottom">
+    <image src='../resource/kind/bianxie.png' class='xie'></image>
+    <text bindtap="hidethis">发表评论</text>
+    <view class='bottom_menu_left_item'>
+      <button open-type="share" style='position:absolute;right:0;height:100%;width:43rpx;opacity:0;'></button>
+      <image src='../resource/kind/zhuanfa.png' class="zhuan"></image>
+    </view>
+    <image src='../resource/kind/{{newsMarkLikeInfo.marked == "Y"? "fydetil15":"fydetil14"}}.png' class="shou" bindtap='onMarkedClick'></image>
+    <image src='../resource/kind/{{newsMarkLikeInfo.liked == "Y"? "px01":"px02"}}.png' class="dz" bindtap='onLikedClick'></image>
+</view>
+</block>
+<block wx:elif="{{!newbottom}}">
+  <form bindsubmit="onPublishComment" class="newsbottom fabiaobox">
+    <image src='../resource/kind/bianxie.png' class='xie'></image>
+    <input focus="{{fabiao_focus}}" name="content" type='text' placeholder='发表评论' class="fabiao" bindblur="hidfabu"></input>
+    <button class="fabu" formType="submit">发布</button>
+  </form>
+</block>

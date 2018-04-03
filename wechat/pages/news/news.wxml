@@ -1,0 +1,106 @@
+<wxs module="orderUtils">
+ var zhuantime=function(time){
+      var zhuan=time.substring(5,7);
+      var jie=time.substring(8,10);
+      var timefan=jie+'/'+zhuan
+      return timefan;
+  }
+  module.exports.zhuantime = zhuantime;
+</wxs>
+<view class="newsnavi">
+  <block wx:if='{{index<4}}' wx:for='{{navList}}' wx:key='{{item.code}}'>
+    <view class="{{index==activeIndex?'active':''}}" data-nav-index='{{index}}' data-nav-code='{{item.code}}' bindtap='onNavItemClick'>{{item.name}}</view>
+  </block> 
+</view>
+
+<block wx:if='{{hostguo}}'>
+<scroll-view scroll-y class="babilist">
+    <view wx:for='{{firstlist}}' wx:if='{{firstlist[index].navigationCode!=zhinan}}'  wx:key="index"   wx:for-item="newsItem" class="babibasic">
+       <view class='lanmufrist'>
+        <image src='{{newsItem.coverPicture}}'/>
+        </view>
+        <view class='bbttext'>
+        <text class='bbttime'>{{orderUtils.zhuantime(newsItem.createTime)}}</text>
+        <block wx:for="{{newsItem.lstNewsBabieta}}" wx:key="idx" wx:for-item="cntItem">
+          <view class='bbcent'>{{cntItem.content}}</view>
+        </block>
+        </view>
+    </view>
+</scroll-view>
+</block>
+<block wx:if='{{lanmudisplay}}'>
+  <navigator bindtap='onSubNavItemClick' class='lanmufrist lanmufrists' wx:if='{{index == 0}}' wx:for='{{lanmu}}' wx:key="index" data-sub-nav-code='{{item.code}}' data-nav-code='{{item.parentCode}}' style='margin:2%;margin-bottom:0;'>
+        <image src='{{item.image}}' />
+        <view class='lanmubox'>
+            <text class="chinse">{{item.name}}</text>
+            <text class="englise">{{item.code}}</text> 
+        </view>
+   </navigator>
+   <view class="lanmulistct">
+    <navigator bindtap='onSubNavItemClick'  class='lanmufrist lanmufrists' wx:if='{{index > 0}}' wx:for='{{lanmu}}' wx:key="index" data-sub-nav-code='{{item.code}}' data-nav-code='{{item.parentCode}}'>
+     <view>
+        <image src='{{item.image}}'/>
+        <view class='lanmubox'>
+            <text class="chinse">{{item.name}}</text>
+            <text class="englise">{{item.code}}</text>
+        </view>
+     </view> 
+    </navigator>
+    </view>
+ 
+</block>
+<block wx:if='{{zlbox}}'>
+    <view style='padding-bottom:20rpx;'>
+          <navigator wx:for='{{newslist}}'  wx:if='{{item.status==2}}' wx:key="index"  url='../newdetail/newdetail?newsId={{item.id}}&newsTitle={{item.title}}' class='zlbox'>
+              <view class='zlleft'>
+              <image src='{{item.coverPicture}}' class='zlleft' />
+              </view>
+              <view class='zlright'>
+                  <text class='zltitle'>{{item.title}}</text>
+                  <view class='zlbtcontent'>
+                      <view class='zlreadnb'>
+                        <image src='../resource/kind/readnb.png' />
+                        <text>{{item.readCount}}</text>
+                      </view>
+                      <text class='zlchu'>{{item.author}}</text>
+                  </view>
+              </view>
+          </navigator>
+    </view>
+</block>
+<block wx:if='{{isdiplayload}}'>
+<view wx:if="{{isLoading}}" class="weui-loadmore">
+  <view class="weui-loading"></view>
+  <view class="weui-loadmore__tips">正在加载</view>
+</view>
+<view wx:if="{{!isLoading && searchStatus == 2}}" class="weui-loadmore weui-loadmore_line">
+  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无更多数据</view>
+</view>
+</block>
+<!--
+<block wx:if='{{hostguo}}'>
+<view class="newstitle">热门国家</view>
+<scroll-view class="newshost" scroll-x style='height:253rpx;' >
+  <block wx:for='{{subNavList[activeIndex]}}' wx:key='{{item.code}}'>
+    <view class="newshostbox" data-sub-nav-code='{{item.code}}' data-nav-code='{{item.parentCode}}' bindtap='onSubNavItemClick'>
+        <image  src='{{item.image}}'/>
+        <text>{{item.name}}</text>
+    </view>
+  </block>
+</scroll-view>
+<view class="newstitle">最新发布</view>
+<view class="newscentbox" wx:if='{{index == 0}}' wx:for='{{subNavDataList[activeIndex]}}' wx:key='{{item.id}}'>
+    <navigator wx:if='{{index == 0}}' url='../newdetail/newdetail?newsId={{item.id}}' class="newsnew">
+      <image  src='{{item.coverPicture}}'/>
+      <text>{{item.title}}</text>
+    </navigator>
+
+</view>
+ <view class="newsshuang">
+      <navigator url='../newdetail/newdetail?newsId={{item.id}}'  wx:if='{{index > 0}}' class="fontimg" wx:for='{{subNavDataList[activeIndex]}}'>
+        <image  src='{{item.coverPicture}}'/>
+          <text>{{item.title}}</text>
+      </navigator>
+</view>
+</block>
+-->

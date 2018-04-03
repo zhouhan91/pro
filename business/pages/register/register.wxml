@@ -1,0 +1,62 @@
+<view class='registerbox'>
+  <form bindsubmit="registerFormSubmit" bindreset="formReset">
+      <view class='regilist'>
+        <label>店主姓名：</label>
+        <input type='text' name="realName" placeholder='请输入店主姓名'  placeholder-style="color:#ccc"></input>
+      </view>
+      <view class='regilist'>
+        <label>昵称：</label>
+        <input type='text' name="userName" placeholder='请输入昵称'  placeholder-style="color:#ccc"></input>
+      </view>
+      <view class='regilist'>
+        <label>设置密码：</label>
+        <input type='password' name="password" placeholder='请输入密码' maxlength="16" placeholder-style="color:#ccc"></input>
+      </view>
+      <view class='regilist'>
+        <label>确认密码：</label>
+        <input type='password' name="password2" placeholder='确认密码'  placeholder-style="color:#ccc"></input>
+      </view>
+      <view class='regilist'>
+        <label>商户名称：</label>
+        <input type='text' name="restaurantName" placeholder='请输入商户名称'  placeholder-style="color:#ccc"></input>
+      </view>
+      <view class='regilist'>
+        <label>店主电话：</label>
+        <input type='text' name="phone" placeholder='请输入店主电话'  placeholder-style="color:#ccc"></input>
+      </view>
+      <view class='regilist'>
+        <label>国家：</label>
+        <input type='text' name="countryCode" value='{{countryList[countryPickerIndex].code}}' hidden='true'></input>
+        <block wx:if='{{countryNameList && countryNameList.length > 0}}'>
+          <picker bindchange="bindCountryPickerChange" bindtap='onCountryPickerClick' value="{{countryPickerIndex}}" range="{{countryNameList}}">
+            <input type='text' name="countryName" value='{{countryNameList[countryPickerIndex]}}' placeholder='请选择所属国家'  placeholder-style="color:#ccc" disabled='true'></input>
+          </picker>
+        </block>
+      </view>
+      <view class='regilist'>
+        <label>城市：</label>
+        <input type='text' name="cityCode" value='{{cityList[cityPickerIndex].code}}' hidden='true'></input>
+        <block wx:if='{{cityNameList && cityNameList.length > 0}}'>
+          <picker bindchange="bindCityPickerChange" bindtap='onCityPickerClick' value="{{cityPickerIndex}}" range="{{cityNameList}}">
+            <input type='text' name="cityName" value='{{cityNameList[cityPickerIndex]}}' placeholder='请选择所属城市'  placeholder-style="color:#ccc" disabled='true'></input>
+          </picker>
+        </block>
+      </view>
+      <view class='regilist'>
+        <label>区县：</label>
+        <input type='text' name="districtCode" value='{{districtList[districtPickerIndex].code}}' hidden='true'></input>
+        <block wx:if='{{districtNameList && districtNameList.length > 0}}'>
+          <picker bindchange="bindDistrictPickerChange" bindtap='onDistrictPickerClick' value="{{districtPickerIndex}}" range="{{districtNameList}}">
+            <input type='text' name="districtName" value='{{districtNameList[districtPickerIndex]}}' placeholder='请选择所属区县'  placeholder-style="color:#ccc" disabled='true'></input>
+          </picker>
+        </block>
+      </view>
+      <view class='regilist'>
+        <label>详细地址：</label>
+        <input type='text' name="address" placeholder='请输入商户详细地址'  placeholder-style="color:#ccc"></input>
+      </view>
+      <view>
+        <button type='warn' class='loginbt' formType="submit">立即申请</button>
+      </view>
+  </form>
+</view>

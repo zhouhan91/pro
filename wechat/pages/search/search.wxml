@@ -1,0 +1,179 @@
+<view class="contabox">
+  <view class="seachbox">
+    <view class="searchwai">
+      <input class="seachindex" value="{{keyword ? keyword : ''}}" bindfocus="onSearchFocus" bindconfirm="onSearchClick" placeholder='搜索城市/学校' placeholder-class="placeholder" confirm-type="search"></input>
+    </view>
+    <block  wx:if="{{isCancel}}">
+      <text class="qiehuan"  bindtap="onGoBackClick" >取消</text>
+    </block>
+    <block wx:elif="{{!isCancel}}">
+      <text class="qiehuan2"  bindtap="onSwitchCityClick" >切换城市</text>
+    </block>
+  </view>
+
+  <!-- 关键字搜索无数据时显示模块 -->
+  <view wx:if="{{searchStatus == 2 && !isLoading && communityList.length == 0}}" class="weui-loadmore weui-loadmore_line zhaono">
+    <view class="weui-loadmore__tips ">找不到"{{keyword}}"相关信息</view>
+  </view>
+
+  <!-- 搜索页默认展示信息模块 -->
+  <block  wx:if="{{isCancel || ((keyword == null || keyword == '') && searchStatus == 2)}}">
+    <view class="contapadding searchbox">
+      <view class="lishibox">
+          <view class="lishititle">
+            <text class="setitle">历史搜索</text>
+            <text class="clearser" bindtap="onDelHistoryClick">清空</text>
+          </view>
+          <view class="refontbox" wx:for="{{historyList}}" wx:key="index" data-history-name="{{item}}" bindtap='onHistoryItemClick'>
+             <view class='rmct'>{{item}}</view> 
+          </view>
+          <view wx:if="{{historyList.length == 0}}" class='rmct'>暂无数据</view> 
+          <view class="retitle">热门城市</view>
+          <view class="remencity">      
+            <view class="refontbox" wx:for="{{hotCityList}}" wx:key="index" data-city-name="{{item.name}}" bindtap='onHotCityItemClick'>
+              <view class='rmct'>{{item.name}}</view>
+            </view> 
+            <view wx:if="{{hotCityList.length == 0}}" class='rmct'>暂无数据</view>  
+          </view>
+          <view class="retitle">热门学校</view>
+          <view class="remensh" wx:for="{{hotSchoolList}}" wx:key="index" data-school-name="{{item.name}}" bindtap='onHotSchoolItemClick'>      
+            <view class="refontbox resh">
+              <view class='rmsh'>{{item.name}}</view>
+            </view>
+            <view wx:if="{{hotSchoolList.length == 0}}" class='rmct'>暂无数据</view>
+          </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 切换城市模块 -->
+  <block wx:elif="{{switchCity}}">
+    <view class="qiehuanbox"> 
+      <scroll-view  scroll-y="true" class="left" >
+        <text class="leftCountry {{choiceCountry.id == item.id ? 'active-text' : ''}}" wx:for="{{countryList}}" wx:key="index" bindtap="onCountryItemClick" data-country-item="{{item}}" >{{item.chineseName}}</text>
+      </scroll-view>
+      <scroll-view  scroll-y="true" class="right">
+        <text class="rightcity {{choiceCity.id == item.id ? 'active-text' : ''}}" wx:for="{{cityList}}" wx:key="index" bindtap='onCityItemClick'  data-city-item="{{item}}" >{{item.chineseName}}</text>
+      </scroll-view>
+    </view>
+  </block>
+
+  <!-- 结果展示模块 -->
+  <block wx:elif="{{searchStatus > 0}}">
+    <!-- 顶部筛选菜单 -->
+    <view class="weui-btn-area">
+      <view class="fytitle">
+        <picker wx:if="{{searchType=='city'}}" bindchange="bindDistrictPickerChange" bindtap='onDistrictPickerClick' value="{{districtPickerIndex}}" range="{{districtNameList}}">
+          <view class="chengqu" style='font-size:26rpx;color:#333'>城区</view>
+        </picker> 
+        <picker bindchange="bindSourcePickerChange" bindtap='onSourcePickerClick' value="{{sourcePickerIndex}}" range="{{sourceTypeList}}">
+          <view class="fangyuan" style='font-size:26rpx;color:#333'>房源</view>
+        </picker>
+
+        <view class="jiage {{isPrice ? 'active-text' : ''}}" bindtap='onPriceClick'>价格</view>
+
+        <view class="shaixuan {{isFilter ? 'active-text' : ''}}" bindtap='onFilterClick'>筛选</view>
+      </view>
+    </view>
+
+    <!-- 条件筛选模块 -->
+    <view wx:if="{{isFilter}}" class="weui-cells" >
+      <view class="weui-cell weui-cellsh">
+        <view class="weui-cell__bd">类型</view>
+        <!-- <view class="weui-cell__ft"> -->
+          <view>
+            <radio-group class="radio-group" bindchange="houseCategoryChange">
+              <label wx:for="{{filterColumns.houseCategory}}" wx:for-index="idx" wx:key="idx" class="radio {{ item===filterColumn.type ? 'active' : ''}}">
+                <radio class="radio-item" value="{{item}}" checked="{{item===filterColumn.type}}"/>{{item}}
+              </label>
+            </radio-group>
+          </view>
+        <!-- </view> -->
+      </view>
+      <view class="weui-cell weui-cellsh">
+        <view class="weui-cell__bd">租期</view>
+        <view class="weui-cell__ft">
+          <radio-group class="radio-group" bindchange="leaseTermChange">
+            <label wx:for="{{filterColumns.leaseTerm}}" wx:for-index="idx"  wx:key="idx" class="radio {{ item===filterColumn.leaseModel ? 'active' : ''}}">
+              <radio class="radio-item" value="{{item}}" checked="{{item===filterColumn.leaseModel}}"/>{{item}}
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view class="weui-cell weui-cellsh">
+        <view class="weui-cell__bd">房型</view>
+        <view class="weui-cell__ft">
+          <radio-group class="radio-group" bindchange="houseTypeChange">
+            <label wx:for="{{filterColumns.houseType}}"  wx:for-index="idx" wx:key="idx" class="radio {{ item===filterColumn.leaseType ? 'active' : ''}}">
+              <radio class="radio-item" value="{{item}}" checked="{{item===filterColumn.leaseType}}"/>{{item}}
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view class="weui-cell weui-cellsh">
+        <view class="weui-cell__bd">卫浴类型</view>
+        <view class="weui-cell__ft">
+          <radio-group class="radio-group" bindchange="bathroomTypeChange">
+            <label wx:for="{{filterColumns.bathroomType}}" wx:for-index="idx" wx:key="idx" class="radio {{ item===filterColumn.bathroomType ? 'active' : ''}}">
+              <radio class="radio-item" value="{{item}}" checked="{{item===filterColumn.bathroomType}}"/>{{item}}
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <button class="weui-btn weui-btnsear" type="primary" bindtap='onFilterConfirmClick'>确定</button>
+    </view>
+    <scroll-view  scroll-y="true" style='margin-top:80rpx;width:94%;margin-left:3%;'>
+      <!-- <navigator url='../house_detail/house_detail?communityId={{item.id}}'> -->
+        <view class="searchxian" wx:for="{{communityList}}" wx:key="index">
+          <view class="searbox" bindtap='onNavToDetailClick' data-community-item="{{item}}">
+            <image src='{{item.coverPicture}}' class="listimg"></image>
+            <block  wx:if="{{item.price<=item.discountPrice}}">
+              <view class="jiagebox">
+                <text class="zdfont">最低每月</text>
+                <text class="zdjiage">€{{item.price}}</text>
+              </view>
+            </block>
+            <block wx:elif="{{item.price>item.discountPrice}}">
+              <view class="jiagebox">
+                <text class="zdfont">特优价格</text>
+                <text class="zdjiage tyjiage">€{{item.discountPrice}}</text>
+              </view>
+            </block>
+            <view class="searbg"></view>
+            <view class="searmiao">
+              <image class="dizhiimg" src='../resource/kind/didian.png'/>
+              <text class="miaofont">{{item.address}}　{{item.advantage}}</text>
+            </view>
+          </view>
+          <view class="listnabox">
+            <text class="shname">{{item.name}}</text>
+            <text class="ddname">{{item.localName}}</text>
+            <view class="jieshaobox">
+              <image class="typeimg" src='../resource/kind/listtu1.png'/>
+              <text class="typejie">{{item.type}}</text>
+              <image class="typeimg" src='../resource/kind/listtu2.png'/>
+              <text class="typejie">{{item.sourceType}}</text>
+              <view class="pxbox">
+                <image src='../resource/kind/px01.png' class="pximg" wx:for="{{item.grade}}" wx:key="idx"/>
+              </view>  
+              <view class="pxdibox">
+                <image src='../resource/kind/px02.png' class="pxdiimg" />
+                <image src='../resource/kind/px02.png' class="pxdiimg" />
+                <image src='../resource/kind/px02.png' class="pxdiimg" />
+                <image src='../resource/kind/px02.png' class="pxdiimg" />
+                <image src='../resource/kind/px02.png' class="pxdiimg" />
+              </view>
+            </view>
+          </view>
+        </view>
+      <!-- </navigator> -->
+    </scroll-view>
+    <view wx:if="{{isLoading}}" class="weui-loadmore">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+    <view wx:if="{{!isLoading && searchStatus == 2 && communityList.length > 0}}" class="weui-loadmore weui-loadmore_line">
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无更多数据</view>
+    </view>
+  </block>
+</view>

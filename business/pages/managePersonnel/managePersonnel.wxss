@@ -1,0 +1,43 @@
+botboxpage{ background:#eee !important;padding-bottom:120rpx;} 
+.botbox{position:fixed;bottom:0;width:100%;height:100rpx;line-height:100rpx;display:flex;  z-index: 300;}
+.botbox button{display:block;width:100%;font-size:32rpx; text-align:center;}
+.botbox button.seven{background:#ffac40;color:#fff;}
+
+.table {
+  border: 0px solid darkgray;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height:80rpx; 
+  align-items: center;
+  border-bottom:2rpx solid #d6d6d6;
+}
+.td {
+    width:40%;
+    justify-content: center;
+    text-align: center;
+    background:#fff;
+    height:80rpx;
+    font-size:24rpx;
+    color:#333;
+    line-height:80rpx;
+}
+.bg-w{
+  background:#fff;
+}
+.bg-g{
+   
+}
+.th {
+  width: 40%;
+  justify-content: center;
+  background: #eee;
+  color: #333;
+  display: flex;
+  height: 80rpx;
+  font-size:24rpx;
+  align-items: center;
+}
+.deletedr{color:#ffad41;}

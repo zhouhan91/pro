@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.catering.mapper.CateringRestaurantMapper">
+
+	<resultMap id="cateringRestaurant" type="com.wemeCity.web.catering.model.CateringRestaurant">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="manager_id" property="managerId" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="local_name" property="localName" jdbcType="VARCHAR" />
+		<result column="parent_category_id" property="parentCategoryId" jdbcType="BIGINT" />
+		<result column="parent_category_code" property="parentCategoryCode" jdbcType="VARCHAR" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="category_code" property="categoryCode" jdbcType="VARCHAR" />
+		<result column="cover_picture" property="coverPicture" jdbcType="VARCHAR" />
+		<result column="country_code" property="countryCode" jdbcType="VARCHAR" />
+		<result column="country_name" property="countryName" jdbcType="VARCHAR" />
+		<result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="district_code" property="districtCode" jdbcType="VARCHAR" />
+		<result column="district_name" property="districtName" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="manager_phone" property="managerPhone" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="notice" property="notice" jdbcType="VARCHAR" />
+		<result column="service_time_code" property="serviceTimeCode" jdbcType="VARCHAR" />
+		<result column="service_time_desc" property="serviceTimeDesc" jdbcType="VARCHAR" />
+		<result column="amount_limit" property="amountLimit" jdbcType="DECIMAL" />
+		<result column="distribution_amount" property="distributionAmount" jdbcType="DECIMAL" />
+		<result column="longitude" property="longitude" jdbcType="DOUBLE" />
+		<result column="latitude" property="latitude" jdbcType="DOUBLE" />
+		<result column="interest_level" property="interestLevel" jdbcType="FLOAT" />
+		<result column="taste_level" property="tasteLevel" jdbcType="FLOAT" />
+		<result column="environment_level" property="environmentLevel" jdbcType="FLOAT" />
+		<result column="service_level" property="serviceLevel" jdbcType="FLOAT" />
+		<result column="like_count" property="likeCount" jdbcType="INTEGER" />
+		<result column="key_words" property="keyWords" jdbcType="VARCHAR" />
+		<result column="recommend_flag" property="recommendFlag" jdbcType="VARCHAR" />
+		<result column="recommend_sort_num" property="recommendSortNum" jdbcType="INTEGER" />
+		<result column="sort_num" property="sortNum" jdbcType="INTEGER" />
+		<result column="distribution_remark" property="distributionRemark" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="pause_flag" property="pauseFlag" jdbcType="VARCHAR" />
+		<result column="open_flag" property="openFlag" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+		<result column="distance" property="distance" jdbcType="DOUBLE" />
+	</resultMap>
+
+	<insert id="insertCateringRestaurant" parameterType="com.wemeCity.web.catering.model.CateringRestaurant">
+		<![CDATA[
+			INSERT INTO CATERING_RESTAURANT (
+				id,
+				manager_id,
+				name,
+				local_name,
+				parent_category_id,
+				parent_category_code,
+				category_id,
+				category_code,
+				cover_picture,
+				country_code,
+				country_name,
+				city_code,
+				city_name,
+				district_code,
+				district_name,
+				address,
+				manager_phone,
+				phone,
+				email,
+				notice,
+				service_time_code,
+				service_time_desc,
+				amount_limit,
+				distribution_amount,
+				longitude,
+				latitude,
+				interest_level,
+				taste_level,
+				environment_level,
+				service_level,
+				like_count,
+				key_words,
+				recommend_flag,
+				recommend_sort_num,
+				distribution_remark,
+				sort_num,
+				status,
+				pause_flag,
+				open_flag,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{managerId},
+				#{name},
+				#{localName},
+				#{parentCategoryId},
+				#{parentCategoryCode},
+				#{categoryId},
+				#{categoryCode},
+				#{coverPicture},
+				#{countryCode},
+				#{countryName},
+				#{cityCode},
+				#{cityName},
+				#{districtCode},
+				#{districtName},
+				#{address},
+				#{managerPhone},
+				#{phone},
+				#{email},
+				#{notice},
+				#{serviceTimeCode},
+				#{serviceTimeDesc},
+				#{amountLimit},
+				#{distributionAmount},
+				#{longitude},
+				#{latitude},
+				#{interestLevel},
+				#{tasteLevel},
+				#{environmentLevel},
+				#{serviceLevel},
+				#{likeCount},
+				#{keyWords},
+				#{recommendFlag},
+				#{recommendSortNum},
+				#{distributionRemark},
+				#{sortNum},
+				#{status},
+				#{pauseFlag},
+				#{openFlag},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM CATERING_RESTAURANT LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteCateringRestaurant" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE catering_restaurant SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateCateringRestaurant" parameterType="map">
+		UPDATE catering_restaurant set modify_time=now()
+		<if test="managerId !=null">
+			, manager_id=#{managerId}
+		</if>
+		<if test="name !=null">
+			, name=#{name}
+		</if>
+		<if test="localName !=null">
+			, local_name=#{localName}
+		</if>
+		<if test="parentCategoryId !=null">
+			, parent_category_id=#{parentCategoryId}
+		</if>
+		<if test="parentCategoryCode !=null">
+			, parent_category_code=#{parentCategoryCode}
+		</if>
+		<if test="categoryId !=null">
+			, category_id=#{categoryId}
+		</if>
+		<if test="categoryCode !=null">
+			, category_code=#{categoryCode}
+		</if>
+		<if test="coverPicture !=null">
+			, cover_picture=#{coverPicture}
+		</if>
+		<if test="countryCode !=null">
+			, country_code=#{countryCode}
+		</if>
+		<if test="countryName !=null">
+			, country_name=#{countryName}
+		</if>
+		<if test="cityCode !=null">
+			, city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			, city_name=#{cityName}
+		</if>
+		<if test="districtCode !=null">
+			, district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			, district_name=#{districtName}
+		</if>
+		<if test="address !=null">
+			, address=#{address}
+		</if>
+		<if test="managerPhone !=null">
+			, manager_phone=#{managerPhone}
+		</if>
+		<if test="phone !=null">
+			, phone=#{phone}
+		</if>
+		<if test="email !=null">
+			, email=#{email}
+		</if>
+		<if test="notice !=null">
+			, notice=#{notice}
+		</if>
+		<if test="serviceTimeCode !=null">
+			, service_time_code=#{serviceTimeCode}
+		</if>
+		<if test="serviceTimeDesc !=null">
+			, service_time_desc=#{serviceTimeDesc}
+		</if>
+		<if test="amountLimit !=null">
+			, amount_limit=#{amountLimit}
+		</if>
+		<if test="distributionAmount !=null">
+			, distribution_amount=#{distributionAmount}
+		</if>
+		<if test="longitude !=null">
+			, longitude=#{longitude}
+		</if>
+		<if test="latitude !=null">
+			, latitude=#{latitude}
+		</if>
+		<if test="interestLevel !=null">
+			, interest_level=#{interestLevel}
+		</if>
+		<if test="tasteLevel !=null">
+			, taste_level=#{tasteLevel}
+		</if>
+		<if test="environmentLevel !=null">
+			, environment_level=#{environmentLevel}
+		</if>
+		<if test="serviceLevel !=null">
+			, service_level=#{serviceLevel}
+		</if>
+		<if test="likeCount !=null">
+			, like_count=#{likeCount}
+		</if>
+		<if test="keyWords !=null">
+			, key_words=#{keyWords}
+		</if>
+		<if test="recommendFlag !=null">
+			, recommend_flag=#{recommendFlag}
+		</if>
+		<if test="recommendSortNum !=null">
+			, recommend_sort_num=#{recommendSortNum}
+		</if>
+		<if test="distributionRemark !=null">
+			, distribution_remark=#{distributionRemark}
+		</if>
+		<if test="sortNum !=null">
+			, sort_num=#{sortNum}
+		</if>
+		<if test="status !=null">
+			, status=#{status}
+		</if>
+		<if test="pauseFlag !=null">
+			, pause_flag=#{pauseFlag}
+		</if>
+		<if test="openFlag !=null">
+			, open_flag=#{openFlag}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readCateringRestaurant" parameterType="java.lang.Long" resultMap="cateringRestaurant">
+		SELECT * FROM catering_restaurant WHERE id=#{id}
+	</select>
+
+	<select id="queryCateringRestaurantList" parameterType="map" resultMap="cateringRestaurant">
+		SELECT * 
+		<if test="myLongitude != null">
+			, (st_distance(point(longitude, latitude),point(#{myLongitude},#{myLatitude}) ) *111195) AS distance
+		</if>
+		<if test="myLongitude == null">
+			, 0 AS distance
+		</if>
+		FROM catering_restaurant WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="managerId !=null">
+			AND manager_id=#{managerId}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="localName !=null">
+			AND local_name=#{localName}
+		</if>
+		<if test="parentCategoryId !=null">
+			AND parent_category_id=#{parentCategoryId}
+		</if>
+		<if test="parentCategoryCode !=null">
+			AND parent_category_code=#{parentCategoryCode}
+		</if>
+		<if test="categoryId !=null">
+			AND category_id=#{categoryId}
+		</if>
+		<if test="categoryCode !=null">
+			AND category_code=#{categoryCode}
+		</if>
+		<if test="coverPicture !=null">
+			AND cover_picture=#{coverPicture}
+		</if>
+		<if test="countryCode !=null">
+			AND country_code=#{countryCode}
+		</if>
+		<if test="countryName !=null">
+			AND country_name=#{countryName}
+		</if>
+		<if test="cityCode !=null">
+			AND city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="cityNameLike !=null">
+			AND city_name like CONCAT('%',#{cityNameLike},'%')
+		</if>
+		<if test="districtCode !=null">
+			AND district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			AND district_name=#{districtName}
+		</if>
+		<if test="districtNameLike !=null">
+			AND district_name like CONCAT('%',#{districtNameLike},'%')
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="managerPhone !=null">
+			AND manager_phone=#{managerPhone}
+		</if>
+		<if test="phone !=null">
+			AND phone=#{phone}
+		</if>
+		<if test="email !=null">
+			AND email=#{email}
+		</if>
+		<if test="notice !=null">
+			AND notice=#{notice}
+		</if>
+		<if test="serviceTimeCode !=null">
+			AND service_time_code=#{serviceTimeCode}
+		</if>
+		<if test="serviceTimeDesc !=null">
+			AND service_time_desc=#{serviceTimeDesc}
+		</if>
+		<if test="amountLimit !=null">
+			AND amount_limit=#{amountLimit}
+		</if>
+		<if test="distributionAmount !=null">
+			AND distribution_amount=#{distributionAmount}
+		</if>
+		<if test="longitude !=null">
+			AND longitude=#{longitude}
+		</if>
+		<if test="latitude !=null">
+			AND latitude=#{latitude}
+		</if>
+		<if test="interestLevel !=null">
+			AND interest_level=#{interestLevel}
+		</if>
+		<if test="tasteLevel !=null">
+			AND taste_level=#{tasteLevel}
+		</if>
+		<if test="environmentLevel !=null">
+			AND environment_level=#{environmentLevel}
+		</if>
+		<if test="serviceLevel !=null">
+			AND service_level=#{serviceLevel}
+		</if>
+		<if test="likeCount !=null">
+			AND like_count=#{likeCount}
+		</if>
+		<if test="keyWords !=null">
+			AND key_words=#{keyWords}
+		</if>
+		<if test="recommendFlag !=null">
+			AND recommend_flag=#{recommendFlag}
+		</if>
+		<if test="recommendSortNum !=null">
+			AND recommend_sort_num=#{recommendSortNum}
+		</if>
+		<if test="distributionRemark !=null">
+			AND distribution_remark=#{distributionRemark}
+		</if>
+		<if test="sortNum !=null">
+			AND sort_num=#{sortNum}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="pauseFlag !=null">
+			AND pause_flag=#{pauseFlag}
+		</if>
+		<if test="openFlag !=null">
+			AND open_flag=#{openFlag}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryCateringRestaurantCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM CATERING_RESTAURANT WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="managerId !=null">
+			AND manager_id=#{managerId}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="localName !=null">
+			AND local_name=#{localName}
+		</if>
+		<if test="parentCategoryId !=null">
+			AND parent_category_id=#{parentCategoryId}
+		</if>
+		<if test="parentCategoryCode !=null">
+			AND parent_category_code=#{parentCategoryCode}
+		</if>
+		<if test="categoryId !=null">
+			AND category_id=#{categoryId}
+		</if>
+		<if test="categoryCode !=null">
+			AND category_code=#{categoryCode}
+		</if>
+		<if test="coverPicture !=null">
+			AND cover_picture=#{coverPicture}
+		</if>
+		<if test="countryCode !=null">
+			AND country_code=#{countryCode}
+		</if>
+		<if test="countryName !=null">
+			AND country_name=#{countryName}
+		</if>
+		<if test="cityCode !=null">
+			AND city_code=#{cityCode}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="districtCode !=null">
+			AND district_code=#{districtCode}
+		</if>
+		<if test="districtName !=null">
+			AND district_name=#{districtName}
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="managerPhone !=null">
+			AND manager_phone=#{managerPhone}
+		</if>
+		<if test="phone !=null">
+			AND phone=#{phone}
+		</if>
+		<if test="email !=null">
+			AND email=#{email}
+		</if>
+		<if test="notice !=null">
+			AND notice=#{notice}
+		</if>
+		<if test="serviceTimeCode !=null">
+			AND service_time_code=#{serviceTimeCode}
+		</if>
+		<if test="serviceTimeDesc !=null">
+			AND service_time_desc=#{serviceTimeDesc}
+		</if>
+		<if test="amountLimit !=null">
+			AND amount_limit=#{amountLimit}
+		</if>
+		<if test="distributionAmount !=null">
+			AND distribution_amount=#{distributionAmount}
+		</if>
+		<if test="longitude !=null">
+			AND longitude=#{longitude}
+		</if>
+		<if test="latitude !=null">
+			AND latitude=#{latitude}
+		</if>
+		<if test="interestLevel !=null">
+			AND interest_level=#{interestLevel}
+		</if>
+		<if test="tasteLevel !=null">
+			AND taste_level=#{tasteLevel}
+		</if>
+		<if test="environmentLevel !=null">
+			AND environment_level=#{environmentLevel}
+		</if>
+		<if test="serviceLevel !=null">
+			AND service_level=#{serviceLevel}
+		</if>
+		<if test="likeCount !=null">
+			AND like_count=#{likeCount}
+		</if>
+		<if test="keyWords !=null">
+			AND key_words=#{keyWords}
+		</if>
+		<if test="recommendFlag !=null">
+			AND recommend_flag=#{recommendFlag}
+		</if>
+		<if test="recommendSortNum !=null">
+			AND recommend_sort_num=#{recommendSortNum}
+		</if>
+		<if test="distributionRemark !=null">
+			AND distribution_remark=#{distributionRemark}
+		</if>
+		<if test="sortNum !=null">
+			AND sort_num=#{sortNum}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="pauseFlag !=null">
+			AND pause_flag=#{pauseFlag}
+		</if>
+		<if test="openFlag !=null">
+			AND open_flag=#{openFlag}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

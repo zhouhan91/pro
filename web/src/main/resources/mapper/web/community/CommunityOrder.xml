@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.community.mapper.CommunityOrderMapper">
+
+	<resultMap id="communityOrder" type="com.wemeCity.web.community.model.CommunityOrder">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="community_id" property="communityId" jdbcType="BIGINT" />
+		<result column="community_name" property="communityName" jdbcType="VARCHAR" />
+		<result column="community_type" property="communityType" jdbcType="VARCHAR" />
+		<result column="community_img" property="communityImg" jdbcType="VARCHAR" />
+		<result column="city_id" property="cityId" jdbcType="BIGINT" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="district_id" property="districtId" jdbcType="BIGINT" />
+		<result column="district_name" property="districtName" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="room_id" property="roomId" jdbcType="BIGINT" />
+		<result column="room_name" property="roomName" jdbcType="VARCHAR" />
+		<result column="room_type" property="roomType" jdbcType="VARCHAR" />
+		<result column="lease_model_key" property="leaseModelKey" jdbcType="VARCHAR" />
+		<result column="lease_month" property="leaseMonth" jdbcType="INTEGER" />
+		<result column="in_date" property="inDate" jdbcType="DATE" />
+		<result column="out_date" property="outDate" jdbcType="DATE" />
+		<result column="real_name" property="realName" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="school" property="school" jdbcType="VARCHAR" />
+		<result column="wechat" property="wechat" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="discount_price" property="discountPrice" jdbcType="DECIMAL" />
+		<result column="first_rent_month" property="firstRentMonth" jdbcType="INTEGER" />
+		<result column="tip_price" property="tipPrice" jdbcType="DECIMAL" />
+		<result column="deposit_price" property="depositPrice" jdbcType="DECIMAL" />
+		<result column="first_deposit_month" property="firstDepositMonth" jdbcType="INTEGER" />
+		<result column="first_amount" property="firstAmount" jdbcType="DECIMAL" />
+		<result column="pay_flag" property="payFlag" jdbcType="VARCHAR" />
+		<result column="tip_flag" property="tipFlag" jdbcType="VARCHAR" />
+		<result column="amount" property="amount" jdbcType="DECIMAL" />
+		<result column="coupon" property="coupon" jdbcType="DECIMAL" />
+		<result column="real_pay" property="realPay" jdbcType="DECIMAL" />
+		<result column="exchange_rate" property="exchangeRate" jdbcType="DECIMAL" />
+		<result column="real_pay_rmb" property="realPayRmb" jdbcType="DECIMAL" />
+		<result column="pay_status" property="payStatus" jdbcType="VARCHAR" />
+		<result column="pay_type" property="payType" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="order_source" property="orderSource" jdbcType="VARCHAR" />
+		<result column="confirm_flag" property="confirmFlag" jdbcType="VARCHAR" />
+		<result column="print_contract_flag" property="printContractFlag" jdbcType="VARCHAR" />
+		<result column="sign_contract_flag" property="signContractFlag" jdbcType="VARCHAR" />
+		<result column="complete_flag" property="completeFlag" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertCommunityOrder" parameterType="com.wemeCity.web.community.model.CommunityOrder">
+		<![CDATA[
+			INSERT INTO COMMUNITY_ORDER (
+				id,
+				code,
+				user_id,
+				community_id,
+				community_name,
+				community_type,
+				community_img,
+				city_id,
+				city_name,
+				district_id,
+				district_name,
+				address,
+				room_id,
+				room_name,
+				room_type,
+				lease_model_key,
+				lease_month,
+				in_date,
+				out_date,
+				real_name,
+				phone,
+				email,
+				school,
+				wechat,
+				price,
+				discount_price,
+				first_rent_month,
+				tip_price,
+				deposit_price,
+				first_deposit_month,
+				first_amount,
+				pay_flag,
+				tip_flag,
+				amount,
+				coupon,
+				real_pay,
+				exchange_rate,
+				real_pay_rmb,
+				pay_status,
+				pay_type,
+				status,
+				order_source,
+				confirm_flag,
+				print_contract_flag,
+				sign_contract_flag,
+				complete_flag,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{code},
+				#{userId},
+				#{communityId},
+				#{communityName},
+				#{communityType},
+				#{communityImg},
+				#{cityId},
+				#{cityName},
+				#{districtId},
+				#{districtName},
+				#{address},
+				#{roomId},
+				#{roomName},
+				#{roomType},
+				#{leaseModelKey},
+				#{leaseMonth},
+				#{inDate},
+				#{outDate},
+				#{realName},
+				#{phone},
+				#{email},
+				#{school},
+				#{wechat},
+				#{price},
+				#{discountPrice},
+				#{firstRentMonth},
+				#{tipPrice},
+				#{depositPrice},
+				#{firstDepositMonth},
+				#{firstAmount},
+				#{payFlag},
+				#{tipFlag},
+				#{amount},
+				#{coupon},
+				#{realPay},
+				#{exchangeRate},
+				#{realPayRmb},
+				#{payStatus},
+				#{payType},
+				#{status},
+				#{orderSource},
+				#{confirmFlag},
+				#{printContractFlag},
+				#{signContractFlag},
+				#{completeFlag},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM COMMUNITY_ORDER LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteCommunityOrder" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE community_order SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateCommunityOrder" parameterType="map">
+		UPDATE community_order set modify_time=now()
+		<if test="code !=null">
+			, code=#{code}
+		</if>
+		<if test="userId !=null">
+			, user_id=#{userId}
+		</if>
+		<if test="communityId !=null">
+			, community_id=#{communityId}
+		</if>
+		<if test="communityName !=null">
+			, community_name=#{communityName}
+		</if>
+		<if test="communityType !=null">
+			, community_type=#{communityType}
+		</if>
+		<if test="communityImg !=null">
+			, community_img=#{communityImg}
+		</if>
+		<if test="cityId !=null">
+			, city_id=#{cityId}
+		</if>
+		<if test="cityName !=null">
+			, city_name=#{cityName}
+		</if>
+		<if test="districtId !=null">
+			, district_id=#{districtId}
+		</if>
+		<if test="districtName !=null">
+			, district_name=#{districtName}
+		</if>
+		<if test="address !=null">
+			, address=#{address}
+		</if>
+		<if test="roomId !=null">
+			, room_id=#{roomId}
+		</if>
+		<if test="roomName !=null">
+			, room_name=#{roomName}
+		</if>
+		<if test="roomType !=null">
+			, room_type=#{roomType}
+		</if>
+		<if test="leaseModelKey !=null">
+			, lease_model_key=#{leaseModelKey}
+		</if>
+		<if test="leaseMonth !=null">
+			, lease_month=#{leaseMonth}
+		</if>
+		<if test="inDate !=null">
+			, in_date=#{inDate}
+		</if>
+		<if test="outDate !=null">
+			, out_date=#{outDate}
+		</if>
+		<if test="realName !=null">
+			, real_name=#{realName}
+		</if>
+		<if test="phone !=null">
+			, phone=#{phone}
+		</if>
+		<if test="email !=null">
+			, email=#{email}
+		</if>
+		<if test="school !=null">
+			, school=#{school}
+		</if>
+		<if test="wechat !=null">
+			, wechat=#{wechat}
+		</if>
+		<if test="price !=null">
+			, price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			, discount_price=#{discountPrice}
+		</if>
+		<if test="firstRentMonth !=null">
+			, first_rent_month=#{firstRentMonth}
+		</if>
+		<if test="tipPrice !=null">
+			, tip_price=#{tipPrice}
+		</if>
+		<if test="depositPrice !=null">
+			, deposit_price=#{depositPrice}
+		</if>
+		<if test="firstDepositMonth !=null">
+			, first_deposit_month=#{firstDepositMonth}
+		</if>
+		<if test="firstAmount !=null">
+			, first_amount=#{firstAmount}
+		</if>
+		<if test="payFlag !=null">
+			, pay_flag=#{payFlag}
+		</if>
+		<if test="tipFlag !=null">
+			, tip_flag=#{tipFlag}
+		</if>
+		<if test="amount !=null">
+			, amount=#{amount}
+		</if>
+		<if test="coupon !=null">
+			, coupon=#{coupon}
+		</if>
+		<if test="realPay !=null">
+			, real_pay=#{realPay}
+		</if>
+		<if test="exchangeRate !=null">
+			, exchange_rate=#{exchangeRate}
+		</if>
+		<if test="realPayRmb !=null">
+			, real_pay_rmb=#{realPayRmb}
+		</if>
+		<if test="payStatus !=null">
+			, pay_status=#{payStatus}
+		</if>
+		<if test="payType !=null">
+			, pay_type=#{payType}
+		</if>
+		<if test="status !=null">
+			, status=#{status}
+		</if>
+		<if test="orderSource !=null">
+			, order_source=#{orderSource}
+		</if>
+		<if test="confirmFlag !=null">
+			, confirm_flag=#{confirmFlag}
+		</if>
+		<if test="printContractFlag !=null">
+			, print_contract_flag=#{printContractFlag}
+		</if>
+		<if test="signContractFlag !=null">
+			, sign_contract_flag=#{signContractFlag}
+		</if>
+		<if test="completeFlag !=null">
+			, complete_flag=#{completeFlag}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readCommunityOrder" parameterType="java.lang.Long" resultMap="communityOrder">
+		SELECT * FROM community_order WHERE id=#{id}
+	</select>
+
+	<select id="queryCommunityOrderList" parameterType="map" resultMap="communityOrder">
+		SELECT * FROM community_order WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="code !=null">
+			AND code=#{code}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="communityId !=null">
+			AND community_id=#{communityId}
+		</if>
+		<if test="communityName !=null">
+			AND community_name=#{communityName}
+		</if>
+		<if test="communityType !=null">
+			AND community_type=#{communityType}
+		</if>
+		<if test="communityImg !=null">
+			AND community_img=#{communityImg}
+		</if>
+		<if test="cityId !=null">
+			AND city_id=#{cityId}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="districtId !=null">
+			AND district_id=#{districtId}
+		</if>
+		<if test="districtName !=null">
+			AND district_name=#{districtName}
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="roomId !=null">
+			AND room_id=#{roomId}
+		</if>
+		<if test="roomName !=null">
+			AND room_name=#{roomName}
+		</if>
+		<if test="roomType !=null">
+			AND room_type=#{roomType}
+		</if>
+		<if test="leaseModelKey !=null">
+			AND lease_model_key=#{leaseModelKey}
+		</if>
+		<if test="leaseMonth !=null">
+			AND lease_month=#{leaseMonth}
+		</if>
+		<if test="inDate !=null">
+			AND in_date=#{inDate}
+		</if>
+		<if test="outDate !=null">
+			AND out_date=#{outDate}
+		</if>
+		<if test="realName !=null">
+			AND real_name=#{realName}
+		</if>
+		<if test="phone !=null">
+			AND phone=#{phone}
+		</if>
+		<if test="email !=null">
+			AND email=#{email}
+		</if>
+		<if test="school !=null">
+			AND school=#{school}
+		</if>
+		<if test="wechat !=null">
+			AND wechat=#{wechat}
+		</if>
+		<if test="price !=null">
+			AND price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			AND discount_price=#{discountPrice}
+		</if>
+		<if test="firstRentMonth !=null">
+			AND first_rent_month=#{firstRentMonth}
+		</if>
+		<if test="tipPrice !=null">
+			AND tip_price=#{tipPrice}
+		</if>
+		<if test="depositPrice !=null">
+			AND deposit_price=#{depositPrice}
+		</if>
+		<if test="firstDepositMonth !=null">
+			AND first_deposit_month=#{firstDepositMonth}
+		</if>
+		<if test="firstAmount !=null">
+			AND first_amount=#{firstAmount}
+		</if>
+		<if test="payFlag !=null">
+			AND pay_flag=#{payFlag}
+		</if>
+		<if test="tipFlag !=null">
+			AND tip_flag=#{tipFlag}
+		</if>
+		<if test="amount !=null">
+			AND amount=#{amount}
+		</if>
+		<if test="coupon !=null">
+			AND coupon=#{coupon}
+		</if>
+		<if test="realPay !=null">
+			AND real_pay=#{realPay}
+		</if>
+		<if test="exchangeRate !=null">
+			AND exchange_rate=#{exchangeRate}
+		</if>
+		<if test="realPayRmb !=null">
+			AND real_pay_rmb=#{realPayRmb}
+		</if>
+		<if test="payStatus !=null">
+			AND pay_status=#{payStatus}
+		</if>
+		<if test="payType !=null">
+			AND pay_type=#{payType}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="orderSource !=null">
+			AND order_source=#{orderSource}
+		</if>
+		<if test="confirmFlag !=null">
+			AND confirm_flag=#{confirmFlag}
+		</if>
+		<if test="printContractFlag !=null">
+			AND print_contract_flag=#{printContractFlag}
+		</if>
+		<if test="signContractFlag !=null">
+			AND sign_contract_flag=#{signContractFlag}
+		</if>
+		<if test="completeFlag !=null">
+			AND complete_flag=#{completeFlag}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryCommunityOrderCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM COMMUNITY_ORDER WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="code !=null">
+			AND code=#{code}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="communityId !=null">
+			AND community_id=#{communityId}
+		</if>
+		<if test="communityName !=null">
+			AND community_name=#{communityName}
+		</if>
+		<if test="communityType !=null">
+			AND community_type=#{communityType}
+		</if>
+		<if test="communityImg !=null">
+			AND community_img=#{communityImg}
+		</if>
+		<if test="cityId !=null">
+			AND city_id=#{cityId}
+		</if>
+		<if test="cityName !=null">
+			AND city_name=#{cityName}
+		</if>
+		<if test="districtId !=null">
+			AND district_id=#{districtId}
+		</if>
+		<if test="districtName !=null">
+			AND district_name=#{districtName}
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="roomId !=null">
+			AND room_id=#{roomId}
+		</if>
+		<if test="roomName !=null">
+			AND room_name=#{roomName}
+		</if>
+		<if test="roomType !=null">
+			AND room_type=#{roomType}
+		</if>
+		<if test="leaseModelKey !=null">
+			AND lease_model_key=#{leaseModelKey}
+		</if>
+		<if test="leaseMonth !=null">
+			AND lease_month=#{leaseMonth}
+		</if>
+		<if test="inDate !=null">
+			AND in_date=#{inDate}
+		</if>
+		<if test="outDate !=null">
+			AND out_date=#{outDate}
+		</if>
+		<if test="realName !=null">
+			AND real_name=#{realName}
+		</if>
+		<if test="phone !=null">
+			AND phone=#{phone}
+		</if>
+		<if test="email !=null">
+			AND email=#{email}
+		</if>
+		<if test="school !=null">
+			AND school=#{school}
+		</if>
+		<if test="wechat !=null">
+			AND wechat=#{wechat}
+		</if>
+		<if test="price !=null">
+			AND price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			AND discount_price=#{discountPrice}
+		</if>
+		<if test="firstRentMonth !=null">
+			AND first_rent_month=#{firstRentMonth}
+		</if>
+		<if test="tipPrice !=null">
+			AND tip_price=#{tipPrice}
+		</if>
+		<if test="depositPrice !=null">
+			AND deposit_price=#{depositPrice}
+		</if>
+		<if test="firstDepositMonth !=null">
+			AND first_deposit_month=#{firstDepositMonth}
+		</if>
+		<if test="firstAmount !=null">
+			AND first_amount=#{firstAmount}
+		</if>
+		<if test="payFlag !=null">
+			AND pay_flag=#{payFlag}
+		</if>
+		<if test="tipFlag !=null">
+			AND tip_flag=#{tipFlag}
+		</if>
+		<if test="amount !=null">
+			AND amount=#{amount}
+		</if>
+		<if test="coupon !=null">
+			AND coupon=#{coupon}
+		</if>
+		<if test="realPay !=null">
+			AND real_pay=#{realPay}
+		</if>
+		<if test="exchangeRate !=null">
+			AND exchange_rate=#{exchangeRate}
+		</if>
+		<if test="realPayRmb !=null">
+			AND real_pay_rmb=#{realPayRmb}
+		</if>
+		<if test="payStatus !=null">
+			AND pay_status=#{payStatus}
+		</if>
+		<if test="payType !=null">
+			AND pay_type=#{payType}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="orderSource !=null">
+			AND order_source=#{orderSource}
+		</if>
+		<if test="confirmFlag !=null">
+			AND confirm_flag=#{confirmFlag}
+		</if>
+		<if test="printContractFlag !=null">
+			AND print_contract_flag=#{printContractFlag}
+		</if>
+		<if test="signContractFlag !=null">
+			AND sign_contract_flag=#{signContractFlag}
+		</if>
+		<if test="completeFlag !=null">
+			AND complete_flag=#{completeFlag}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

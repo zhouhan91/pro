@@ -1,0 +1,70 @@
+<wxs module="newUtils">
+  var diffDate = function (dateStr){
+    var cDate = getDate();
+    var eDate = getDate(dateStr);
+    var diffTimes = (cDate.getTime() - eDate.getTime()) / 1000;
+    var diffDays = diffTimes / 3600 / 24;
+    var ctime = dateStr;
+    if (diffTimes < 3600) {
+      ctime = abs(parseInt(diffTimes / 60)) + '分钟';
+    } else if (diffDays < 1) {
+      ctime = parseInt(diffTimes / 3600) + '小时';
+    } else {
+      ctime = parseInt(diffDays) + '天';
+    }
+    return ctime;
+  };
+
+  module.exports.diffDate = diffDate;
+</wxs>
+
+<scroll-view class="newsnavi" scroll-x style='height:86rpx;' >
+  <block wx:for='{{subNavList}}' wx:key='{{index}}' >
+    <view  class="{{index==subNavIndex?'active':''}}"  data-sub-nav-index='{{index}}' data-sub-nav-code='{{item.code}}' data-nav-code='{{item.parentCode}}' bindtap='onSubNavItemClick'>{{item.name}}</view>
+  </block>
+</scroll-view>
+ 
+<view style='padding-bottom:20rpx;'>
+          <navigator wx:for='{{subNavNewsList[subNavIndex]}}' wx:if='{{item.status==2}}'  wx:key="index"  url='../newdetail/newdetail?newsId={{item.id}}&newsTitle={{item.title}}' class='zlbox'>
+              <view class='zlleft'>
+              <image src='{{item.coverPicture}}' class='zlleft' />
+              </view>
+              <view class='zlright'>
+                  <text class='zltitle'>{{item.title}}</text>
+                  <view class='zlbtcontent'>
+                      <view class='zlreadnb'>
+                        <image src='../resource/kind/readnb.png' />
+                        <text>{{item.readCount}}</text>
+                      </view>
+                      <text class='zlchu'>{{item.author}}</text>
+                  </view>
+              </view>
+          </navigator>
+</view>
+ 
+
+<view wx:if="{{isLoading}}" class="weui-loadmore">
+  <view class="weui-loading"></view>
+  <view class="weui-loadmore__tips">正在加载</view>
+</view>
+<view wx:if="{{!isLoading && searchStatus == 2 && subNavNewsList[subNavIndex].length > 10}}" class="weui-loadmore weui-loadmore_line">
+  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无更多数据</view>
+</view>
+<!-- <view class="newslistbox">
+   <image  src='../resou        sdasadasnew   <view class="newbot"> 
+      <view class="name">凤凰网</view>
+      <view class="pl">2评论</view>
+      <view class="time">21分钟</view>
+   </view>
+</view>
+<view class="newslistbox">
+   <image  src='../resource/kind/news1.jpg'/>
+   <text class="newtitle">这个曾在酒吧卖酒的女人 如今把欧洲扛在肩上</text>
+   <text class="newcent">马来西亚性感女孩,她是既优雅而又美艳的混合体马来西亚性感女孩,她是既
+优雅而又美艳的混合体</text>
+   <view class="newbot"> 
+      <view class="name">凤凰网</view>
+      <view class="pl">2评论</view>
+      <view class="time">21分钟</view>
+   </view>
+</view> -->

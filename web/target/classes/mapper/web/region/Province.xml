@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.region.mapper.ProvinceMapper">
+
+	<resultMap id="province" type="com.wemeCity.web.region.model.Province">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="chinese_name" property="chineseName" jdbcType="VARCHAR" />
+		<result column="english_name" property="englishName" jdbcType="VARCHAR" />
+		<result column="country_id" property="countryId" jdbcType="BIGINT" />
+		<result column="image" property="image" jdbcType="VARCHAR" />
+		<result column="area_code" property="areaCode" jdbcType="VARCHAR" />
+		<result column="post_code" property="postCode" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertProvince" parameterType="com.wemeCity.web.region.model.Province">
+		<![CDATA[
+			INSERT INTO PROVINCE (
+				id,
+				code,
+				name,
+				chinese_name,
+				english_name,
+				country_id,
+				image,
+				area_code,
+				post_code,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{code},
+				#{name},
+				#{chineseName},
+				#{englishName},
+				#{countryId},
+				#{image},
+				#{areaCode},
+				#{postCode},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM PROVINCE LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteProvince" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE province SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateProvince" parameterType="map">
+		UPDATE province set modify_time=now()
+		<if test="code !=null">
+			, code=#{code}
+		</if>
+		<if test="name !=null">
+			, name=#{name}
+		</if>
+		<if test="chineseName !=null">
+			, chinese_name=#{chineseName}
+		</if>
+		<if test="englishName !=null">
+			, english_name=#{englishName}
+		</if>
+		<if test="countryId !=null">
+			, country_id=#{countryId}
+		</if>
+		<if test="image !=null">
+			, image=#{image}
+		</if>
+		<if test="areaCode !=null">
+			, area_code=#{areaCode}
+		</if>
+		<if test="postCode !=null">
+			, post_code=#{postCode}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readProvince" parameterType="java.lang.Long" resultMap="province">
+		SELECT * FROM province WHERE id=#{id}
+	</select>
+
+	<select id="queryProvinceList" parameterType="map" resultMap="province">
+		SELECT * FROM province WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="code !=null">
+			AND code=#{code}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="chineseName !=null">
+			AND chinese_name=#{chineseName}
+		</if>
+		<if test="englishName !=null">
+			AND english_name=#{englishName}
+		</if>
+		<if test="countryId !=null">
+			AND country_id=#{countryId}
+		</if>
+		<if test="image !=null">
+			AND image=#{image}
+		</if>
+		<if test="areaCode !=null">
+			AND area_code=#{areaCode}
+		</if>
+		<if test="postCode !=null">
+			AND post_code=#{postCode}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryProvinceCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM PROVINCE WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="code !=null">
+			AND code=#{code}
+		</if>
+		<if test="name !=null">
+			AND name=#{name}
+		</if>
+		<if test="chineseName !=null">
+			AND chinese_name=#{chineseName}
+		</if>
+		<if test="englishName !=null">
+			AND english_name=#{englishName}
+		</if>
+		<if test="countryId !=null">
+			AND country_id=#{countryId}
+		</if>
+		<if test="image !=null">
+			AND image=#{image}
+		</if>
+		<if test="areaCode !=null">
+			AND area_code=#{areaCode}
+		</if>
+		<if test="postCode !=null">
+			AND post_code=#{postCode}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

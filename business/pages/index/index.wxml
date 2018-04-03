@@ -1,0 +1,74 @@
+          <!--index.wxml-->
+<view class="indextopbox">
+    <image src='{{restInfo.coverPicture ? restInfo.coverPicture : "../images/dianputop.jpg"}}'></image>
+    <text class='dptitle'>{{restInfo.name ? restInfo.name : '--'}}</text>
+    <text class='dptype'>{{todayOrderStatInfo.status == '20' ? '已审核' : '待审核'}}</text>
+</view>
+<view class='shujubox'> 
+    <view class='pfbox'>
+        <text class='nubmer'>{{todayOrderStatInfo.orderCount ? todayOrderStatInfo.orderCount : '-'}}个</text>
+        <text>订单总数</text>
+    </view>
+    <view class='pfbox'>
+        <text class='nubmer'>{{todayOrderStatInfo.orderCompleteCount ? todayOrderStatInfo.orderCompleteCount : '-'}}个</text>
+        <text>完成订单</text>
+    </view>
+    <view class='pfbox'>
+        <text class='nubmer'>€{{todayOrderStatInfo.amount ? todayOrderStatInfo.amount : '-'}}</text>
+        <text>订单总额</text>
+    </view>
+    <view class='pfbox'>
+        <text class='nubmer'>€{{todayOrderStatInfo.income ? todayOrderStatInfo.income : '-'}}</text>
+        <text>收入</text>
+    </view>
+</view>
+<view class='dingdanshu'>
+    <view class='left;' bindtap='onOrderPaidClick'>
+        <text class='textop'>{{todayOrderStatInfo.orderPaidCount ? todayOrderStatInfo.orderPaidCount : '-'}}<text style='display:inline;'>个</text></text>
+        <text>待确认订单数</text>
+    </view>
+    <view class='right' bindtap='onOrderConfirmClick'>
+        <text class='textop'>{{todayOrderStatInfo.orderConfirmedCount ? todayOrderStatInfo.orderConfirmedCount : '-'}}<text style='display:inline;'>个</text></text>
+        <text>待配送订单数</text>
+    </view>
+</view>
+<view class='glbox'>
+    <view class='gllist' bindtap='onManageFondClick'>
+        <image src='../images/tblist02.png'></image>
+        <text>菜品管理</text>
+    </view>
+    <view class='gllist' bindtap='onManageActivityClick'>
+        <image src='../images/tblist07.png'></image>
+        <text>活动管理</text>
+    </view>
+    <view class='gllist' bindtap='onManageOrderClick'>
+        <image src='../images/tblist05.png'></image>
+        <text>订单管理</text>
+    </view>
+    <view class='gllist' bindtap='onEmplaceClick'>
+        <image src='../images/tblist04.png'></image>
+        <text>店铺设置</text>
+    </view>
+    <view class='gllist' bindtap='onManageDataClick'>
+        <image src='../images/tblist08.png'></image>
+        <text>经营统计</text>
+    </view>
+    <view class='gllist' bindtap='onDistributionClick'>
+        <image src='../images/tblist09.png'></image>
+        <text>配送设置</text>
+    </view>
+    <!--
+    <view class='gllist' bindtap='onOrderDetailClick'>
+        <image src='../images/tblist06.png'></image>
+        <text>订单明细</text>
+    </view>
+    --> 
+    <view class='gllist' bindtap='onNewsClick'>
+        <image src='../images/tblist03.png'></image>
+        <text>店铺公告</text>
+    </view>
+    <view class='gllist' bindtap='onManagePersonnelClick'>
+        <image src='../images/tblist09.png'></image>
+        <text>配送人员管理</text>
+    </view>
+</view>

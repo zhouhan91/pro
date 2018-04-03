@@ -1,0 +1,9 @@
+<form bindsubmit='onSaveNoticeClick'>
+  <view class='shurubox'>
+    <textarea name="" value='{{notice}}' placeholder='请输入店铺公告'  placeholder-style="color:#ccc" bindblur='onNoticeBlur'></textarea >
+    <view style='font-size:24rpx;color:#666;'>此处为店铺对用户发布的公告，请输入{{noticeLength}}字以内，若发布新公告，请清除原公告重新输入发布！</view>
+  </view>
+  <view class='botbox'>
+    <button class='seven' form-type='submit'>发布</button>
+  </view>
+</form>

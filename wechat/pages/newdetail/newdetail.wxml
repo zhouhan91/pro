@@ -1,0 +1,126 @@
+<import src="../../wxParse/wxParse.wxml"/>
+<wxs module="newsDetailUtils">
+  var dateFormat = function(dateStr){
+    var d = getDate(dateStr);
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    var hour = d.getHours();
+    var min = d.getMinutes();
+    return month + "-" + day + " " + hour + ":" + min;
+  };
+
+  var diffDate = function (dateStr){
+    var cDate = getDate();
+    var eDate = getDate(dateStr);
+    var diffTimes = (cDate.getTime() - eDate.getTime()) / 1000;
+    var diffDays = diffTimes / 3600 / 24;
+    var ctime = dateStr;
+    if (diffTimes < 3600) {
+      ctime = Math.abs(parseInt(diffTimes / 60)) + '分钟前';
+    } else if (diffDays < 1) {
+      ctime = parseInt(diffTimes / 3600) + '小时前';
+    } else {
+      ctime = parseInt(diffDays) + '天前';
+    }
+    return ctime;
+  };
+
+  var subContent = function(content, len){
+    return content.substring(0, len);
+  };
+
+  module.exports.subContent = subContent;
+  module.exports.diffDate = diffDate;
+  module.exports.dateFormat = dateFormat;
+</wxs>
+
+<view class="newsdetaitop">
+    <text class="newtitle">{{newsDetailInfo.title}}</text>
+    <view class="newfubox">
+        <text class="chu">{{newsDetailInfo.author}}</text>
+        <text class="time">{{newsDetailInfo.createTime}}</text>
+        <view class="dianzan">
+          <text>{{newsDetailInfo.likeCount}}</text>
+          <image src='../resource/kind/dz.png'></image>
+        </view>
+    </view>
+</view>
+
+<view class="news_page">
+  <view class="newscent">
+     <template is="wxParse" data="{{wxParseData:detail.nodes}}"/>
+  </view>
+  <view class="newdetailtitle">
+    用户热评
+  </view>
+  <view class="newsplbox">
+    <block wx:for="{{commentStatus == 1 && commentList}}" wx:key="{{index}}" >
+      <view wx:if="{{index < commentShowNum}}" class="plbox" data-comment-item="{{item}}" bindtap='onCommentDetailClick'>
+          <view class="plcenttop">
+              <view><image src='{{item.portrait}}'></image></view>
+              <text>{{item.nickname}}</text>
+          </view>
+          <text class="plcontent">
+            {{item.isFullText ? item.content : newsDetailUtils.subContent(item.content, commentShowLen)}}
+          </text>
+           <!-- {{item.content.length}}/{{commentShowLen}}  -->
+          <text wx:if="{{item.content.length > commentShowLen}}" class="more" data-comment-item='{{item}}' data-comment-index='{{index}}' catchtap='onFulltextClick'>{{item.isFullText ? '收起' : '全文'}}</text>
+          <view class="plbot">
+            <text>{{item.replyCount}}回复</text>
+            <text>{{item.likeCount}}赞</text>
+            <text>{{newsDetailUtils.diffDate(item.createTime)}}</text>
+          </view>
+      </view>
+    </block>
+    <view wx:if="{{commentStatus == 2}}" class="weui-loadmore">
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无评论</view>
+    </view>
+    <view wx:if="{{commentList.length > 0}}" class="plgong" bindtap='onCommentListClick'>
+      <text>共{{commentTotal}}条评论</text>
+      <image src='../resource/kind/jiantou2.png'></image>
+    </view>
+  </view>
+  <view class="newdetailtitle">
+    延展阅读
+  </view>
+  <view class="yuedubox">
+    <block wx:for="{{extNewsList}}" wx:key="index">
+      <navigator class="yueduwai" url="../newdetail/newdetail?newsId={{item.id}}">
+          <view class='left'>
+              <text class="waititle">{{item.title}}</text>
+              <view class="yanding">
+                <text style='float:left;'>{{item.author}}</text>
+                <text style='float:right'>{{item.commentCount}}评论</text>
+              </view>
+          </view>
+          <view class='right'>
+              <image src='{{item.coverPicture}}'></image>
+          </view>
+      </navigator>
+    </block>
+    <view wx:if="{{extNewsStatus == 2}}" class="weui-loadmore">
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无扩展阅读</view>
+    </view>
+  </view>
+</view>
+
+<block wx:if="{{newbottom}}">
+<view class="newsbottom">
+    <image src='../resource/kind/bianxie.png' class='xie'></image>
+    <text bindtap="hidethis">发表评论</text>
+    <view class='bottom_menu_left_item'>
+      <button open-type="share" style='position:absolute;right:0;height:100%;width:43rpx;opacity:0;'></button>
+      <image src='../resource/kind/zhuanfa.png' class="zhuan"></image>
+    </view>
+
+    <image src='../resource/kind/{{newsMarkLikeInfo.marked == "Y"? "fydetil15":"fydetil14"}}.png' class="shou" bindtap='onMarkedClick'></image>
+    <image src='../resource/kind/{{newsMarkLikeInfo.liked == "Y"? "dz2":"dz"}}.png' class="dz" bindtap='onLikedClick'></image>
+</view>
+</block>
+<block wx:elif="{{!newbottom}}">
+  <form bindsubmit="onPublishComment" class="newsbottom fabiaobox">
+    <image src='../resource/kind/bianxie.png' class='xie'></image>
+    <input focus="{{fabiao_focus}}" name="content" type='text' maxlength="{{commentMaxLen}}" placeholder='发表评论' class="fabiao" bindblur="hidfabu"></input>
+    <button class="fabu" formType="submit">发布</button>
+  </form>
+</block>

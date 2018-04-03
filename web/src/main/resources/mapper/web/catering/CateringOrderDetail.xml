@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.catering.mapper.CateringOrderDetailMapper">
+
+	<resultMap id="cateringOrderDetail" type="com.wemeCity.web.catering.model.CateringOrderDetail">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="order_id" property="orderId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+		<result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="discount_price" property="discountPrice" jdbcType="DECIMAL" />
+		<result column="count" property="count" jdbcType="INTEGER" />
+		<result column="amount" property="amount" jdbcType="DECIMAL" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertCateringOrderDetail" parameterType="com.wemeCity.web.catering.model.CateringOrderDetail">
+		<![CDATA[
+			INSERT INTO CATERING_ORDER_DETAIL (
+				id,
+				order_id,
+				user_id,
+				goods_id,
+				goods_name,
+				price,
+				discount_price,
+				count,
+				amount,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{orderId},
+				#{userId},
+				#{goodsId},
+				#{goodsName},
+				#{price},
+				#{discountPrice},
+				#{count},
+				#{amount},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM CATERING_ORDER_DETAIL LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteCateringOrderDetail" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE catering_order_detail SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateCateringOrderDetail" parameterType="map">
+		UPDATE catering_order_detail set modify_time=now()
+		<if test="orderId !=null">
+			, order_id=#{orderId}
+		</if>
+		<if test="userId !=null">
+			, user_id=#{userId}
+		</if>
+		<if test="goodsId !=null">
+			, goods_id=#{goodsId}
+		</if>
+		<if test="goodsName !=null">
+			, goods_name=#{goodsName}
+		</if>
+		<if test="price !=null">
+			, price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			, discount_price=#{discountPrice}
+		</if>
+		<if test="count !=null">
+			, count=#{count}
+		</if>
+		<if test="amount !=null">
+			, amount=#{amount}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readCateringOrderDetail" parameterType="java.lang.Long" resultMap="cateringOrderDetail">
+		SELECT * FROM catering_order_detail WHERE id=#{id}
+	</select>
+
+	<select id="queryCateringOrderDetailList" parameterType="map" resultMap="cateringOrderDetail">
+		SELECT * FROM catering_order_detail WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="orderId !=null">
+			AND order_id=#{orderId}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="goodsId !=null">
+			AND goods_id=#{goodsId}
+		</if>
+		<if test="goodsName !=null">
+			AND goods_name=#{goodsName}
+		</if>
+		<if test="price !=null">
+			AND price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			AND discount_price=#{discountPrice}
+		</if>
+		<if test="count !=null">
+			AND count=#{count}
+		</if>
+		<if test="amount !=null">
+			AND amount=#{amount}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryCateringOrderDetailCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM CATERING_ORDER_DETAIL WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="orderId !=null">
+			AND order_id=#{orderId}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="goodsId !=null">
+			AND goods_id=#{goodsId}
+		</if>
+		<if test="goodsName !=null">
+			AND goods_name=#{goodsName}
+		</if>
+		<if test="price !=null">
+			AND price=#{price}
+		</if>
+		<if test="discountPrice !=null">
+			AND discount_price=#{discountPrice}
+		</if>
+		<if test="count !=null">
+			AND count=#{count}
+		</if>
+		<if test="amount !=null">
+			AND amount=#{amount}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="dateStart !=null">
+			AND create_time<![CDATA[>=]]>#{dateStart}
+		</if>
+		<if test="dateEnd !=null">
+			AND create_time<![CDATA[<]]>#{dateEnd}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+	
+	<resultMap id="cateringGoodsSalesVolume" type="com.wemeCity.web.catering.dto.CateringGoodsSalesVolume">
+		<result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+		<result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+		<result column="sales_volume" property="salesVolume" jdbcType="INTEGER" />
+	</resultMap>
+	<select id="queryCateringGoodsSalesVolume" parameterType="map" resultMap="cateringGoodsSalesVolume">
+		select b.id 'goods_id',b.name 'goods_name',a.sales_volume from 
+		(select goods_id, max(goods_name) 'goods_name', count(*) 'sales_volume' from catering_order_detail 
+		 where is_deleted='N' 
+		 and order_id in(
+		  select id from catering_order 
+		   where restaurant_id = #{restaurantId} 
+		   and is_deleted = 'N' 
+		   and pay_status=3 
+		   and status!='80'
+		   and create_time BETWEEN #{timeStart} and #{timeEnd}
+		) group by goods_id ) a right join catering_goods b on a.goods_id= b.id where b.restaurant_id=#{restaurantId} 
+		order by a.sales_volume desc
+	</select>
+
+</mapper>

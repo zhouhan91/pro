@@ -1,0 +1,18 @@
+.ordbox{width:95%;margin:0 auto;border:2rpx solid #eee; border-radius:10rpx; overflow:hidden; margin-bottom:20rpx;}
+.ortop{ background:#fd9f39;height:120rpx; overflow:hidden;zoom:1;}
+.ortop .left{float:left;color:#fff;padding-left:20rpx;padding-top:15rpx;}
+.ortop .left .leftmenu{display:block;font-size:32rpx; margin-bottom:0rpx;}
+.peibox{overflow:hidden;zoom:1;}
+.ortop .left .peiinfo{font-size:20rpx; margin-right:20rpx; display:block;float:left;}
+.ortop .right{float:right;margin-top:35rpx;margin-right:20rpx;}
+.ortop .right .an{ font-size:26rpx;color:#333;background:#fff;padding:19rpx 24rpx; border-radius:5rpx;margin-left:20rpx;}
+.orderadds text{font-size:28rpx;color:#333; width:90%;margin:0 auto; display:block; height:70rpx;line-height:70rpx; border-bottom:2rpx solid #eee; margin-bottom:15rpx;}
+.foodlist{border-bottom:2rpx solid #eee; margin-bottom:15rpx;width:90%;margin:0 auto;}
+.foodbox{ overflow:hidden;zoom:1;}
+.foodbox text{font-size:26rpx;color:#333; height:70rpx; line-height:70rpx;}
+.foodbox text.left{float:left;width:60%; text-align:left;}
+.foodbox text.center{float:left;width:20%; text-align:center;}
+.foodbox text.right{float:left;width:20%; text-align:right;}
+.jisuan{overflow:hidden;zoom:1; width:90%;margin:0 auto; height:80rpx;line-height:80rpx;}
+.jisuan .left{ float:left; font-size:26rpx;}
+.jisuan .right{float:right; font-size:32rpx; color:#f59a24;}

@@ -1,0 +1,34 @@
+<!--pages/foodaddress/foodaddress.wxml-->
+<view class="myToast" hidden="{{nullHouse}}">建议选择老板推荐地址</view>
+<form bindsubmit='addressFormSubmit'>
+  <view class='pstitle'>配送联系人:</view>
+  <input class='pstext' name="name" value="{{cateringContactsList[personIndex].name}}" placeholder="请输入联系人" ></input>
+  <view class='pstitle'>配送联系电话:</view>
+  <input class='pstext' name="phone" value="{{cateringContactsList[personIndex].phone}}" placeholder="请输入联系电话" ></input>
+  <view class='pstitle'>配送地址:</view>
+  <input class='pstext' name="address" value="{{cateringContactsList[personIndex].address}}" placeholder="请输入配送地址" ></input>
+  <view class='pstitle'>指定隔日配送时间:</view>
+  <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+    <view class="picker" bindtap="placeholder" data-key="请选择明天配送时间，今天配送可不填" class='pstext active' style='color:#666;'>
+      {{time}}
+    </view>
+  </picker>
+  <view class='pstitle'>历史收货人:</view>
+  <view>
+    <radio-group class="radio-group" bindchange="radioContactsChange">
+      <label class="radio" wx:for="{{cateringContactsList}}" wx:key="index">
+        <radio value="{{index}}" checked='{{index == personIndex}}' color='#ffad41' style='transform:scale(.6);'/>{{item.name}} - {{item.address}}
+      </label>
+    </radio-group>
+  </view>
+  <view class='pstitle'>老板推荐配送地址:</view>
+  <view>
+    <view class='tishi'>{{distributionRemark}}</view>
+    <radio-group class="radio-group" bindchange="radioLocationChange">
+      <label class="radio" wx:for="{{restLocList}}" wx:key="index">
+        <radio value="{{index}}" color='#ffad41' style='transform:scale(.6);'/>{{item.address}}
+      </label>
+    </radio-group>
+    </view>
+  <button class='qdadds' form-type='submit'>确定</button>
+</form>

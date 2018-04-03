@@ -1,0 +1,73 @@
+<form bindsubmit='onFormSubmit'>
+  <view class='listbox'>
+    <view class='szlist'>
+      <text>菜品名称</text>
+      <input placeholder='请输入菜品名' type='text' name="name" value='{{isAdd ? "" : goodsInfo.name}}'></input>
+    </view>
+    <view class='szlist'>
+      <text>原价</text>
+      <input placeholder='请输入菜品原价' type='text' name="price" value='{{isAdd ? "" : goodsInfo.price}}'></input>
+    </view>
+    <view class='szlist'>
+      <text>折扣价</text>
+      <input placeholder='请输入菜品折扣' ype='text' name="discountPrice" value='{{isAdd ? "" : goodsInfo.discountPrice}}'></input>
+    </view>
+    <view class='szlist'>
+      <text>日限量</text>
+      <input placeholder='请输入日均限量份数' type='text' name="stock" value='{{isAdd ? "" : goodsInfo.stock}}'></input>
+    </view>
+    <view class='szlist daijian'>
+      <text>菜品类型</text>
+      <input placeholder='请选择菜品菜单' type='text' name="{{isAdd ? 'categoryId' : ''}}" value='{{currCate.name}}' bindtap='onGoodsCateClick' disabled='true'></input>
+    </view>
+  </view>
+  <view class='shebot'>
+    <text class='titletext'>上传图片</text>
+    <view class=''>
+      <view class="weui-uploader">
+        <view class="weui-uploader__bd">
+          <block wx:for="{{tempFilePaths}}" wx:key="*this">
+            <view class="weui-uploader__file" bindtap="chooseImage" id="{{item}}">
+              <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+            </view>
+          </block>
+          <view class="weui-uploader__input-box" wx:if="{{tempFilePaths.length == 0}}" >
+            <view class="weui-uploader__input" bindtap="chooseImage"></view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+    
+    <text class='titletext' style='margin-top:20rpx;'>是否老板推荐</text>
+    <radio-group name="recommendFlag" class="radio-group">
+      <label class="radio" wx:for="{{items}}" wx:key="idx">
+        <radio value="{{item.name}}" checked="{{item.checked}}" color="#ffac40" style='transform:scale(.7);'/>{{item.value}}
+      </label>
+    </radio-group>
+    <view style='font-size:26rpx;color:#ffac40;margin-top:15rpx;'>注：未审核商户不能上架商品</view>
+  </view>
+
+  <view class='botbox'>
+    <button class='seven' form-type='submit'>保存</button>
+  </view>
+</form>
+
+<!-- 菜品分类 start -->
+  <view class="user_coupon" hidden="{{!isShowCate || !isAdd}}">
+    <view class="mask" bindtap="onHideCateClick"></view>
+    <view class="user_coupon_body">
+      <view class="coupon_body_title">请选择菜品分类</view>
+      <radio-group bindchange="onCateChangeClick">
+        <view class="weui-cell" wx:for="{{goodsCateList}}" wx:key="index" style='padding:8rpx 30rpx;'>
+          <block wx:if="{{item.status == 'Y'}}">
+            <view class="weui-cell__bd">{{item.name}}</view>
+            <view class="weui-cell__ft" style='display:flex;'>
+              <radio value="{{index}}"/>
+            </view>
+          </block>
+        </view>
+      </radio-group>
+      <view class="user_coupon_close" bindtap="onHideCateClick">关闭</view>
+    </view>
+  </view>

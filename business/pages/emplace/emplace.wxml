@@ -1,0 +1,107 @@
+<form bindsubmit='onFormSubmit'>
+  <view class='listbox'>
+    <view class='szlist'>
+      <text>商家名称</text>
+      <input type='text' name="name" value="{{restInfo.name}}" placeholder='请输入'  placeholder-style="color:#ccc"></input>
+    </view>
+    <view class='shebot'>
+      <text class='titletext'>LOGO上传</text>
+      <view class='' style='float:left;'>
+        <view class="weui-uploader">
+          <view class="weui-uploader__bd">
+            <block wx:for="{{tempFilePaths}}" wx:key="*this">
+              <view class="weui-uploader__file" bindtap="chooseImage" id="{{item}}">
+                <image class="weui-uploader__img" src="{{item}}" mode="scaleToFill" />
+              </view>
+            </block>
+
+            <view class="weui-uploader__input-box" wx:if="{{tempFilePaths.length == 0}}">
+              <view class="weui-uploader__input" bindtap="chooseImage"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='huoqubox'>
+        <text>注：未审核商户，不能销售商品，请联系0033786838105</text>
+      </view>
+    </view>
+    <view class='szlist daijian'>
+      <text>商户类型</text>
+      <picker wx:if="{{!restInfo.parentCategoryId}}" range="{{restaurantCateList}}" value="{{0}}" range-key="name" bindchange="bindRestCateChange">
+        <input type='text' value="{{restaurantCateList[currRestCateIndex].name}}" placeholder='请选择'  placeholder-style="color:#ccc" disabled='true'></input>
+      </picker>
+      <input type='text' wx:if="{{restInfo.parentCategoryId}}" value="{{restaurantCateList[currRestCateIndex].name}}" placeholder='请选择'  placeholder-style="color:#ccc" disabled='true'></input>
+    </view>
+    <view class='szlist daijian' wx:if='{{foodsCateList.length != 0}}'>
+      <text>餐饮类型</text>
+      <picker wx:if="{{!restInfo.categoryId}}" range="{{foodsCateList}}" value="{{0}}" range-key="name" bindchange="bindFoodCateChange">
+        <input type='text' value="{{foodsCateList[currFoodsCateIndex].name}}" placeholder='请选择'  placeholder-style="color:#ccc" disabled='true'></input>
+      </picker>
+      <input type='text' value="{{foodsCateList[currFoodsCateIndex].name}}" placeholder='请选择'  placeholder-style="color:#ccc" disabled='true'></input>
+    </view>
+    <view class='szlist daijian '>
+      <text>营业时间</text>
+    </view>
+    <view  class="ordertimebox">
+      <view class="ordertimtim">至</view>
+      <view class="odtmcent odtimeleft">
+        <picker mode="time" value="{{openTime}}" bindchange="bindOpenTimeChange">
+          <input class="shuruinput" value="{{openTime}}" placeholder="选择营业时间" placeholder-style="color:#ccc" disabled='true'/>
+        </picker>
+      </view>
+      <view class="odtmcent odtimeright">
+        <picker mode="time" value="{{closeTime}}" bindchange="bindCloseTimeChange">
+          <input class="shuruinput" value="{{closeTime}}" placeholder="选择歇业日期" placeholder-style="color:#ccc" disabled='true'/>
+        </picker>
+      </view>
+    </view>
+    <view class="">
+      <checkbox-group bindchange="bindWeekDayChange">
+        <label class="weui-check__label" wx:for="{{weeks}}" wx:key="{{item.id}}">
+            <checkbox value="{{item.id}}" checked='{{item.checked}}'/>{{item.name}}
+        </label>
+      </checkbox-group>
+    </view>
+    <view class='szlist'>
+      <text>配置说明</text>
+      <input type='text' name="distributionRemark" value="{{restInfo.distributionRemark}}" placeholder='请输入'  placeholder-style="color:#ccc"></input>
+    </view>
+    <view class='szlist'>
+      <text>店主电话</text>
+      <input type='text' name="managerPhone" value='{{restInfo.managerPhone}}' placeholder='请输入'  placeholder-style="color:#ccc"></input>
+    </view>
+    <view class='szlist'>
+      <text>客服热线</text>
+      <input type='text' name="phone" value="{{restInfo.phone}}" placeholder='请输入'  placeholder-style="color:#ccc"></input>
+    </view>
+    <view class='szlist'>
+      <text>EMAIL</text>
+      <input type='text' name="email" value="{{restInfo.email}}" placeholder='请输入'  placeholder-style="color:#ccc"></input>
+    </view>
+    <view class='szlist'>
+      <text>城市</text>
+      <input type='text' name="cityName" value="{{restInfo.cityName}}" placeholder='请输入'  placeholder-style="color:#ccc" disabled='true'></input>
+    </view>
+    <view class='szlist'>
+      <text>地址</text>
+      <input type='text' name="address" value="{{restInfo.address}}" placeholder='请输入'  placeholder-style="color:#ccc"></input>
+    </view>
+    <view class='szlist'>
+      <text>是否接单</text>
+      <switch checkbox checked='{{restInfo.pauseFlag == "Y" ? true : false}}' bindchange="switch2Change" color="#ffac40" style='float:left;'/><text>{{pauseFlag == "Y" ? "正在接单" : "停止接单"}}</text>
+    </view>
+    <view class='szlist'>
+      <text>商户开关</text>
+      <switch checkbox checked='{{restInfo.openFlag == "Y" ? true : false}}' bindchange="switch1Change" color="#ffac40" style='float:left;'/><text>{{openFlag == "Y" ? "已开" : "已关"}}</text>
+    </view>
+  </view>
+   <!-- <view class='shebot'>
+      <text class='titletext'>定位</text>
+      <map id="map" longitude="{{locationInfo.longitude}}" latitude="{{locationInfo.latitude}}" scale="15" show-location="true" bindcontroltap="controltap" markers="{{markers}}" style="width: 100%; height: 385rpx;"></map>
+  </view>  -->
+
+  <view class='botbox'>
+    <button class='quxiao' bindtap='onCancelClick'>取消</button>
+    <button class='seven' form-type='submit'>保存</button>
+  </view>
+</form>

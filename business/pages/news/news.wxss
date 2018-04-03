@@ -1,0 +1,5 @@
+.botbox{position:fixed;bottom:0;width:100%;height:100rpx;line-height:100rpx;display:flex;  z-index: 300;}
+.botbox button{display:block;width:100%;font-size:32rpx; text-align:center;}
+.botbox button.seven{background:#ffac40;color:#fff;}
+.shurubox{padding:30rpx;}
+.shurubox textarea{font-size:26rpx; border-bottom:2rpx solid #eee; margin-bottom:20rpx;}

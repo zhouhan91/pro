@@ -1,0 +1,38 @@
+.seachbox{ display:flex;color:#fff; font-size:26rpx;top:0;position:fixed;width:100%; z-index:150;height:88rpx !important; background:#eee;padding:0 !important;}
+.qiehuan{ width:100% !important;padding:0; text-align:center;line-height:88rpx; color:#666;}
+page{background:#eee;}
+.navbox{width:100%; overflow:hidden;white-space:nowrap; background:#fff;height:80rpx;line-height:80rpx; position:fixed;top:0; z-index:100;border-bottom:2rpx solid #eee;}
+.navmenu{width:25%; display:inline-block; text-align:center;font-size:26rpx;color:#7c7c7c;}
+.active{height:91%;border-bottom:5rpx solid #ff9933;}
+.tjlistbox{overflow:hidden;zoom:1;}
+.tjlistbox:last-child{border:none;}
+.tjlistbox .left{float:left;width:160rpx;margin-left:34rpx;}
+.tjlistbox .left image{width:160rpx;height:160rpx;}
+.tjlistbox .right{margin-left:20rpx;float:left;width:68%;}
+ .pxbox{position:absolute;left:0;top:14rpx; overflow:hidden;zoom:1;width:160rpx;}
+ .pxdibox{position:absolute;left:0;top:14rpx; overflow:hidden;zoom:1;width:160rpx;}
+ .pxdiimg{float:left;width:28rpx;height:24rpx;margin-right:4rpx;}
+.pjbox{position:relative;margin-top:20rpx;}
+.pjbox text{padding-left:170rpx; font-size:24rpx;color:#333;}
+ .titlebox{color:#333;font-size:32rpx;}
+ .titlebox image{width:36rpx;height:32rpx;margin-left:10rpx;}
+ .jsbox{overflow:hidden;zoom:1;  margin-top:10rpx;padding-bottom:15rpx;margin-bottom:20rpx;}
+ .jsbox .cuisine{ display:block;float:left;font-size:24rpx; color:#999;}
+ .jsbox .street{display:block;float:left; font-size:24rpx; color:#333;margin-left:10rpx;}
+ .jsbox .distance{display:block;float:right; font-size:24rpx;color:#333;} 
+ .jsbox .time{display:block;float:right; font-size:24rpx;color:#333;border-left:2rpx solid #ccc;margin-left:20rpx;padding-left:20rpx;}
+.tebox{overflow:hidden;zoom:1;margin-bottom:20rpx;}
+.tebox .tetype{ background:#ff676e;color:#fff;font-size:20rpx; display:block;float:left;width:30rpx;height:30rpx; text-align:center;line-height:30rpx; border-radius:3rpx;margin-right:20rpx;}
+.tebox .tetext{display:block;float:left;color:#333;font-size:20rpx;}
+.tjlistbox{border-bottom:2rpx solid #e7e7e7;margin-bottom:20rpx;}
+.listbox{background:#fff;margin-top:90rpx;padding-top:20rpx;}
+.citybox{ position:fixed;width:100%;height:100%;top:0;left:0; z-index:200; background:#fff; }
+.citytitle{display:block;background:#eee;height:60rpx;line-height:60rpx;font-size:28rpx;color:#333;padding-left:20rpx; margin-bottom:20rpx;}
+.dqcity{color:#666;margin-left:20rpx;margin-bottom:20rpx;font-size:24rpx; display:block;}
+.qubox{padding-left:20rpx;padding-bottom:20rpx;}
+.qubox text{font-size:24rpx;color:#666;margin-right:20rpx;}
+.chengbox{padding-left:20rpx;padding-bottom:20rpx;}
+.chengbox text{font-size:24rpx;color:#666;margin-right:20rpx;}
+.distishi{ width:100%; position:fixed;top:0; background:#eee;height:100%; text-align:center; z-index:200; font-size:24rpx;color:#333;padding-top:150rpx;}
+.distishi .tishi{display:block;width:70%;margin-left:15%;margin-top:100rpx;}
+.btn{width:300rpx;height:80rpx; background:#ffac40;color:#fff;line-height:80rpx; text-align:center; display:block;margin:0 auto;margin-top:30rpx;}

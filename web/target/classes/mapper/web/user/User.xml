@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.user.mapper.UserMapper">
+
+	<resultMap id="user" type="com.wemeCity.web.user.model.User">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="open_id" property="openId" jdbcType="VARCHAR" />
+		<result column="union_id" property="unionId" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+		<result column="portrait" property="portrait" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+		<result column="birthday" property="birthday" jdbcType="DATE" />
+		<result column="country" property="country" jdbcType="VARCHAR" />
+		<result column="country_id" property="countryId" jdbcType="BIGINT" />
+		<result column="province" property="province" jdbcType="VARCHAR" />
+		<result column="province_id" property="provinceId" jdbcType="BIGINT" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="city_id" property="cityId" jdbcType="BIGINT" />
+		<result column="district" property="district" jdbcType="VARCHAR" />
+		<result column="district_id" property="districtId" jdbcType="BIGINT" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="mail" property="mail" jdbcType="VARCHAR" />
+		<result column="qq" property="qq" jdbcType="VARCHAR" />
+		<result column="wechat" property="wechat" jdbcType="VARCHAR" />
+		<result column="facebook" property="facebook" jdbcType="VARCHAR" />
+		<result column="instagram" property="instagram" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertUser" parameterType="com.wemeCity.web.user.model.User">
+		<![CDATA[
+			INSERT INTO USER (
+				id,
+				open_id,
+				union_id,
+				phone,
+				password,
+				nick_name,
+				portrait,
+				sex,
+				birthday,
+				country,
+				country_id,
+				province,
+				province_id,
+				city,
+				city_id,
+				district,
+				district_id,
+				address,
+				mail,
+				qq,
+				wechat,
+				facebook,
+				instagram,
+				status,
+				is_deleted,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{openId},
+				#{unionId},
+				#{phone},
+				#{password},
+				#{nickName},
+				#{portrait},
+				#{sex},
+				#{birthday},
+				#{country},
+				#{countryId},
+				#{province},
+				#{provinceId},
+				#{city},
+				#{cityId},
+				#{district},
+				#{districtId},
+				#{address},
+				#{mail},
+				#{qq},
+				#{wechat},
+				#{facebook},
+				#{instagram},
+				#{status},
+				#{isDeleted},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM USER LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteUser" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE user SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateUser" parameterType="map">
+		UPDATE user set modify_time=now()
+		<if test="openId !=null">
+			, open_id=#{openId}
+		</if>
+		<if test="unionId !=null">
+			, union_id=#{unionId}
+		</if>
+		<if test="phone !=null">
+			, phone=#{phone}
+		</if>
+		<if test="password !=null">
+			, password=#{password}
+		</if>
+		<if test="nickName !=null">
+			, nick_name=#{nickName}
+		</if>
+		<if test="portrait !=null">
+			, portrait=#{portrait}
+		</if>
+		<if test="sex !=null">
+			, sex=#{sex}
+		</if>
+		<if test="birthday !=null">
+			, birthday=#{birthday}
+		</if>
+		<if test="country !=null">
+			, country=#{country}
+		</if>
+		<if test="countryId !=null">
+			, country_id=#{countryId}
+		</if>
+		<if test="province !=null">
+			, province=#{province}
+		</if>
+		<if test="provinceId !=null">
+			, province_id=#{provinceId}
+		</if>
+		<if test="city !=null">
+			, city=#{city}
+		</if>
+		<if test="cityId !=null">
+			, city_id=#{cityId}
+		</if>
+		<if test="district !=null">
+			, district=#{district}
+		</if>
+		<if test="districtId !=null">
+			, district_id=#{districtId}
+		</if>
+		<if test="address !=null">
+			, address=#{address}
+		</if>
+		<if test="mail !=null">
+			, mail=#{mail}
+		</if>
+		<if test="qq !=null">
+			, qq=#{qq}
+		</if>
+		<if test="wechat !=null">
+			, wechat=#{wechat}
+		</if>
+		<if test="facebook !=null">
+			, facebook=#{facebook}
+		</if>
+		<if test="instagram !=null">
+			, instagram=#{instagram}
+		</if>
+		<if test="status !=null">
+			, status=#{status}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readUser" parameterType="java.lang.Long" resultMap="user">
+		SELECT * FROM user WHERE id=#{id}
+	</select>
+
+	<select id="queryUserList" parameterType="map" resultMap="user">
+		SELECT * FROM user WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="openId !=null">
+			AND open_id=#{openId}
+		</if>
+		<if test="unionId !=null">
+			AND union_id=#{unionId}
+		</if>
+		<if test="phone !=null">
+			AND phone=#{phone}
+		</if>
+		<if test="password !=null">
+			AND password=#{password}
+		</if>
+		<if test="nickName !=null">
+			AND nick_name=#{nickName}
+		</if>
+		<if test="portrait !=null">
+			AND portrait=#{portrait}
+		</if>
+		<if test="sex !=null">
+			AND sex=#{sex}
+		</if>
+		<if test="birthday !=null">
+			AND birthday=#{birthday}
+		</if>
+		<if test="country !=null">
+			AND country=#{country}
+		</if>
+		<if test="countryId !=null">
+			AND country_id=#{countryId}
+		</if>
+		<if test="province !=null">
+			AND province=#{province}
+		</if>
+		<if test="provinceId !=null">
+			AND province_id=#{provinceId}
+		</if>
+		<if test="city !=null">
+			AND city=#{city}
+		</if>
+		<if test="cityId !=null">
+			AND city_id=#{cityId}
+		</if>
+		<if test="district !=null">
+			AND district=#{district}
+		</if>
+		<if test="districtId !=null">
+			AND district_id=#{districtId}
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="mail !=null">
+			AND mail=#{mail}
+		</if>
+		<if test="qq !=null">
+			AND qq=#{qq}
+		</if>
+		<if test="wechat !=null">
+			AND wechat=#{wechat}
+		</if>
+		<if test="facebook !=null">
+			AND facebook=#{facebook}
+		</if>
+		<if test="instagram !=null">
+			AND instagram=#{instagram}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryUserCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM USER WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="openId !=null">
+			AND open_id=#{openId}
+		</if>
+		<if test="unionId !=null">
+			AND union_id=#{unionId}
+		</if>
+		<if test="phone !=null">
+			AND phone=#{phone}
+		</if>
+		<if test="password !=null">
+			AND password=#{password}
+		</if>
+		<if test="nickName !=null">
+			AND nick_name=#{nickName}
+		</if>
+		<if test="portrait !=null">
+			AND portrait=#{portrait}
+		</if>
+		<if test="sex !=null">
+			AND sex=#{sex}
+		</if>
+		<if test="birthday !=null">
+			AND birthday=#{birthday}
+		</if>
+		<if test="country !=null">
+			AND country=#{country}
+		</if>
+		<if test="countryId !=null">
+			AND country_id=#{countryId}
+		</if>
+		<if test="province !=null">
+			AND province=#{province}
+		</if>
+		<if test="provinceId !=null">
+			AND province_id=#{provinceId}
+		</if>
+		<if test="city !=null">
+			AND city=#{city}
+		</if>
+		<if test="cityId !=null">
+			AND city_id=#{cityId}
+		</if>
+		<if test="district !=null">
+			AND district=#{district}
+		</if>
+		<if test="districtId !=null">
+			AND district_id=#{districtId}
+		</if>
+		<if test="address !=null">
+			AND address=#{address}
+		</if>
+		<if test="mail !=null">
+			AND mail=#{mail}
+		</if>
+		<if test="qq !=null">
+			AND qq=#{qq}
+		</if>
+		<if test="wechat !=null">
+			AND wechat=#{wechat}
+		</if>
+		<if test="facebook !=null">
+			AND facebook=#{facebook}
+		</if>
+		<if test="instagram !=null">
+			AND instagram=#{instagram}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

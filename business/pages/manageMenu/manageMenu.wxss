@@ -1,0 +1,44 @@
+page{background:#eee;padding-bottom:100rpx;}
+.botbox{position:fixed;bottom:0;width:100%;height:100rpx;line-height:100rpx;display:flex;  z-index: 300;}
+.botbox text{display:block;width:50%;font-size:32rpx; text-align:center;}
+.botbox text.quxiao{background:#fff;color:#333;}
+.botbox text.seven{background:#ffac40;color:#fff;}
+.swiper-tab{  
+    width: 100%;  
+    text-align: center;  
+    line-height: 80rpx;
+    white-space:nowrap;
+    position:fixed;
+    top:0;
+    background:#fff;
+    z-index:100;
+    }  
+.swiper-tab-list{  font-size:26rpx;  
+    display: inline-block;   
+    width: 25%;   
+    color: #333;  
+    background:#fff;
+}  
+.on{ color: #da7c0c;  
+    border-bottom: 5rpx solid #da7c0c;}  
+  
+/* .swiper-box{ display: block; height: 100%; width: 100%; overflow: hidden;margin-top:95rpx;}  */
+.zanwei{margin-top:95rpx;}
+.menulist{display: block; height: 100%; width: 100%; overflow: hidden;background:#fff;zoom:1; position:relative;padding:20rpx 30rpx;border-bottom:2rpx solid #eee;}
+.imgbox{float:left; width:160rpx;height:160rpx;margin-right:20rpx;}
+.imgbox image{width:100%;height:100%;}
+.menutitle{overflow:hidden;zoom:1;}
+.menutitle .title{float:left;max-width:250rpx;font-size:32rpx;color:#333;}
+.menutitle image{float:left;width:36rpx;height:33rpx;margin:0 10rpx;}
+.menutitle .delete{float:right;font-size:26rpx;color:#333; display:block;border-right:2rpx solid #ccc;padding-right:25rpx;margin-right:25rpx;height:30rpx;}
+.menutitle .xiu{float:right;font-size:26rpx;color:#333;}
+.moneyjia{margin-top:15rpx;}
+.moneyjia .left{font-size:32rpx; color:#ffac40;}
+.moneyjia .right{font-size:26rpx;color:#333;padding-left:20rpx;}
+.kucun{margin-top:-5rpx;}
+.kucun .left{font-size:26rpx;color:#999;}
+.kucun .right{font-size:26rpx;color:#333;padding-left:20rpx;}
+.czbox{ position:absolute;right:0;bottom:18rpx;overflow:hidden;zoom:1;}
+.shangjia{float:left;width:50%;}
+.shangjia text,.guqing text{display:block;color:#999;font-size:20rpx; text-align:center;margin-bottom:5rpx;}
+.guqing{float:left;width:50%;}

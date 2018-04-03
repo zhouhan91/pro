@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.user.mapper.UserSessionMapper">
+
+	<resultMap id="userSession" type="com.wemeCity.web.user.model.UserSession">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="union_id" property="unionId" jdbcType="VARCHAR" />
+		<result column="session_key" property="sessionKey" jdbcType="VARCHAR" />
+		<result column="open_id" property="openId" jdbcType="VARCHAR" />
+		<result column="user_key" property="userKey" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertUserSession" parameterType="com.wemeCity.web.user.model.UserSession">
+		<![CDATA[
+			INSERT INTO USER_SESSION (
+				id,
+				user_id,
+				union_id,
+				session_key,
+				open_id,
+				user_key,
+				create_time
+			) VALUES (
+				null,
+				#{userId},
+				#{unionId},
+				#{sessionKey},
+				#{openId},
+				#{userKey},
+				#{createTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM USER_SESSION LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteUserSession" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE user_session SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateUserSession" parameterType="map">
+		UPDATE user_session set modify_time=now()
+		<if test="userId !=null">
+			, user_id=#{userId}
+		</if>
+		<if test="unionId !=null">
+			, union_id=#{unionId}
+		</if>
+		<if test="sessionKey !=null">
+			, session_key=#{sessionKey}
+		</if>
+		<if test="openId !=null">
+			, open_id=#{openId}
+		</if>
+		<if test="userKey !=null">
+			, user_key=#{userKey}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readUserSession" parameterType="java.lang.Long" resultMap="userSession">
+		SELECT * FROM user_session WHERE id=#{id}
+	</select>
+
+	<select id="queryUserSessionList" parameterType="map" resultMap="userSession">
+		SELECT * FROM user_session WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="unionId !=null">
+			AND union_id=#{unionId}
+		</if>
+		<if test="sessionKey !=null">
+			AND session_key=#{sessionKey}
+		</if>
+		<if test="openId !=null">
+			AND open_id=#{openId}
+		</if>
+		<if test="userKey !=null">
+			AND user_key=#{userKey}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryUserSessionCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM USER_SESSION WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="unionId !=null">
+			AND union_id=#{unionId}
+		</if>
+		<if test="sessionKey !=null">
+			AND session_key=#{sessionKey}
+		</if>
+		<if test="openId !=null">
+			AND open_id=#{openId}
+		</if>
+		<if test="userKey !=null">
+			AND user_key=#{userKey}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

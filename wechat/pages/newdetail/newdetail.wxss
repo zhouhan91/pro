@@ -1,0 +1,52 @@
+@import"../../wxParse/wxParse.wxss";
+page{background:#f6f6f6;}
+.newsdetaitop{background:#fff; border-bottom:2rpx solid #d1d1d1;padding:40rpx 32rpx;}
+.newtitle{display:block;color:#333; font-size:40rpx;}
+.newfubox{ overflow:hidden;zoom:1;}
+
+.newfubox text.time,.newfubox text.chu{float:left;font-size:24rpx;color:#999;margin-top:10rpx;margin-right:40rpx;}
+.newfubox .dianzan{float:right;}
+.newfubox .dianzan text{font-size:24rpx;color:#999;}
+.newfubox .dianzan image{width:34rpx; height:34rpx;margin-left:15rpx;}
+.newscent{padding:0 30rpx;}
+.newscent image{width:100% !important;}
+.newscent text{display:block; font-size:32rpx;padding:0; margin-bottom:30rpx;margin-top:-20rpx;}
+
+.newdetailtitle{ font-size:34rpx; font-weight:bold;color:#333; text-align:center; position:relative;padding-bottom:20px;}
+.newdetailtitle::after{ position:absolute; content:""; background:#fadab0;width:28rpx;height:10rpx;left:48%;bottom:0;}
+
+.newsplbox{padding:0 30rpx;margin-bottom:40rpx;}
+.plbox{ border-bottom:2rpx solid #e7e7e7;padding-bottom:28rpx;margin-bottom:28rpx;}
+.plcenttop{overflow:hidden;zoom:1;}
+.plcenttop view{float:left;width:50rpx;height:50rpx;overflow:hidden;margin-right:20rpx;border-radius:25rpx;}
+.plcenttop view image{width:100%;height:100%;} 
+.plcenttop text{float:left; font-size:28rpx;color:#333;}
+.plcontent{font-size: 32rpx;color:#333;margin-top:-30rpx; display:block;}
+.more{display:block; font-size:28rpx;color:#ffac40;}
+.plbot{overflow:hidden;zoom:1;}
+.plbot text{float:left;color:#999;font-size:20rpx;margin-right:30rpx;}
+.plgong{text-align: center;padding-left:40%; overflow:hidden;zoom:1;}
+.plgong text{color:#333;font-size:20rpx; font-weight:bold; display:inline-block; float:left;margin-right:10rpx;}
+.plgong image{width:27rpx; height:27rpx;display:inline-block; float:left; margin-top:5rpx;}
+.yueduwai{overflow:hidden;zoom:1;border-bottom:2rpx solid #e7e7e7;padding-bottom:20rpx;margin-bottom:20rpx;}
+.yueduwai .left{float:left; width:400rpx; min-height:132rpx; position: relative;}
+.yueduwai .right{float:right;width:220rpx;height:132rpx;}
+.yueduwai .right image{width:100%;height:100%;}
+.yuedubox{padding:0 30rpx;margin-top:10rpx;margin-bottom:130rpx;}
+.waititle{display:block;padding-bottom:40rpx;}
+.yanding{position: absolute;bottom:0;overflow:hidden;zoom:1;width:100%;}
+.yanding text{color:#999;font-size:20rpx; }
+.newsbottom{position:fixed;bottom:0;width:100%; background:#fff;height:100rpx;line-height:100rpx; border-top:2rpx solid #e7e7e7; overflow:hidden;zoom:1; z-index:100;}
+.newsbottom text,.newsbottom image{float:left;}
+.newsbottom text{font-size:32rpx;color:#999; display:block;margin-left:24rpx; width:50%;}
+.xie{width:37rpx;height:34rpx;margin-left:30rpx;margin-top:34rpx;}
+.dz{width:44rpx;height:44rpx; float:right !important;margin-top:32rpx;margin-right:40rpx;}
+.shou{width:44rpx;height:44rpx;float:right !important;margin-top:32rpx;margin-right:40rpx;}
+.zhuan{width:43rpx;height:44rpx;float:right !important;margin-top:32rpx;margin-right:30rpx;}
+
+ 
+ 
+.fabiao{float:left;margin-top:25rpx;margin-left:30rpx;width:75%;  }
+.fabu{ background:#fff !important; border:none !important; padding:0;margin:0; margin-top:5rpx; color:#999;font-size:32rpx; }
+.fabuchu{color:#ffac40;}
+.fabu::after{display:none;}

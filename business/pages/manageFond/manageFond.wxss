@@ -1,0 +1,18 @@
+/* pages/addFond/addFond.wxss */
+page{ background:#eee !important;padding-bottom:120rpx;} 
+.listbox{padding-left:30rpx;background:#fff;}
+.szlist{overflow:hidden;zoom:1; background:#fff;height:100rpx;line-height:100rpx;border-bottom:2rpx solid #eee;position:relative;}  
+.szlist text{float:left;color:#999; font-size:32rpx;display:block;width:10%;}
+.szlist input{float:left;color:#333;font-size:32rpx;margin-top:20rpx;margin-left:15rpx;width:30%; }
+.shebot{padding:20rpx 30rpx;}
+.szlist image{float:left;color:#333;font-size:32rpx;margin-top:20rpx;margin-left:15rpx;width:20%; }
+.shebot .titletext{color:#999; font-size:32rpx; display:block;margin-bottom:20rpx;}
+map{margin-bottom:20rpx;}
+.huoqubox{position:relative;overflow:hidden;zoom:1;}
+.huoqubox button{width:300rpx;height:300rpx;float:left;color:#999;line-height:300rpx;font-size:80rpx; position:relative;z-index:100;}
+.huoqubox text{float:left; width:340rpx;color:#999;font-size:28rpx;margin-left:50rpx;margin-top:50rpx;}
+.huoqubox image{width:300rpx;height:300rpx; position:absolute;left:0;z-index:200;}
+.botbox{position:fixed; background:#fff;  bottom:0;width:100%;height:100rpx;line-height:100rpx;display:flex;  z-index: 300;}
+.botbox text{display:block;width:50%;font-size:32rpx; text-align:center;}
+.botbox text.seven{background:#ffac40;color:#fff;}
+.radio{font-size:26rpx; color:#333;margin-right:15rpx;}

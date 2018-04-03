@@ -1,0 +1,75 @@
+<view class='pftop'>
+  <view class="comment1-description" style="display:flex;flex-direction:row;">
+    <view class="comment1-description1">总评</view>
+    <view  class="star-pos" style="display:flex;flex-direction:row;">
+      <view class="stars  {{flag>=1? 'on': ''}}"  bindtap="changeColor1"></view>
+      <view class="stars  {{flag>=2? 'on': ''}}"  bindtap="changeColor2"></view>
+      <view class="stars  {{flag>=3? 'on': ''}}"  bindtap="changeColor3"></view>
+      <view class="stars  {{flag>=4? 'on': ''}}"  bindtap="changeColor4"></view>
+      <view class="stars  {{flag>=5? 'on': ''}}"  bindtap="changeColor5"></view>
+    </view>
+    <view style='padding-left:25rpx;color:#999;'>{{flag}}分</view>
+  </view>
+  <view class="comment1-description" style="display:flex;flex-direction:row;">
+    <view class="comment1-description1">环境</view>
+    <view  class="star-pos" style="display:flex;flex-direction:row;">
+      <view class="stars  {{huanj>=1? 'on': ''}}"  bindtap="changehuanjing1"></view>
+      <view class="stars  {{huanj>=2? 'on': ''}}"  bindtap="changehuanjing2"></view>
+      <view class="stars  {{huanj>=3? 'on': ''}}"  bindtap="changehuanjing3"></view>
+      <view class="stars  {{huanj>=4? 'on': ''}}"  bindtap="changehuanjing4"></view>
+      <view class="stars  {{huanj>=5? 'on': ''}}"  bindtap="changehuanjing5"></view>
+    </view>
+    <view style='padding-left:25rpx;color:#999;'>{{huanj}}分</view>
+  </view>
+  <view class="comment1-description" style="display:flex;flex-direction:row;">
+    <view class="comment1-description1">口味</view>
+    <view  class="star-pos" style="display:flex;flex-direction:row;">
+      <view class="stars  {{kouwei>=1? 'on': ''}}"  bindtap="kouwei1"></view>
+      <view class="stars  {{kouwei>=2? 'on': ''}}"  bindtap="kouwei2"></view>
+      <view class="stars  {{kouwei>=3? 'on': ''}}"  bindtap="kouwei3"></view>
+      <view class="stars  {{kouwei>=4? 'on': ''}}"  bindtap="kouwei4"></view>
+      <view class="stars  {{kouwei>=5? 'on': ''}}"  bindtap="kouwei5"></view>
+    </view>
+    <view style='padding-left:25rpx;color:#999;'>{{kouwei}}分</view>
+  </view>
+  <view class="comment1-description" style="display:flex;flex-direction:row;">
+    <view class="comment1-description1">服务</view>
+    <view  class="star-pos" style="display:flex;flex-direction:row;">
+      <view class="stars  {{serves>=1? 'on': ''}}"  bindtap="serves1"></view>
+      <view class="stars  {{serves>=2? 'on': ''}}"  bindtap="serves2"></view>
+      <view class="stars  {{serves>=3? 'on': ''}}"  bindtap="serves3"></view>
+      <view class="stars  {{serves>=4? 'on': ''}}"  bindtap="serves4"></view>
+      <view class="stars  {{serves>=5? 'on': ''}}"  bindtap="serves5"></view>
+    </view>
+    <view style='padding-left:25rpx;color:#999;'>{{serves}}分</view>
+  </view>
+  <view class="comment1-description" style="display:flex;flex-direction:row;">
+    <view class="comment1-description1" style='line-height:60rpx;margin-right:20rpx;'>是否推荐</view>
+      <view  class="star-pos" style="display:flex;flex-direction:row;">
+        <switch  bindchange="switch1Change" color='#ffac40' checked='{{isRecomment}}' />
+      </view>
+  </view>
+  <view>
+    上传照片<text style='color:#999;font-size:24rpx;margin-left:10rpx;'>最多可上传三张</text>
+    <view class='huoqubox'>
+      <view class="weui-uploader">
+        <view class="weui-uploader__bd">
+          <block wx:for="{{tempFilePaths}}" wx:key="*this">
+            <view class="weui-uploader__file" bindtap="chooseImage" data-idx="{{index}}">
+              <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+            </view>
+          </block>
+          <view class="weui-uploader__input-box" wx:if="{{tempFilePaths.length < 3}}" bindtap="chooseImage">
+            <view  class="weui-uploader__input" ></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view>
+    <form bindsubmit='onPublishCommentClick'>
+       <textarea class='plbox' name="content" value="{{comment}}" placeholder='仅限输入50个字的评论' maxlength='50' disabled='{{!isPublish}}'></textarea>
+      <button style='background:#ffac40;color:#fff;font-size:28rpx;margin-top:40rpx;' form-type='submit' wx:if="{{isPublish}}">发表评论</button> 
+    </form>
+  </view>
+ </view>

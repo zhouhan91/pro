@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.components.file.mapper.FileUploadMapper">
+
+	<resultMap id="fileUpload" type="com.wemeCity.components.file.model.FileUpload">
+		<id column="id" property="id" />
+        <result column="id" property="id" jdbcType="BIGINT" />
+        <result column="busi_code" property="busiCode" jdbcType="VARCHAR" />
+        <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+        <result column="save_name" property="saveName" jdbcType="VARCHAR" />
+        <result column="path" property="path" jdbcType="VARCHAR" />
+        <result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <insert id="insertFileUpload" parameterType="com.wemeCity.components.file.model.FileUpload">
+        <![CDATA[
+            INSERT INTO FILE_UPLOAD (
+                id,
+                busi_code,
+                file_name,
+                save_name,
+                path,
+                is_deleted,
+                create_by,
+                create_time
+            ) VALUES (
+                null,
+                #{busiCode},
+                #{fileName},
+                #{saveName},
+                #{path},
+                #{isDeleted},
+                #{createBy},
+                #{createTime}
+            )
+        ]]>
+        <selectKey resultType="long" keyProperty="id">
+            <![CDATA[
+                SELECT LAST_INSERT_ID() AS ID FROM FILE_UPLOAD LIMIT 1
+            ]]>
+        </selectKey>
+    </insert>
+
+    <update id="deleteFileUpload" parameterType="java.lang.Long">
+        <![CDATA[
+            UPDATE file_upload SET IS_DELETED='Y' WHERE id = #{id}
+        ]]>
+    </update>
+
+    <update id="updateFileUpload" parameterType="map">
+        UPDATE file_upload set modify_time=now()
+        <if test="busiCode !=null">
+            , busi_code=#{busiCode}
+        </if>
+        <if test="fileName !=null">
+            , file_name=#{fileName}
+        </if>
+        <if test="saveName !=null">
+            , save_name=#{saveName}
+        </if>
+        <if test="path !=null">
+            , path=#{path}
+        </if>
+        <if test="isDeleted !=null">
+            , is_deleted=#{isDeleted}
+        </if>
+        <if test="createBy !=null">
+            , create_by=#{createBy}
+        </if>
+        <if test="createTime !=null">
+            , create_time=#{createTime}
+        </if>
+        WHERE id=#{id}
+    </update>
+
+    <select id="readFileUpload" parameterType="java.lang.Long" resultMap="fileUpload">
+        SELECT * FROM file_upload WHERE id=#{id}
+    </select>
+
+    <select id="queryFileUploadList" parameterType="map" resultMap="fileUpload">
+        SELECT * FROM file_upload WHERE 1=1 
+        <if test="id !=null">
+            AND id=#{id}
+        </if>
+        <if test="busiCode !=null">
+            AND busi_code=#{busiCode}
+        </if>
+        <if test="fileName !=null">
+            AND file_name=#{fileName}
+        </if>
+        <if test="saveName !=null">
+            AND save_name=#{saveName}
+        </if>
+        <if test="path !=null">
+            AND path=#{path}
+        </if>
+        <if test="isDeleted !=null">
+            AND is_deleted=#{isDeleted}
+        </if>
+        <if test="createBy !=null">
+            AND create_by=#{createBy}
+        </if>
+        <if test="createTime !=null">
+            AND create_time=#{createTime}
+        </if>
+    </select>
+
+    <select id="queryFileUploadCount" parameterType="map" resultType="long">
+        SELECT COUNT(1) FROM FILE_UPLOAD WHERE 1=1 
+        <if test="id !=null">
+            AND id=#{id}
+        </if>
+        <if test="busiCode !=null">
+            AND busi_code=#{busiCode}
+        </if>
+        <if test="fileName !=null">
+            AND file_name=#{fileName}
+        </if>
+        <if test="saveName !=null">
+            AND save_name=#{saveName}
+        </if>
+        <if test="path !=null">
+            AND path=#{path}
+        </if>
+        <if test="isDeleted !=null">
+            AND is_deleted=#{isDeleted}
+        </if>
+        <if test="createBy !=null">
+            AND create_by=#{createBy}
+        </if>
+        <if test="createTime !=null">
+            AND create_time=#{createTime}
+        </if>
+    </select>
+
+</mapper>

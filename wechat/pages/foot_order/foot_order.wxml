@@ -1,0 +1,85 @@
+<wxs module="orderUtils">
+  var checkout = function (foodmoney, youhui, distributionAmount){
+    distributionAmount = distributionAmount ? distributionAmount : 0;
+    var fee = parseFloat(foodmoney - youhui + distributionAmount).toFixed(2);
+    return fee > 0 ? fee : 0;
+  };
+
+  module.exports.checkout = checkout;
+</wxs>
+
+<view class='adsbox' bindtap='onChoiceAddrClick'>
+    <view class='left'><image src='../resource/kind/dress02.png'></image></view>
+    <view class='right'>
+        <view class='namephone'>
+            <text class='name'>{{cateringContact.name}}</text> <text class='phone'>{{cateringContact.phone}}</text>
+        </view>
+        <block wx:if="{{!tjaddress}}">
+        <text class='adss'>{{cateringContact ? cateringContact.address : "请点击编辑收货人信息"}}</text>
+        </block>
+        <block wx:if="{{tjaddress}}">
+        <text class='adss'>商家推荐地址：{{tjaddress}}</text>
+        </block>
+    </view>
+</view>
+<view class='ddbox'>
+    <view class='foodname'>
+      <text class='name'>{{shopname}}</text>
+      <!-- <text class='bianhao'>订单号：58455455</text>  -->
+    </view>
+    <view class='footbox' wx:for="{{orderfood}}" wx:key="index" wx:if="{{item.fen > 0}}">
+      <view class='footlist' >
+        <text class='left'>{{item.name}}</text>
+        <text class='center'>x{{item.fen}}</text>
+        <text class='right'>{{item.discountPrice}}€</text>
+      </view>
+    </view>
+    <view class='footlist peisong' style='padding-bottom:25rpx;padding-top:15rpx;margin-bottom:20rpx;'>
+      <text class='left'>配送费</text>
+      <text class='right'>{{shopdetail.distributionAmount}}€</text>
+    </view>
+    <view class='youhuibox' wx:for="{{lstCateringDiscount}}" wx:key="index" wx:for-item="cdItem" wx:if="{{cdItem.status == 'Y'}}">
+      <view class='yhlist'>
+        <view class='left'>
+          <view class='tebox' wx:if="{{cdItem.type == 'manjian' && foodmoney > cdItem.target}}">
+            <text class='tetype'>满</text>
+            <text class='tetext'>满{{cdItem.target}}减{{cdItem.discount}}</text>
+          </view>
+          <view class='tebox' wx:if="{{cdItem.type == 'quanchangzhekou'}}">
+            <text class='tetype' style='background:#ff9933;'>折</text>
+            <text class='tetext'>全场{{cdItem.discount*10}}折</text>
+          </view>
+          <view class='tebox' wx:if="{{cdItem.type == 'xinren' && isNew}}">
+            <text class='tetype' style='background:#0f9ff2;'>新</text>
+            <text class='tetext'>新人直减{{cdItem.discount}}</text>
+          </view>
+        </view>
+        <view class='right' wx:if="{{(cdItem.type == 'manjian' && foodmoney > cdItem.target) || (cdItem.type == 'xinren' && isNew) || cdItem.type == 'quanchangzhekou'}}">
+          <text>-{{cdItem.type=="quanchangzhekou" ? disc : cdItem.discount }}€</text>
+        </view>
+      </view>
+    </view>
+      <view class='footlist peisong' style='padding-top:20rpx;border-bottom:none;margin-top:20rpx;padding-bottom:0;'>
+             <text class='left'>小计</text>
+            <text class='right' style='font-size:32rpx;color:#f59a24;'>{{orderUtils.checkout(foodmoney, youhui, shopdetail.distributionAmount)}}€</text>
+      </view>
+      <!-- <view class='kouweibox'>
+          <text class='title'>口味偏好</text>
+          <view class='kouwei'>
+              <text>不要辣椒</text>
+              <text>少辣</text>
+              <text>中辣</text>
+              <text>特辣</text>
+              <text>加醋</text>
+              <text>不要葱</text>
+              <text>不要洋葱</text>
+          </view>
+      </view> -->
+      <view class='beizhu'>
+          <input type='text' value="{{remark}}" placeholder='备注'  placeholder-style="color:#ccc" bindblur='onRemarkBlur'></input>
+      </view>
+</view>
+<view class='botbox'>
+    <button class='left' bindtap='onBackClick'  style='border-radius:0;line-height:95rpx;'>返回</button>
+    <button class='right' bindtap='onCashPayClick' style='border-radius:0;line-height:95rpx;'>现金支付</button>  
+</view>

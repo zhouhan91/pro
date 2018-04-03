@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.news.mapper.NewsMapper">
+
+	<resultMap id="news" type="com.wemeCity.web.news.model.News">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="summary" property="summary" jdbcType="VARCHAR" />
+		<result column="cover_picture" property="coverPicture" jdbcType="VARCHAR" />
+		<result column="author" property="author" jdbcType="VARCHAR" />
+		<result column="key_words" property="keyWords" jdbcType="VARCHAR" />
+		<result column="navigation_code" property="navigationCode" jdbcType="VARCHAR" />
+		<result column="navigation_name" property="navigationName" jdbcType="VARCHAR" />
+		<result column="sub_navigation_code" property="subNavigationCode" jdbcType="VARCHAR" />
+		<result column="sub_navigation_name" property="subNavigationName" jdbcType="VARCHAR" />
+		<result column="read_count" property="readCount" jdbcType="INTEGER" />
+		<result column="like_count" property="likeCount" jdbcType="INTEGER" />
+		<result column="comment_count" property="commentCount" jdbcType="INTEGER" />
+		<result column="mark_count" property="markCount" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertNews" parameterType="com.wemeCity.web.news.model.News">
+		<![CDATA[
+			INSERT INTO NEWS (
+				id,
+				title,
+				summary,
+				cover_picture,
+				author,
+				key_words,
+				navigation_code,
+				navigation_name,
+				sub_navigation_code,
+				sub_navigation_name,
+				read_count,
+				like_count,
+				comment_count,
+				mark_count,
+				status,
+				publish_time,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{title},
+				#{summary},
+				#{coverPicture},
+				#{author},
+				#{keyWords},
+				#{navigationCode},
+				#{navigationName},
+				#{subNavigationCode},
+				#{subNavigationName},
+				#{readCount},
+				#{likeCount},
+				#{commentCount},
+				#{markCount},
+				#{status},
+				#{publishTime},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM NEWS LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteNews" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE news SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateNews" parameterType="map">
+		UPDATE news set modify_time=now()
+		<if test="title !=null">
+			, title=#{title}
+		</if>
+		<if test="summary !=null">
+			, summary=#{summary}
+		</if>
+		<if test="coverPicture !=null">
+			, cover_picture=#{coverPicture}
+		</if>
+		<if test="author !=null">
+			, author=#{author}
+		</if>
+		<if test="keyWords !=null">
+			, key_words=#{keyWords}
+		</if>
+		<if test="navigationCode !=null">
+			, navigation_code=#{navigationCode}
+		</if>
+		<if test="navigationName !=null">
+			, navigation_name=#{navigationName}
+		</if>
+		<if test="subNavigationCode !=null">
+			, sub_navigation_code=#{subNavigationCode}
+		</if>
+		<if test="subNavigationName !=null">
+			, sub_navigation_name=#{subNavigationName}
+		</if>
+		<if test="readCount !=null">
+			, read_count=#{readCount}
+		</if>
+		<if test="likeCount !=null">
+			, like_count=#{likeCount}
+		</if>
+		<if test="commentCount !=null">
+			, comment_count=#{commentCount}
+		</if>
+		<if test="markCount !=null">
+			, mark_count=#{markCount}
+		</if>
+		<if test="status !=null">
+			, status=#{status}
+		</if>
+		<if test="publishTime !=null">
+			, publish_time=#{publishTime}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readNews" parameterType="java.lang.Long" resultMap="news">
+		SELECT * FROM news WHERE id=#{id}
+	</select>
+
+	<select id="queryNewsList" parameterType="map" resultMap="news">
+		SELECT * FROM news WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="title !=null">
+			AND title=#{title}
+		</if>
+		<if test="summary !=null">
+			AND summary=#{summary}
+		</if>
+		<if test="coverPicture !=null">
+			AND cover_picture=#{coverPicture}
+		</if>
+		<if test="author !=null">
+			AND author=#{author}
+		</if>
+		<if test="keyWords !=null">
+			AND key_words=#{keyWords}
+		</if>
+		<if test="navigationCode !=null">
+			AND navigation_code=#{navigationCode}
+		</if>
+		<if test="navigationName !=null">
+			AND navigation_name=#{navigationName}
+		</if>
+		<if test="notNavigationCode !=null">
+			AND navigation_code!=#{notNavigationCode}
+		</if>
+		<if test="subNavigationCode !=null">
+			AND sub_navigation_code=#{subNavigationCode}
+		</if>
+		<if test="subNavigationName !=null">
+			AND sub_navigation_name=#{subNavigationName}
+		</if>
+		<if test="readCount !=null">
+			AND read_count=#{readCount}
+		</if>
+		<if test="likeCount !=null">
+			AND like_count=#{likeCount}
+		</if>
+		<if test="commentCount !=null">
+			AND comment_count=#{commentCount}
+		</if>
+		<if test="markCount !=null">
+			AND mark_count=#{markCount}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="publishTime !=null">
+			AND publish_time=#{publishTime}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryNewsCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM NEWS WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="title !=null">
+			AND title=#{title}
+		</if>
+		<if test="summary !=null">
+			AND summary=#{summary}
+		</if>
+		<if test="coverPicture !=null">
+			AND cover_picture=#{coverPicture}
+		</if>
+		<if test="author !=null">
+			AND author=#{author}
+		</if>
+		<if test="keyWords !=null">
+			AND key_words=#{keyWords}
+		</if>
+		<if test="navigationCode !=null">
+			AND navigation_code=#{navigationCode}
+		</if>
+		<if test="navigationName !=null">
+			AND navigation_name=#{navigationName}
+		</if>
+		<if test="subNavigationCode !=null">
+			AND sub_navigation_code=#{subNavigationCode}
+		</if>
+		<if test="subNavigationName !=null">
+			AND sub_navigation_name=#{subNavigationName}
+		</if>
+		<if test="readCount !=null">
+			AND read_count=#{readCount}
+		</if>
+		<if test="likeCount !=null">
+			AND like_count=#{likeCount}
+		</if>
+		<if test="commentCount !=null">
+			AND comment_count=#{commentCount}
+		</if>
+		<if test="markCount !=null">
+			AND mark_count=#{markCount}
+		</if>
+		<if test="status !=null">
+			AND status=#{status}
+		</if>
+		<if test="publishTime !=null">
+			AND publish_time=#{publishTime}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

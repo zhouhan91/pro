@@ -1,0 +1,22 @@
+/* pages/foodaddress/foodaddress.wxss */
+page{width:95%;margin:0 auto;padding-bottom:100rpx;padding-top:20rpx;}
+.pstitle{font-size:28rpx;color:#333;margin-bottom:15rpx;}
+.pstext{border:2rpx solid #eee;font-size:24rpx;margin-bottom:15rpx; text-indent:15rpx;height:70rpx;line-height:70rpx; background:#fff;}
+.radio{display:block; font-size:24rpx; margin-bottom:10rpx; }
+.tishi{font-size:24rpx;color:#666;}
+.qdadds{position:fixed;bottom:0;width:100%;height:100rpx;line-height:100rpx;background:#ffad41;color:#fff;text-align: center;font-size:28rpx;left:0; border-radius:0 !important;}
+.myToast{
+  width:180rpx;
+  height:140rpx;
+  line-height: 36rpx;
+  margin:220rpx 33%;
+  border-radius:20rpx;
+  background-color: rgb(114,113,113);
+  color:rgb(255,255,255);
+  font-size:24rpx;
+  text-align: center;
+  position: absolute;
+  z-index: 100;
+  opacity: 0.9;
+  padding:70rpx 30rpx 0 30rpx;
+}

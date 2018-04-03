@@ -1,0 +1,202 @@
+<wxs module="listUtils">
+  var showStar = function(item, interestLevel){
+    var url = "../resource/kind/star_normal.png";
+    if(item <= Math.floor(interestLevel)){
+      url = "../resource/kind/star_selected.png";
+    } else if (item > Math.floor(interestLevel) && item <= Math.round(interestLevel)){
+      url = "../resource/kind/star_half.png";
+    }
+
+    return url;
+  };
+
+  module.exports.showStar = showStar;
+</wxs>
+
+<view class='shoptopbox'>
+      <view class='pxdiimgs'>
+     <image src='{{shopdetail.coverPicture}}'/>
+     </view>
+</view>
+<view>
+     <view class='shoptitle'>
+          <text class='title'>{{shopdetail.name}}</text>
+          <view class='adds'>
+               <image src='../resource/kind/dress.png'/>
+               <text>{{shopdetail.address}}</text>
+          </view>
+          <view class='tybox'>
+              <text class='type'>{{parentCateName}}</text>
+              <text class='type'>{{cateName}}</text>
+			  <block wx:if='{{shopdetail.managerPhone}}'>
+        <image src='../resource/kind/phone.png' style='width:24rpx;height:28rpx;margin-right:5rpx;margin-bottom:-3rpx;'/>
+				<text class='money' bindtap='bdphone'>{{shopdetail.managerPhone}}</text>
+			  </block>
+          </view>
+     </view>
+     <view class='newbox'>
+          <text class='strong'>公告</text>
+          <text class='newtext'>{{shopdetail.notice==null ? '暂无公告': shopdetail.notice}}</text>
+     </view>
+</view>
+<view class="swiper-tab">  
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">外卖</view> 
+	<!-- 
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">评价</view>
+	-->
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">商家</view>  
+</view>  
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight + 140}}rpx" bindchange="bindChange">  
+    <!-- 外卖 -->  
+    <swiper-item style="display:flex;">  
+           <scroll-view scroll-y="true" style="height:84%;" class='shopleftbox'>
+               <view class="{{item.id==foodId?'active':''}}" wx:for="{{foodmenulist}}" wx:key="index" data-food-menuid='{{item.id}}' bindtap='onfoodlist' style='font-size:26rpx;color:#333;text-align:center;height:100rpx;line-height:100rpx;'>
+                   {{item.name}}
+                </view>
+          </scroll-view>   
+          <scroll-view scroll-y="true" style="height:84%;" class='shoprightbox' bindscrolltolower="loadlist">
+          
+                  <view class="food-item"  bindtap="selectFoods" wx:for='{{foodlist}}' wx:key="index">
+                  <view class="icon">
+                    <image src='{{item.coverPicture}}'  style="width:140rpx;height:140rpx"></image>
+                  </view>
+                  <view class="content">
+                    <view class="name"><image src='../resource/kind/tuijian.png' style='width:32rpx;height:28rpx;margin-right:10rpx;' wx:if="{{item.recommendFlag=='Y'}}"></image><text>{{item.name}}</text></view>
+                    <view class="desc"><text style='color:#333;'>月销{{item.currentMonthSalesVolume}}份</text></view>
+                    <view class="price">
+                      <view class="now"><text style='font-size:24rpx;color:#999;text-decoration:line-through;'>{{item.price}}€</text><text>{{item.discountPrice}}€</text></view>
+                    </view>
+                        <view class='adddele'>
+                            <image wx:if="{{item.fen>0}}" class='add' src='../resource/kind/delete.png'  style="width:40rpx;height:40rpx" catchtap='deletefoodlist' data-parent-index="{{index}}" data-cate-Goryid="{{item.categoryId}}"></image>
+                            <text wx:if="{{item.fen>0}}">{{item.fen}}</text>
+                            <image class='delete' src='../resource/kind/add.png'  style="width:40rpx;height:40rpx" catchtap='addfoodlist' data-parent-index="{{index}}" data-cate-Goryid="{{item.categoryId}}"></image>
+                        </view>
+                  </view>                
+                </view>
+        
+          </scroll-view> 
+               
+    </swiper-item>  
+    <!-- 评价 
+    <swiper-item>  
+      <scroll-view scroll-y="true" style="height:95%;">
+        <view class='pllist' wx:for="{{restCommentList}}" wx:key="index">
+          <view class='left'>
+            <image class='delete' src='../resource/kind/newsbg.jpg'  style="width:80rpx;height:80rpx"></image>
+          </view>
+          <view class='right'>
+            <view class='titlebox'>
+              <text class='name'>
+                  {{item.userName}}
+              </text>
+              <view class='pjbox'>
+                <view class="pxdibox">
+                  <block wx:for="{{[1,2,3,4,5]}}" wx:key="idx" wx:for-item="it">
+                    <image src='{{listUtils.showStar(it, item.score)}}' class="pxdiimg" /> 
+                  </block>
+                </view>
+              </view>
+            </view>
+            <view class='plcenter'>{{item.content}}</view>
+            <view class='timebox'>
+              {{item.createTime}}
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>  
+	-->
+    <!-- 商家 -->  
+    <swiper-item style='background:#eee;'> 
+       <scroll-view scroll-y="true" style="height:95%;"> 
+	    <!--
+        <view class='shangjiatitle'>
+              网友口碑
+        </view>  
+        <view class='kbwai'>
+          <view class='kbbox'>
+              <text class='left'>口味</text>
+              <text class='right'>{{shopdetail.tasteLevel}}</text>
+          </view>
+          <view class='kbbox'>
+              <text class='left'>服务</text>
+              <text class='right'>{{shopdetail.serviceLevel}}</text>
+          </view>
+          <view class='kbbox'>
+              <text class='left'>环境</text>
+              <text class='right'>{{shopdetail.environmentLevel}}</text>
+          </view>
+          <view class='kbbox'>
+              <text class='left'>推荐</text>
+              <text class='right'>{{shopdetail.likeCount}}</text>
+          </view>
+        </view>
+		-->
+        <view class='kbbox' style='padding-left:30rpx;margin-top:20rpx;'>
+              <text class='left'>营业时间</text>
+              <text class='right'>{{shopdetail.serviceTimeDesc}}</text>
+          </view>
+		  <!--
+          <view class='shangjiatitle'>
+              推荐菜品
+        </view>
+        <scroll-view scroll-x="true" style="width:100%;" class='caipintj'>
+          <block wx:for="{{shopdetail.lstCateringGoods}}" wx:key="index">
+            <image src='{{item.coverPicture}}'></image><text>{{item.name}}</text>
+          </block>
+        </scroll-view> 
+		-->
+    <!--
+        <view class='shangjiatitle'>
+              店铺位置
+              <map id="map" longitude="{{shopdetail.longitude}}" latitude="{{shopdetail.latitude}}" scale="15" show-location="true" bindcontroltap="controltap" markers="{{markers}}" style="width:100%;position:static; height: 385rpx;"></map>
+        </view> 
+        	-->
+        </scroll-view> 
+    </swiper-item>  
+</swiper> 
+<!-- 购物车 -->  
+<block wx:if="{{currentTab==0}}">
+<view class='bg'  wx:if="{{carbox==true}}" catchtap='nonecarbox'></view>
+<scroll-view scroll-y="true" class='karbox' wx:if="{{carbox==true}}">
+    <view class='kartopbox'>
+        <text class='title'>已选商品</text>
+        <text class='clear' catchtap='clearcar'>清空</text>
+    </view>
+    <view class='footlist' wx:for="{{foodlistshu}}" wx:key="index" wx:if="{{foodlistshu[index].fen>0}}">
+        <view class='foottext'>{{item.name}}</view>
+        <view class='adddele adddeleer'>
+                <text class='footmoney'>￥{{item.price}}</text>
+                <image class='add' src='../resource/kind/delete.png'  style="width:40rpx;height:40rpx" catchtap='deletefoodlist' data-parent-index="{{index}}" data-cate-Goryid="{{item.categoryId}}"></image>
+                            <text>{{item.fen}}</text>
+                            <image class='delete' src='../resource/kind/add.png'  style="width:40rpx;height:40rpx" catchtap='addfoodlist' data-parent-index="{{index}}" data-cate-Goryid="{{item.categoryId}}"></image>
+         </view>
+    </view>
+</scroll-view>
+<!-- 底部块 -->  
+<view class='bottombox'>
+              <view class='left'>
+                  <view class='gougif' >
+                    <image class='delete' wx:if='{{displaycar==false}}' src='../resource/kind/shopkar.png'  style="width:48rpx;height:48rpx"/>
+                    <!-- 选择后的图标-->
+                    <image class='delete' wx:if='{{displaycar==true}}' src='../resource/kind/shopkar2.png'  style="width:48rpx;height:48rpx" catchtap='discarbox'/>
+                    <!-- 选择后的红点-->
+                    <text wx:if='{{displaycar==true}}'>{{carnub}}</text>
+                    
+                  </view>
+                  <view class='moenybox'>
+                      <text  wx:if="{{displaycar==false&&shopdetail.pauseFlag=='Y'}}">未选购商品</text>
+                      <text  wx:if="{{displaycar==false&&shopdetail.pauseFlag=='N'}}">商家休息中，还未开始接单</text>
+                      <!-- 选择后显示费用-->
+                      <text  wx:if='{{displaycar==true}}'>{{foodmoney}}€</text>
+                      <text wx:if='{{shopdetail.distributeionAmount!=null}}'>{{shopdetail.distributeionAmount}}€</text>               
+                  </view>
+              </view>
+              <view class='right'>
+                  <text class='qs_box' wx:if='{{shopdetail.amountLimit > foodmoney}}'>{{shopdetail.amountLimit}}€起送</text>
+                  <text class='qs_box' wx:if='{{displaycar==false&&shopdetail.amountLimit==null}}'>无起送价</text>
+                  <!--选择后-->
+                  <text class='jsbox'  wx:if='{{displaycar==true&&shopdetail.amountLimit <= foodmoney}}' catchtap='goorder'>去结算</text>
+              </view>
+</view>  
+</block>

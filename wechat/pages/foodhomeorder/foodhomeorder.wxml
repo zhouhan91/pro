@@ -1,0 +1,103 @@
+<wxs module="orderUtils">
+  var parsePayStatus = function(status, payType) {
+    var result = "";
+    switch (status) {
+      case "10":  result = "待确认"; break;
+      case "20":  result = "支付中"; break;
+      case "30":  result = (payType=="offLine" ? "待确认" : "已支付"); break;
+      case "40":  result = "支付失败"; break;
+      case "50":  result = "已确认"; break;
+      case "60":  result = "配送中"; break;
+      case "70":  result = "已完成"; break;
+      case "80":  result = "已取消"; break;
+    }
+    return result;
+  }
+
+  var enableCancelOrder = function(status){
+    var s = parseInt(status);
+
+    return s < 50 ? true : false;
+  }
+
+  var enableCommentOrder = function(status){
+    var s = parseInt(status);
+
+    return (s == 70 || s == 60) ? true : false;
+  }
+
+  var hasCourierStatus = function(status){
+    var s = parseInt(status);
+
+    return (s == 50 || s == 70 || s == 60) ? true : false;
+  }
+
+  module.exports.parsePayStatus = parsePayStatus;
+  module.exports.enableCancelOrder = enableCancelOrder;
+  module.exports.enableCommentOrder = enableCommentOrder;
+  module.exports.hasCourierStatus = hasCourierStatus;
+</wxs>
+
+<view class='ordbox' wx:for="{{orderList}}" wx:key="index">
+  <view class='ortop'>
+    <view class='left'>
+      <text class='leftmenu'>{{orderUtils.parsePayStatus(item.status, item.payType)}}<text wx:if='{{item.cancelReason}}' style='margin-left:10rpx;font-size:24rpx;'>( 取消原因：{{item.cancelReason}} )</text></text>
+      <view class='peibox'>
+        <text class='peiinfo'>配送地址:{{item.address}}</text>
+        <!-- <text class='peiinfo'>配送员:{{item.courierName}}</text>
+        <text class='peiinfo'>联系方式:{{item.courierPhone}}</text>         -->
+      </view>
+      <view class='peibox' wx:if="{{orderUtils.hasCourierStatus(item.status)}}">
+        <!-- <text class='peiinfo'>配送地址:{{item.address}}</text> -->
+         <text class='peiinfo'>配送员:{{item.courierName}}</text>
+        <text class='peiinfo'>联系方式:{{item.courierPhone}}</text>         
+      </view>
+    </view>
+    <view class='right'>
+      <text class='an' wx:if="{{item.status == '10'}}" data-order='{{item}}' bindtap='onPayClick'>立即支付</text>
+      <text class='an' wx:if="{{orderUtils.enableCancelOrder(item.status)}}" data-order='{{item}}' bindtap='onCancelClick'>取消</text>
+      <text class='an' wx:if="{{orderUtils.enableCommentOrder(item.status)}}" data-order='{{item}}' bindtap='onCommentClick'>{{item.commentFlag == "Y" ? "查看评论" : "立即评论"}}</text>
+    </view>
+  </view>
+  <view class='orderadds'>
+    <text>订单号： {{item.code}}</text>
+  </view>
+  <view class='orderadds'>
+    <text>下单时间： {{item.createTime}}</text>
+  </view>
+  <view class='orderadds' wx:if="{{item.distributionTime}}">
+    <text>配送时间： {{item.distributionTime}}</text>
+  </view>
+  <view class='orderadds'>
+    <text>{{item.restaurant.name}} {{item.restaurant.address}}</text>
+  </view>
+  <view class='foodlist' wx:for="{{item.lstDetail}}" wx:key="idx" wx:for-index="idx" wx:for-item="detail">
+    <view class='foodbox'>
+      <text class='left'>{{detail.goodsName}}</text>
+      <text class='center'>x{{detail.count}}</text>
+      <text class='right'>€{{detail.amount}}</text>
+    </view>
+  </view>
+  <view class='foodmoney'>
+    <view class='jisuan' wx:if="{{item.couponName}}">
+      <text class='left'>{{item.couponName}}</text>
+      <text class='right'>- €{{item.couponAmount}}</text>
+    </view>
+    <view class='jisuan'>
+      <text class='left'>配送费</text>
+      <text class='right'>€{{item.distributionAmount}}</text>
+    </view>
+    <view class='jisuan'>
+      <text class='left'>小计</text>
+      <text class='right'>€{{item.payType == "offLine" ? item.cashAmount : item.settlementAmount}}</text>
+    </view>
+  </view>
+  <!-- <view wx:if="{{isLoading}}" class="weui-loadmore">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view> -->
+  <view wx:if="{{!isLoading && searchStatus == 2 && orderList.length > 0}}" class="weui-loadmore weui-loadmore_line">
+    <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无更多数据</view>
+  </view>
+  <view wx:if="{{orderList.length == 0}}" class='rmct'>暂无数据</view>
+</view>

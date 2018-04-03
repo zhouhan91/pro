@@ -1,0 +1,493 @@
+<wxs module="orderUtils">
+  var parsePayStatus = function(status) {
+    var result = "";
+    switch (status) {
+      case "10":  result = "新建"; break;
+      case "20":  result = "支付中"; break;
+      case "30":  result = "已支付"; break;
+      case "40":  result = "支付失败"; break;
+      case "50":  result = "待配送"; break;
+      case "60":  result = "待结算"; break;
+      case "70":  result = "已完成"; break;
+      case "80":  result = "已取消"; break;
+    }
+    return result;
+  }
+
+  var enableCancelOrder = function(status){
+    var s = parseInt(status);
+
+    return s < 50 ? true : false;
+  }
+
+  var enableCommentOrder = function(status){
+    var s = parseInt(status);
+
+    return (s == 70 || s == 60) ? true : false;
+  }
+
+  var hasCourierStatus = function(status){
+    var s = parseInt(status);
+
+    return (s == 50 || s == 70 || s == 60) ? true : false;
+  }
+
+  module.exports.parsePayStatus = parsePayStatus;
+  module.exports.enableCancelOrder = enableCancelOrder;
+  module.exports.enableCommentOrder = enableCommentOrder;
+  module.exports.hasCourierStatus = hasCourierStatus;
+</wxs>
+
+<view class='shujubox'> 
+  <view class='pfbox'>
+    <text class='nubmer'>{{orderInfo.orderCount}}个</text>
+    <text>订单总数</text>
+  </view>
+  <view class='pfbox'>
+    <text class='nubmer'>{{orderInfo.orderCompleteCount}}个</text>
+    <text>完成订单</text>
+  </view>
+  <view class='pfbox'>
+    <text class='nubmer'>€{{orderInfo.amount ? orderInfo.amount : 0}}</text>
+    <text>订单总额</text>
+  </view>
+</view>
+<view class="swiper-tab">
+  <block wx:for="{{tabList}}" wx:key="{{item.status}}">
+    <view class="swiper-tab-list {{currentTab==index? 'on' : ''}}" data-current="{{index}}" bindtap="swichNav">{{item.tab}}</view>
+  </block>
+</view>
+  <!-- <text>{{tabDataList[currentTab].length}}</text> -->
+<swiper current="{{currentTab}}" class="swiper-box" bindchange="bindChange">
+  <swiper-item></swiper-item>
+  <swiper-item></swiper-item>
+  <swiper-item></swiper-item>
+  <swiper-item></swiper-item>
+  <swiper-item></swiper-item>
+  <!-- <swiper-item>
+    <block wx:for="{{tabDataList[0]}}" wx:key="{{index}}"wx:for-item="it">
+      <view class='orderboxdd'>
+        <view class='orderttop'>
+          <view class='topleft'>
+            <text class='zt'>新订单</text>
+            <text class='ddh'>订单号：{{it.code}}</text>
+          </view>     
+          <text class='btn' style='color:#f59a24;' data-order='{{it}}' bindtap='onConfirmOrderClick'>确定</text>
+          <text class='btn' data-order='{{it}}' bindtap='onCancelClick'>取消</text>
+        </view>
+        <view class='listbox'>
+          <view class='bplist'>
+            <text class='left'>客户名称</text>
+            <text class='right'>{{it.userId}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>联系电话</text>
+            <text class='right'>{{it.phone}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>配送地址</text>
+            <text class='right'>{{it.address}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>下单时间</text>
+            <text class='right'>{{it.createTime}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>配送时间</text>
+            <text class='right'></text>
+          </view>             
+        </view>
+        <view class='footbox'>
+          <block wx:for="{{it.lstDetail}}" wx:key="idx" wx:for-index="idx" wx:for-item="goods">
+            <view class='footlist'>
+              <text class='left'>{{goods.goodsName}}</text>
+              <text class='center'>x{{goods.count}}</text>
+              <text class='right'>€{{goods.amount}}</text>
+            </view>
+          </block>
+        </view>
+        <view class='zfbotbox'>
+          <text class='left'>{{it.couponName}}</text>
+          <text class='right'>€{{it.couponAmount}}</text>
+        </view>
+      </view>
+    </block>
+  </swiper-item>    
+  <swiper-item>
+    <block wx:for="{{tabDataList[1]}}"  wx:key="index" wx:key="{{index}}">
+      <view class='orderboxdd'>
+        <view class='orderttop'>
+          <view class='topleft'>
+            <text class='zt'>待配送</text>
+            <text class='ddh'>订单号：{{item.code}}</text>
+          </view>     
+          <text class='btn' style='color:#f59a24;' bindtap='onDistributeOrderClick'>配送</text>
+          <text class='btn' data-order='{{item}}' bindtap='onCancelClick'>取消</text>
+        </view>
+        <view class='listbox'>
+          <view class='bplist'>
+            <text class='left'>客户名称</text>
+            <text class='right'>{{item.userId}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>联系电话</text>
+            <text class='right'>{{item.phone}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>配送地址</text>
+            <text class='right'>{{item.address}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>下单时间</text>
+            <text class='right'>{{item.createTime}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>配送时间</text>
+            <text class='right'></text>
+          </view>             
+        </view>
+        <view class='footbox'>
+          <block wx:for="{{item.lstDetail}}" wx:key="idx" wx:for-index="idx" wx:for-item="goods">
+            <view class='footlist'>
+              <text class='left'>{{goods.goodsName}}</text>
+              <text class='center'>x{{goods.count}}</text>
+              <text class='right'>€{{goods.amount}}</text>
+            </view>
+          </block>
+        </view>
+        <view class='zfbotbox'>
+          <text class='left'>{{item.couponName}}</text>
+          <text class='right'>€{{item.couponAmount}}</text>
+        </view>
+      </view>
+    </block>   
+  </swiper-item>  
+  <swiper-item>
+    <block wx:for="{{tabDataList[2]}}" wx:key="index" wx:key="{{index}}">
+      <view class='orderboxdd'>
+        <view class='orderttop'>
+          <view class='topleft'>
+            <text class='zt'>待结算</text>
+            <text class='ddh'>订单号：{{item.code}}</text>
+          </view>
+          <text class='btn' style='color:#f59a24;' data-order='{{item}}' bindtap='onSettlingOrderClick'>结算确定</text>
+        </view>
+        <view class='listbox'>
+          <view class='bplist'>
+            <text class='left'>客户名称</text>
+            <text class='right'>{{item.userId}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>联系电话</text>
+            <text class='right'>{{item.phone}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>配送地址</text>
+            <text class='right'>{{item.address}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>下单时间</text>
+            <text class='right'>{{item.createTime}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>配送时间</text>
+            <text class='right'></text>
+          </view>             
+        </view>
+        <view class='footbox'>
+          <block wx:for="{{item.lstDetail}}" wx:key="idx" wx:for-index="idx" wx:for-item="goods">
+            <view class='footlist'>
+              <text class='left'>{{goods.goodsName}}</text>
+              <text class='center'>x{{goods.count}}</text>
+              <text class='right'>€{{goods.amount}}</text>
+            </view>
+          </block>
+        </view>
+        <view class='zfbotbox'>
+          <text class='left'>{{item.couponName}}</text>
+          <text class='right'>€{{item.couponAmount}}</text>
+        </view>
+      </view>
+    </block>
+  </swiper-item>    
+  <swiper-item>
+    <block wx:for="{{tabDataList[3]}}" wx:key="index" wx:key="{{index}}">
+      <view class='orderboxdd'>
+        <view class='orderttop'>
+          <view class='topleft'>
+            <text class='zt'>已完成</text>
+            <text class='ddh'>订单号：{{item.code}}</text>
+          </view>     
+        </view>
+        <view class='listbox'>
+          <view class='bplist'>
+            <text class='left'>客户名称</text>
+            <text class='right'>{{item.userId}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>联系电话</text>
+            <text class='right'>{{item.phone}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>配送地址</text>
+            <text class='right'>{{item.address}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>下单时间</text>
+            <text class='right'>{{item.createTime}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>配送时间</text>
+            <text class='right'></text>
+          </view>             
+        </view>
+        <view class='footbox'>
+          <block wx:for="{{item.lstDetail}}" wx:key="idx" wx:for-index="idx" wx:for-item="goods">
+            <view class='footlist'>
+              <text class='left'>{{goods.goodsName}}</text>
+              <text class='center'>x{{goods.count}}</text>
+              <text class='right'>€{{goods.amount}}</text>
+            </view>
+          </block>
+        </view>
+        <view class='zfbotbox'>
+          <text class='left'>{{item.couponName}}</text>
+          <text class='right'>€{{item.couponAmount}}</text>
+        </view>
+      </view>
+    </block>
+  </swiper-item>
+  <swiper-item>
+    <block wx:for="{{tabDataList[4]}}" wx:key="index" wx:key="{{index}}">
+      <view class='orderboxdd'>
+        <view class='orderttop'>
+          <view class='topleft'>
+              <text class='zt'>已取消</text>
+              <text class='ddh'>订单号：{{item.code}}</text>
+          </view>     
+        </view>
+        <view class='listbox'>
+          <view class='bplist'>
+            <text class='left'>客户名称</text>
+            <text class='right'>{{item.userId}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>联系电话</text>
+            <text class='right'>{{item.phone}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>配送地址</text>
+            <text class='right'>{{item.address}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>下单时间</text>
+            <text class='right'>{{item.createTime}}</text>
+          </view>  
+          <view class='bplist'>
+            <text class='left'>配送时间</text>
+            <text class='right'></text>
+          </view>             
+        </view>
+        <view class='footbox'>
+          <block wx:for="{{item.lstDetail}}" wx:key="idx" wx:for-index="idx" wx:for-item="goods">
+            <view class='footlist'>
+              <text class='left'>{{goods.goodsName}}</text>
+              <text class='center'>x{{goods.count}}</text>
+              <text class='right'>€{{goods.amount}}</text>
+            </view>
+          </block>
+        </view>
+        <view class='zfbotbox'>
+          <text class='left'>{{item.couponName}}</text>
+          <text class='right'>€{{item.couponAmount}}</text>
+        </view>
+      </view>
+    </block>
+  </swiper-item> -->
+</swiper>
+<block wx:for="{{tabDataList[currentTab]}}" wx:key="{{index}}"wx:for-item="it">
+  <view class='orderboxdd'>
+    <!-- 新订单 -->
+    <view class='orderttop' wx:if="{{currentTab == 0}}">
+      <view class='topleft'>
+      <text class='zt'>新订单</text>
+      <text class='ddh'>订单号：{{it.code}}</text>
+      </view>     
+      <text class='btn' style='color:#f59a24;' data-order='{{it}}' bindtap='onConfirmOrderClick'>确定</text>
+      <text class='btn' data-order='{{it}}' bindtap='onCancelClick'>取消</text>
+    </view>
+    <!-- 待配送 -->
+    <view class='orderttop' wx:if="{{currentTab == 1}}">
+      <view class='topleft'>
+      <text class='zt'>待配送</text>
+      <text class='ddh'>订单号：{{it.code}}</text>
+      </view>     
+      <text class='btn' style='color:#f59a24;' data-order='{{it}}' bindtap='onDistributeOrderClick'>配送</text>
+      <text class='btn' data-order='{{it}}' bindtap='onCancelClick'>取消</text>
+    </view>
+    <!-- 待结算 -->
+    <view class='orderttop' wx:if="{{currentTab == 2}}">
+      <view class='topleft'>
+        <text class='zt'>待结算</text>
+        <text class='ddh'>订单号：{{it.code}}</text>
+      </view>
+      <text class='btn' style='color:#f59a24;' data-order='{{it}}' bindtap='onSettlingOrderClick'>确定结算</text>
+    </view>
+    <!-- 已完成 -->
+    <view class='orderttop' wx:if="{{currentTab == 3}}">
+      <view class='topleft'>
+        <text class='zt'>已完成</text>
+        <text class='ddh'>订单号：{{it.code}}</text>
+      </view>     
+    </view>
+    <!-- 已取消 --> 
+    <view class='orderttop' wx:if="{{currentTab == 4}}">
+      <view class='topleft'>
+          <text class='zt'>已取消</text>
+          <text class='ddh'>订单号：{{it.code}}</text>
+      </view>     
+    </view>
+    <view class='listbox'>
+      <view class='bplist'>
+        <text class='left'>客户名称：</text>
+        <text class='right'>{{it.name}}</text>
+      </view>  
+      <view class='bplist'>
+        <text class='left'>联系电话：</text>
+        <text class='right'>{{it.phone}}</text>
+      </view>  
+      <view class='bplist'>
+        <text class='left'>配送地址：</text>
+        <text class='right'>{{it.address}}</text>
+      </view>  
+      <view class="bplist" wx:if="{{it.distributionNotes}}">
+        <text class='left' style='color:#ff0000;'>配送时间：</text>
+        <text class='right'  style='color:#ff0000;'>{{it.distributionNotes}}</text>
+      </view>
+      <view class='bplist'>
+        <text class='left'>下单时间：</text>
+        <text class='right'>{{it.createTime}}</text>
+      </view>  
+       <view class='bplist' wx:if="{{it.remark}}">
+        <text class='left'>客户备注:</text>
+        <text class='right'>{{it.remark}}</text>
+      </view>             
+    </view>
+    <view class='footbox'>
+      <block wx:for="{{it.lstDetail}}" wx:key="idx" wx:for-index="idx" wx:for-item="goods">
+        <view class='footlist'>
+          <text class='left'>{{goods.goodsName}}</text>
+          <text class='center'>x{{goods.count}}</text>
+          <text class='right'>€{{goods.amount}}</text>
+        </view>
+      </block>
+    </view>
+    <view class='zfbotbox' wx:if="{{it.couponName}}">
+      <text class='left'>{{it.couponName}}</text>
+      <text class='right'>- €{{it.couponAmount}}</text>
+    </view>
+    <view class='zfbotbox'>
+      <text class='left'>配送费</text>
+      <text class='right'>€{{it.distributionAmount}}</text>
+    </view>
+    <view class='zfbotbox'>
+      <text class='left'>小计</text>
+      <text class='right'>€{{it.payType == "offLine" ? it.cashAmount : it.settlementAmount}}</text>
+    </view>
+    <view class='zfbotbox'>
+      <text class='left'>实收</text>
+      <text class='right' wx:if="{{currentTab <= 2}}"></text>
+      <text class='right' wx:if="{{currentTab == 3}}">€{{it.cashAmount}}</text>
+    </view>
+    <view class='zfbotbox'>
+      <text class='right'>{{it.payType == "offLine" ? "线下支付" : "在线支付"}}</text>
+    </view>
+  </view>
+</block>
+
+<!-- 取消订单弹窗 start -->
+<view class="room_detail" hidden="{{!isShowCancelReason}}">
+  <view class="mask" bindtap="hideHomeDetail"></view>
+  <view class="room_detail_pic">
+    <form bindsubmit="formCanelSubmit" bindreset='formCancelReset'>
+      <view class='listbox'>
+        <view class='bplist'>
+          <view class="page-section">
+            <view class="page-section-title">取消原因</view>
+            <view class="weui-cells_after-title">
+              <radio-group name="cancelReason" bindchange="radioReasonChange">
+                <label class="weui-cell weui-check__label" style='padding-left:0;' wx:for="{{cancelResonList}}" wx:key="idx">
+                  <view class="weui-cell__hd">
+                    <radio value="{{item}}"/>{{item}}
+                  </view>
+                </label>
+              </radio-group>
+            </view>
+          </view>
+        </view>
+        <view class='bplist'>
+          <text class='left'>备注</text>
+          <input type='text' class="right" name="cancelRemark"></input>
+        </view>
+      </view>
+      <view class='btboxqq' style='padding-left:190rpx;'>
+        <button size='mini' style='border-radius:0;' type="warn" form-type='submit'>确认</button>
+        <button size='mini' style='border-radius:0;border:2rpx solid #eee;margin-left:20rpx;'  type="default" form-type='reset'>取消</button>
+      </view>
+    </form>
+  </view>
+</view>
+<!-- 取消订单弹窗 end -->
+
+<!-- 订单配送弹窗 start -->
+<view class="room_detail" hidden="{{!isShowCourier}}">
+  <view class="mask" bindtap="hideHomeDetail"></view>
+  <view class="room_detail_pic">
+    <form bindsubmit="formDistSubmit" bindreset='formCancelReset'>
+      <view class='listbox'>
+        <view class=''>
+          <view class="">
+            <view class="">请选择配送员</view>
+            <view class="">
+              <view class="">
+                <view class="">
+                  <picker bindchange="bindCourierChange" value="{{courierIndex}}" range="{{courierList}}" range-key="name">
+                    <view class="weui-select">{{courierList[courierIndex].name}}</view>
+                  </picker>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view>
+        <button size='mini' type="warn" bindtap='onCourierConfirmClick'>配送</button>
+        <button size='mini' type="default" bindtap='onCourierCancelClick'>取消</button>
+      </view>
+    </form>
+  </view>
+</view>
+<!-- 订单配送弹窗 end -->
+
+<!-- 确认结算弹窗 start -->
+<view class="room_detail" hidden="{{!isShowSettling}}">
+  <view class="mask" bindtap="hideHomeDetail"></view>
+  <view class="room_detail_pic">
+    <form bindsubmit="formSettingSubmit" bindreset='formCancelReset'>
+      <view class='bplist'>
+        <text class='left'>实收:</text>
+        <input type='text' class="right" name="settlementAmount" value="{{orderInfo.payType == 'offLine' ? orderInfo.cashAmount : orderInfo.settlementAmount}}"></input>
+      </view>
+      <view class='bplist'>
+        <text class='left'>备注:</text>
+        <input type='text' class="right" name="settlementRemark"></input>
+      </view>
+
+      <view class='btboxqq' style='padding-left:190rpx;'>
+        <button size='mini' style='border-radius:0;' type="warn" form-type='submit'>确认</button>
+        <button size='mini' style='border-radius:0;border:2rpx solid #eee;margin-left:20rpx;'  type="default" form-type='reset'>取消</button>
+      </view>
+    </form>
+  </view>
+</view>
+<!-- 确认结算弹窗 end -->

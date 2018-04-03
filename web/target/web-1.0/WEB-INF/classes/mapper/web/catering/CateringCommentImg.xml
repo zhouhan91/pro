@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.web.catering.mapper.CateringCommentImgMapper">
+
+	<resultMap id="cateringCommentImg" type="com.wemeCity.web.catering.model.CateringCommentImg">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="comment_id" property="commentId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="restaurant_id" property="restaurantId" jdbcType="BIGINT" />
+		<result column="path" property="path" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_by" property="modifyBy" jdbcType="BIGINT" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertCateringCommentImg" parameterType="com.wemeCity.web.catering.model.CateringCommentImg">
+		<![CDATA[
+			INSERT INTO CATERING_COMMENT_IMG (
+				id,
+				comment_id,
+				user_id,
+				restaurant_id,
+				path,
+				is_deleted,
+				create_by,
+				create_time,
+				modify_by,
+				modify_time
+			) VALUES (
+				null,
+				#{commentId},
+				#{userId},
+				#{restaurantId},
+				#{path},
+				#{isDeleted},
+				#{createBy},
+				#{createTime},
+				#{modifyBy},
+				#{modifyTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM CATERING_COMMENT_IMG LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteCateringCommentImg" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE catering_comment_img SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateCateringCommentImg" parameterType="map">
+		UPDATE catering_comment_img set modify_time=now()
+		<if test="commentId !=null">
+			, comment_id=#{commentId}
+		</if>
+		<if test="userId !=null">
+			, user_id=#{userId}
+		</if>
+		<if test="restaurantId !=null">
+			, restaurant_id=#{restaurantId}
+		</if>
+		<if test="path !=null">
+			, path=#{path}
+		</if>
+		<if test="isDeleted !=null">
+			, is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			, create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			, modify_by=#{modifyBy}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readCateringCommentImg" parameterType="java.lang.Long" resultMap="cateringCommentImg">
+		SELECT * FROM catering_comment_img WHERE id=#{id}
+	</select>
+
+	<select id="queryCateringCommentImgList" parameterType="map" resultMap="cateringCommentImg">
+		SELECT * FROM catering_comment_img WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="commentId !=null">
+			AND comment_id=#{commentId}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="restaurantId !=null">
+			AND restaurant_id=#{restaurantId}
+		</if>
+		<if test="path !=null">
+			AND path=#{path}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryCateringCommentImgCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM CATERING_COMMENT_IMG WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="commentId !=null">
+			AND comment_id=#{commentId}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="restaurantId !=null">
+			AND restaurant_id=#{restaurantId}
+		</if>
+		<if test="path !=null">
+			AND path=#{path}
+		</if>
+		<if test="isDeleted !=null">
+			AND is_deleted=#{isDeleted}
+		</if>
+		<if test="createBy !=null">
+			AND create_by=#{createBy}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="modifyBy !=null">
+			AND modify_by=#{modifyBy}
+		</if>
+		<if test="modifyTime !=null">
+			AND modify_time=#{modifyTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

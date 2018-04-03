@@ -1,0 +1,19 @@
+/**index.wxss**/
+.indextopbox{ background:#7c7c7c;height:175rpx; overflow:hidden;zoom:1;}
+.indextopbox image{float:left;width:120rpx;height:120rpx;margin-left:30rpx;margin-top:26rpx;}
+.indextopbox .dptitle{float:left;font-size:34rpx;color:#fff;margin-top:62rpx;margin-left:20rpx;}
+.indextopbox .dptype{float:right;display:blcok;background:#fff;color:#666;width:120rpx;height:50rpx;line-height:50rpx;border-radius:25rpx; text-align:center;font-size:24rpx;margin-right:30rpx;margin-top:60rpx;}
+.shujubox{ display:flex;height:94rpx;padding-top:34rpx;}
+.pfbox{text-align:center; font-size:20rpx;color:#999; width:25%;border-right:2rpx solid #ccc;height:66rpx;}
+.pfbox text{display:block;}
+.pfbox:last-child{border:none;}
+.nubmer{color:#333;font-size:32rpx;}
+.dingdanshu{overflow:hidden;zoom:1;height:300rpx;}
+.dingdanshu .left{float:left;width:50%;height:100%;background:#ffac40;padding-top:100rpx;}
+.dingdanshu .right{float:left;width:50%;height:100%; background:#f59a24;padding-top:100rpx;}
+.dingdanshu text{color:#fff; display:block; text-align:center;font-size:20rpx;}
+.dingdanshu text.textop{font-size:60rpx;}
+.glbox{display:flex; justify-content:space-between;flex-wrap:wrap;margin-top:50rpx;}
+.gllist{ width:25%; text-align:center;margin-bottom:50rpx;}
+.gllist image{width:90rpx;height:90rpx;margin-bottom:5rpx;}
+.gllist text{display:block; font-size:24rpx;color:#333;}

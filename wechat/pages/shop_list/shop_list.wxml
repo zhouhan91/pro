@@ -1,0 +1,111 @@
+<wxs module="listUtils">
+  var distanceconverter = function (distance){
+    return distance > 1000 ? parseFloat(distance / 1000).toFixed(1) + "KM" : distance + "M";
+  };
+
+  var showStar = function(item, interestLevel){
+    var url = "../resource/kind/star_normal.png";
+    if(item <= Math.floor(interestLevel)){
+      url = "../resource/kind/star_selected.png";
+    } else if (item > Math.floor(interestLevel) && item <= Math.round(interestLevel)){
+      url = "../resource/kind/star_half.png";
+    }
+
+    return url;
+  };
+  var cateNameById = function(categoryId, navitop){
+    var cateName = "";
+    if (navitop) {
+      navitop.forEach(function(item, idx){
+        if(item.id == categoryId){
+          cateName = item.name;
+        }
+      });
+    }
+    
+    return cateName;
+  };
+  module.exports.distanceconverter = distanceconverter;
+  module.exports.showStar = showStar;
+  module.exports.cateNameById = cateNameById;
+</wxs>
+<!--定位显示屏蔽
+<view class="seachbox">    
+      <view class="qiehuan"  bindtap="onGoBackClick" ><image src='../resource/kind/dress.png' style='width:24rpx;height:28rpx;margin-right:14rpx;'></image>{{dist}},{{city}}</view>
+  </view>
+-->
+<block wx:if="{{distext}}">
+  <view class='distishi'>
+      <text class='tishi'>好吃小妹将尽快为您推出合适的商家敬请期待！请先选择其他品类，谢谢！</text>
+      <text class='btn' bindtap='onOkClick'>返回</text>
+  </view>
+</block>
+<scroll-view scroll-x class='navbox'>
+        <view class='navmenu {{index==activeCateIndex ? "active":""}}'  wx:for="{{cateList}}" wx:key="index" data-cate-index="{{index}}" bindtap='onCateItemClick'>
+            <text>{{item.name}}</text>
+        </view>        
+</scroll-view>
+
+<view class='listbox'>
+     <view class='tjlistbox' wx:for="{{shopList[activeCateIndex]}}" wx:key="index" data-item='{{item}}' bindtap='onShopItemClick' wx:if="{{item.openFlag=='Y'}}">
+          <view class='left'>
+             <image src='{{item.coverPicture}}'></image>
+          </view>
+          <view class='right'>
+              <view class='titlebox'>
+                  <text>{{item.name}}</text>
+                  <image src='../resource/kind/tuijian.png' wx:if="{{item.recommendFlag=='Y'}}"></image>
+              </view>
+              <view class='pjbox'> 
+                  <view class="pxdibox">
+                    <block wx:for="{{[1,2,3,4,5]}}" wx:key="idx" wx:for-item="it">
+                     <image src='{{listUtils.showStar(it, item.interestLevel)}}' class="pxdiimg" /> 
+                  </block>
+                  </view>
+                  <text>{{item.interestLevel}}</text>
+              </view>
+              <view class='jsbox'>
+                  <text class='cuisine'>{{listUtils.cateNameById(item.categoryId, navitop)}}</text>
+                  <text class='street'>{{item.address}}</text>
+                  <!-- <text class='time'>30分钟</text> -->
+                  <text class='distance'>{{indexUtils.distanceconverter(item.distance)}}</text>                
+              </view>
+              <view class='tewaibox' wx:for="{{item.lstCateringDiscount}}" wx:key="index" wx:for-item="cdItem" wx:if="{{cdItem.status == 'Y'}}">
+                 <view class='tebox' wx:if="{{cdItem.type == 'manjian'&&cdItem.target!=0&&cdItem.discount!=0}}">
+                      <text class='tetype'>满</text>
+                      <text class='tetext'>满{{cdItem.target}}减{{cdItem.discount}}</text>
+                 </view>
+                 <view class='tebox' wx:if="{{cdItem.type == 'quanchangzhekou'}}">
+                      <text class='tetype' style='background:#ff9933;'>折</text>
+                      <text class='tetext'>全场{{cdItem.discount*10}}折</text>
+                 </view>
+                 <view class='tebox' wx:if="{{cdItem.type == 'xinren'&&cdItem.discount!=0}}">
+                      <text class='tetype' style='background:#0f9ff2;'>新</text>
+                      <text class='tetext'>新人直减{{cdItem.discount}}</text>
+                 </view>
+              </view>
+          </view>
+      </view>
+</view>
+<block wx:if="{{isnone==true}}">
+  <view class='citybox' bindtap='isnone'>
+      <text class='citytitle'>当前城市</text>
+      <text class='dqcity'>巴黎市，九十四省</text>
+      <text class='citytitle'>其他城区</text>
+      <view class='qubox'>
+         <text>九十一区</text>
+         <text>九十一区</text>
+         <text>九十一区</text>
+         <text>九十一区</text>
+         <text>九十一区</text>
+      </view>
+       <text class='citytitle'>热门城市</text>
+      <view class='chengbox'>
+         <text>柏林</text>
+         <text>慕尼黑</text>
+         <text>北京</text>
+         <text>长沙</text>
+         <text>广州</text>
+      </view>
+  </view>
+  </block>

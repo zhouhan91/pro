@@ -1,0 +1,147 @@
+<view class="ordercent" style='padding-bottom:118rpx;'>  
+  <view class="orderbot">
+      <text class="odbtsj"></text>
+      <text class="odbtmy"></text>
+      <!-- 暂时隐藏
+       <text class="odbtsj">实际支付</text>
+      <text class="odbtmy">€{{actualCost}}</text>
+      -->
+      <text class="odbtbtn" bindtap='onPayClick'>立即预订</text>
+  </view>
+  <view class="ordertopbox">
+      <view class="ordtopleft"><image src="{{orderInfo.roomInfo.images.length > 0 ? orderInfo.roomInfo.images[0].path : '' }}" /></view>
+      <view class="ordtopright">
+          <text class="odtoptitle">{{orderInfo.name}}</text>
+          <view class="odtopds"><image src="../resource/kind/dress.png" class="souimg"/><text>{{cityName}}</text></view>
+          <view class="odtopty"><text>{{orderInfo.houseType}}</text><text>{{orderInfo.roomInfo.type}}</text><text>{{orderInfo.roomInfo.area}}㎡</text><text>{{orderInfo.roomInfo.bedType}}</text><text>{{orderInfo.roomInfo.price}}€起/{{orderInfo.roomInfo.leaseUnit}}</text></view>
+      </view>
+  </view>
+  <view class="ordertitle">
+  入住时间
+  </view>
+  <!--
+  <view class="ordertimebox">
+  -->
+  <view class="ruzhubox">
+    <view class="rzlistbox">
+        <text>入住日期</text>
+        <picker mode="date" value="{{startDate}}" start="{{currDate}}" end="{{(endDatePre && endDatePre != '') ? endDatePre : maxDate}}" bindchange="bindStartDateChange">
+          <input class="shuruinput" value="{{startDate}}" placeholder="选择入住日期" disabled='true'/>
+        </picker>
+    </view>
+    <view wx:if="{{orderInfo.roomInfo.leaseModel == '日租'}}" class="rzlistbox">
+        <text>入住时间</text>
+        <picker mode="time" value="{{time}}" bindchange="bindTimeChange">
+          <input class="shuruinput" value="{{time}}" placeholder="选择入住时间" disabled='true'/>
+        </picker>
+    </view>
+    <view wx:if="{{orderInfo.roomInfo.leaseModel == '日租'}}" class="rzlistbox">
+        <text>离开日期</text>
+        <picker mode="date" value="{{endDate}}" start="{{(startDateNext && startDateNext != '') ? startDateNext : minDate}}" end="{{maxDate}}" bindchange="bindEndDateChange">
+          <input class="shuruinput" value="{{endDate}}" placeholder="选择离开日期" disabled='true'/>
+        </picker>
+    </view>
+    <view wx:if="{{orderInfo.roomInfo.leaseModel == '月租'}}" class="rzlistbox" style='border:none;'>
+        <text>居住时长</text>
+        <picker bindchange="bindMonthPickerChange" value="{{index}}" range="{{monthList}}">
+          <input class="shuruinput" value="{{months}}" placeholder="选择居住时长" disabled='true'/>
+        </picker>
+    </view>
+  </view>
+          <!--
+      <view wx:if="{{isDateOk}}" class="ordertimtim">{{diffMonths}}个月{{diffDays%30}}天</view>
+      <view class="odtmcent odtimeleft">
+        <picker mode="date" value="{{startDate}}" start="{{currDate}}" end="{{(endDatePre && endDatePre != '') ? endDatePre : maxDate}}" bindchange="bindStartDateChange">
+          <image src="../resource/kind/odtime.png" class="souimg"/>
+          <text>{{startDate==null? "选择入住时间" : startDate}}</text>
+        </picker>
+      </view>
+      <view class="odtmcent odtimeright">
+
+        <picker mode="date" value="{{endDate}}" start="{{(startDateNext && startDateNext != '') ? startDateNext : minDate}}" end="{{maxDate}}" bindchange="bindEndDateChange">
+          <image src="../resource/kind/odtime.png" class="souimg"/>
+          <text>{{endDate==null? "选择离开时间" : endDate}}</text>
+        </picker>
+      </view>
+  </view>
+              -->
+  <view class="ordertitle">
+  入住人信息
+  </view>
+  <view class="ruzhubox">
+    <view class="rzlistbox">
+        <text>真实姓名</text>
+        <input class="shuruinput" value="{{renterName}}" placeholder-class="orderplaceholder" catchblur='onRenterNameBlur' placeholder="姓(例：li)/名(例：lei)，必填"/>
+    </view>
+    <view class="rzlistbox">
+        <text>联系电话</text>
+        <input class="shuruinput" value="{{renterPhone}}" placeholder-class="orderplaceholder" catchblur='onRenterPhoneBlur' placeholder="用于接收通知，必填"/>
+    </view>
+    <view class="rzlistbox">
+        <text>EMAIL</text>
+        <input class="shuruinput" value="{{renterEmail}}" placeholder-class="orderplaceholder" catchblur='onRenterEmailBlur' placeholder="用于接收通知，必填"/>
+    </view>
+    <view class="rzlistbox">
+        <text>微信</text>
+        <input class="shuruinput" value="{{renterWeixin}}" placeholder-class="orderplaceholder" catchblur='onRenterWeixin' placeholder="请输入微信号，没有可不填"/>
+    </view>
+      <view class="rzlistbox" style='border:none;'>
+        <text>学校名称</text>
+        <input class="shuruinput" value="{{renterUniversity}}" placeholder-class="orderplaceholder" catchblur='onRenterUniversity' placeholder="请输入学校名称，没有可不填"/>
+    </view>
+  </view>
+  <view class="ordertitle" wx:if="{{orderInfo.roomInfo.leaseModel == '日租' || (orderInfo.roomInfo.leaseModel == '月租' && orderInfo.roomInfo.payFlag == 'Y')}}">
+  资费信息
+  </view>
+  <view class="ruzhubox"  wx:if="{{orderInfo.roomInfo.leaseModel == '日租' || (orderInfo.roomInfo.leaseModel == '月租' && orderInfo.roomInfo.payFlag == 'Y')}}">
+    <view wx:if="{{orderInfo.roomInfo.tipFlag == 'Y'}}" class="rzlistbox">
+        <text>定金</text>
+        <text>€{{orderInfo.roomInfo.tipPrice}}</text>
+    </view>
+    <view wx:if="{{orderInfo.roomInfo.tipFlag == 'N'}}" class="rzlistbox">
+        <text>房费</text>
+        <text>€{{orderInfo.roomInfo.discountPrice}}</text>
+    </view>
+    <view wx:if="{{orderInfo.roomInfo.leaseModel == '日租' || (orderInfo.roomInfo.leaseModel == '月租' && orderInfo.roomInfo.payFlag == 'Y')}}" class="rzlistbox" style='border:none;'>
+        <text>优惠券</text>
+        <input class="shuruinput" value="€{{couponAmount==0?notUseCouponDesc:couponAmount}}" placeholder-class="orderplaceholder" bindtap='onCouponClick' placeholder="选择使用" disabled='true'/>
+        <image src="../resource/kind/jiantou.png" class="jiantou ordjt"></image>
+    </view>
+  </view>
+  <view style='font-size:28rpx;color:#333;padding-left:30rpx;margin-top:20rpx;'>
+  您填写完预定信息后，房东会尽快联系您
+  </view>
+  <!--
+  <view style='padding:20rpx 30rpx; font-size:26rpx;color:#333;padding-bottom:0;'>
+    当前人民币欧元汇率 1:{{euros}}
+  </view>
+  <view style='margin-bottom:140rpx;padding:20rpx 30rpx; font-size:26rpx;color:#999;padding-top:10rpx;'>
+  (汇率会随时间波动，以支付时间为准)
+  </view>
+  -->
+  <!-- 优惠券 start -->
+  <view class="user_coupon" hidden="{{!isShowCoupon}}">
+    <view class="mask" bindtap="onHideUserCouponClick"></view>
+    <view class="user_coupon_body">
+      <view class="coupon_body_title">代金券</view>
+      <radio-group bindchange="onCouponChangeClick">
+        <view class="weui-cell" wx:for="{{couponList}}" wx:key="index">
+          <block wx:if="{{item.status == 1}}">
+            <view class="weui-cell__bd">€{{item.amount}}</view>
+            <view class="weui-cell__ft" style='display:flex;'>
+              <view class="">{{item.remark}}</view>
+              <radio value="{{item.id}}"/>
+            </view>
+          </block>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">{{notUseCouponDesc}}</view>
+          <view class="weui-cell__ft">
+            <radio value="{{notUseCouponIdx}}"/>
+          </view>
+        </view>
+      </radio-group>
+      <view class="user_coupon_close" bindtap="onHideUserCouponClick">关闭</view>
+    </view>
+  </view>
+</view>

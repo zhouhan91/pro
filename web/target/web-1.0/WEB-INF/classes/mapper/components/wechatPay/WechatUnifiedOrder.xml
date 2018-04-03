@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wemeCity.components.wechatPay.mapper.WechatUnifiedOrderMapper">
+
+	<resultMap id="wechatUnifiedOrder" type="com.wemeCity.components.wechatPay.model.WechatUnifiedOrder">
+		<id column="id" property="id" />
+		<result column="id" property="id" jdbcType="BIGINT" />
+		<result column="return_code" property="returnCode" jdbcType="VARCHAR" />
+		<result column="return_msg" property="returnMsg" jdbcType="VARCHAR" />
+		<result column="app_id" property="appId" jdbcType="VARCHAR" />
+		<result column="mch_id" property="mchId" jdbcType="VARCHAR" />
+		<result column="device_info" property="deviceInfo" jdbcType="VARCHAR" />
+		<result column="nonce_str" property="nonceStr" jdbcType="VARCHAR" />
+		<result column="sign" property="sign" jdbcType="VARCHAR" />
+		<result column="result_code" property="resultCode" jdbcType="VARCHAR" />
+		<result column="err_code" property="errCode" jdbcType="VARCHAR" />
+		<result column="err_code_des" property="errCodeDes" jdbcType="VARCHAR" />
+		<result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
+		<result column="prepay_id" property="prepayId" jdbcType="VARCHAR" />
+		<result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
+		<result column="open_id" property="openId" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertWechatUnifiedOrder" parameterType="com.wemeCity.components.wechatPay.model.WechatUnifiedOrder">
+		<![CDATA[
+			INSERT INTO WECHAT_UNIFIED_ORDER (
+				id,
+				return_code,
+				return_msg,
+				app_id,
+				mch_id,
+				device_info,
+				nonce_str,
+				sign,
+				result_code,
+				err_code,
+				err_code_des,
+				trade_type,
+				prepay_id,
+				out_trade_no,
+				open_id,
+				user_id,
+				create_time
+			) VALUES (
+				null,
+				#{returnCode},
+				#{returnMsg},
+				#{appId},
+				#{mchId},
+				#{deviceInfo},
+				#{nonceStr},
+				#{sign},
+				#{resultCode},
+				#{errCode},
+				#{errCodeDes},
+				#{tradeType},
+				#{prepayId},
+				#{outTradeNo},
+				#{openId},
+				#{userId},
+				#{createTime}
+			)
+		]]>
+		<selectKey resultType="long" keyProperty="id">
+			<![CDATA[
+				SELECT LAST_INSERT_ID() AS ID FROM WECHAT_UNIFIED_ORDER LIMIT 1
+			]]>
+		</selectKey>
+	</insert>
+
+	<update id="deleteWechatUnifiedOrder" parameterType="java.lang.Long">
+		<![CDATA[
+			UPDATE wechat_unified_order SET IS_DELETED='Y' WHERE id = #{id}
+		]]>
+	</update>
+
+	<update id="updateWechatUnifiedOrder" parameterType="map">
+		UPDATE wechat_unified_order set modify_time=now()
+		<if test="returnCode !=null">
+			, return_code=#{returnCode}
+		</if>
+		<if test="returnMsg !=null">
+			, return_msg=#{returnMsg}
+		</if>
+		<if test="appId !=null">
+			, app_id=#{appId}
+		</if>
+		<if test="mchId !=null">
+			, mch_id=#{mchId}
+		</if>
+		<if test="deviceInfo !=null">
+			, device_info=#{deviceInfo}
+		</if>
+		<if test="nonceStr !=null">
+			, nonce_str=#{nonceStr}
+		</if>
+		<if test="sign !=null">
+			, sign=#{sign}
+		</if>
+		<if test="resultCode !=null">
+			, result_code=#{resultCode}
+		</if>
+		<if test="errCode !=null">
+			, err_code=#{errCode}
+		</if>
+		<if test="errCodeDes !=null">
+			, err_code_des=#{errCodeDes}
+		</if>
+		<if test="tradeType !=null">
+			, trade_type=#{tradeType}
+		</if>
+		<if test="prepayId !=null">
+			, prepay_id=#{prepayId}
+		</if>
+		<if test="outTradeNo !=null">
+			, out_trade_no=#{outTradeNo}
+		</if>
+		<if test="openId !=null">
+			, open_id=#{openId}
+		</if>
+		<if test="userId !=null">
+			, user_id=#{userId}
+		</if>
+		<if test="createTime !=null">
+			, create_time=#{createTime}
+		</if>
+		WHERE id=#{id}
+	</update>
+
+	<select id="readWechatUnifiedOrder" parameterType="java.lang.Long" resultMap="wechatUnifiedOrder">
+		SELECT * FROM wechat_unified_order WHERE id=#{id}
+	</select>
+
+	<select id="queryWechatUnifiedOrderList" parameterType="map" resultMap="wechatUnifiedOrder">
+		SELECT * FROM wechat_unified_order WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="returnCode !=null">
+			AND return_code=#{returnCode}
+		</if>
+		<if test="returnMsg !=null">
+			AND return_msg=#{returnMsg}
+		</if>
+		<if test="appId !=null">
+			AND app_id=#{appId}
+		</if>
+		<if test="mchId !=null">
+			AND mch_id=#{mchId}
+		</if>
+		<if test="deviceInfo !=null">
+			AND device_info=#{deviceInfo}
+		</if>
+		<if test="nonceStr !=null">
+			AND nonce_str=#{nonceStr}
+		</if>
+		<if test="sign !=null">
+			AND sign=#{sign}
+		</if>
+		<if test="resultCode !=null">
+			AND result_code=#{resultCode}
+		</if>
+		<if test="errCode !=null">
+			AND err_code=#{errCode}
+		</if>
+		<if test="errCodeDes !=null">
+			AND err_code_des=#{errCodeDes}
+		</if>
+		<if test="tradeType !=null">
+			AND trade_type=#{tradeType}
+		</if>
+		<if test="prepayId !=null">
+			AND prepay_id=#{prepayId}
+		</if>
+		<if test="outTradeNo !=null">
+			AND out_trade_no=#{outTradeNo}
+		</if>
+		<if test="openId !=null">
+			AND open_id=#{openId}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+	<select id="queryWechatUnifiedOrderCount" parameterType="map" resultType="long">
+		SELECT COUNT(1) FROM WECHAT_UNIFIED_ORDER WHERE 1=1 
+		<if test="id !=null">
+			AND id=#{id}
+		</if>
+		<if test="returnCode !=null">
+			AND return_code=#{returnCode}
+		</if>
+		<if test="returnMsg !=null">
+			AND return_msg=#{returnMsg}
+		</if>
+		<if test="appId !=null">
+			AND app_id=#{appId}
+		</if>
+		<if test="mchId !=null">
+			AND mch_id=#{mchId}
+		</if>
+		<if test="deviceInfo !=null">
+			AND device_info=#{deviceInfo}
+		</if>
+		<if test="nonceStr !=null">
+			AND nonce_str=#{nonceStr}
+		</if>
+		<if test="sign !=null">
+			AND sign=#{sign}
+		</if>
+		<if test="resultCode !=null">
+			AND result_code=#{resultCode}
+		</if>
+		<if test="errCode !=null">
+			AND err_code=#{errCode}
+		</if>
+		<if test="errCodeDes !=null">
+			AND err_code_des=#{errCodeDes}
+		</if>
+		<if test="tradeType !=null">
+			AND trade_type=#{tradeType}
+		</if>
+		<if test="prepayId !=null">
+			AND prepay_id=#{prepayId}
+		</if>
+		<if test="outTradeNo !=null">
+			AND out_trade_no=#{outTradeNo}
+		</if>
+		<if test="openId !=null">
+			AND open_id=#{openId}
+		</if>
+		<if test="userId !=null">
+			AND user_id=#{userId}
+		</if>
+		<if test="createTime !=null">
+			AND create_time=#{createTime}
+		</if>
+		<if test="sortColumn!=null">
+			order by ${sortColumn} ${sortType} 
+		</if>
+	</select>
+
+</mapper>

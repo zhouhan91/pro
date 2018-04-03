@@ -1,0 +1,52 @@
+<scroll-view scroll-x="true" class="swiper-tab">
+  <block wx:for="{{goodsCateList}}" wx:key="id">
+    <view class="swiper-tab-list {{currentTab==index ? 'on' : ''}}" data-current="{{index}}" bindtap="swichNav">{{item.name}}</view>
+  </block>
+    <!-- <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">单人套餐</view>  
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">双人套餐</view>  
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">热销</view>  
+    <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNav">小吃</view>   -->
+</scroll-view>
+<!-- <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight + 31}}px" bindchange="bindChange">
+    <block wx:for="{{goodsCateList}}" wx:key="i" wx:for-index="cateIdx"> 
+    <swiper-item>
+    </swiper-item>  
+   </block> 
+</swiper>   -->
+<view class='zanwei'></view>
+      <scroll-view class='menulist'   wx:for="{{goodsList[currentTab]}}" wx:key="idx" wx:for-index="goodsIdx" wx:for-item="goods">
+            <view class='imgbox'>
+              <image src='{{goods.coverPicture}}'></image>
+            </view>
+            <view class='menucent'>
+                <view class='menutitle'>
+                    <text class='title'>{{goods.name}}</text>
+                    <image src='../images/tuijian.png'></image>
+                    <text class='xiu' data-goods='{{goods}}' bindtap='onUpdGoodsClick'>修改</text>
+                    <text class='delete' data-goods='{{goods}}' bindtap='onDelGoodsClick'>删除</text>                    
+                </view>
+                <view class='moneyjia'>
+                    <text class='left'>￥{{goods.price}}</text><text class='right'>￥{{goods.discountPrice}}</text>
+                </view>
+                <view class='kucun'> 
+                    <text class='left'>库存</text><text class='right'>{{goods.stock == null ? "不限量" : goods.stock}}</text>
+                </view>
+            </view>
+            <view class='czbox'>
+                <view class='shangjia'>
+                     <text>上架</text>
+                     <switch checked='{{goods.status == "Y" ? true : false}}' data-goods='{{goods}}' bindchange="switchUpChange" color="#ffac40" style="transform:scale(.8)"/>
+                </view>        
+                <view class='guqing'>
+                     <text>沽清</text>
+                     <switch checked='{{goods.stock == 0 ? true : false}}' data-goods='{{goods}}' bindchange="switchClearChange" color="#ffac40" style="transform:scale(.8)"/>
+                </view>   
+            </view>
+      </scroll-view> 
+    <!-- </swiper-item>  
+    </block>  
+</swiper>   -->
+<view class='botbox'>
+  <text class='quxiao' bindtap='onManageFoodClick'>菜品管理</text>
+  <text class='seven' bindtap='onAddFoodClick'>添加新菜</text>
+</view>

@@ -1,0 +1,15 @@
+/* pages/setting_userinfo/setting_userinfo.wxss */
+page{background:#eee}
+.avatar{
+  /* vertical-align: middle; */
+  width: 28px;
+  height: 28px;
+}
+.logout-btn{
+  background: #f7982a;
+  margin-bottom:0%;
+}
+.tuichubt{background:#ffac40;width:95%;margin-left:2.5%;text-align:center;height:90rpx;line-height:90rpx;color:#fff;font-size:32rpx;position:fixed;bottom:30rpx; border-radius:5rpx; border:none;}
+.shuruinput{font-size:30rpx;}
+.quborder{position:relative;top:0;}
+.quborder .weui-cells{ position:relative;}
